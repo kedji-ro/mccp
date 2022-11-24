@@ -15,5 +15,5 @@
 
     session_destroy();
 
-    header('Location: https://motherchildcareportal.com/?');
+    header('Location: http://localhost:8080/mccp/?');
 ?>

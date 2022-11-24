@@ -21,7 +21,7 @@ if (isset($_POST['transfer_patient'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?patient-transfer');
+    header('Location: http://localhost:8080/mccp/doctor/?patient-transfer');
     $con->close();
 }
 
@@ -86,7 +86,7 @@ if (isset($_POST['add_clinic'])) {
         }
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?clinics');
+    header('Location: http://localhost:8080/mccp/doctor/?clinics');
     $con->close();
 }
 
@@ -115,7 +115,7 @@ if (isset($_POST['edit_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?clinics');
+    header('Location: http://localhost:8080/mccp/doctor/?clinics');
     $con->close();
 }
 
@@ -139,7 +139,7 @@ if (isset($_POST['deactreact_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?clinics');
+    header('Location: http://localhost:8080/mccp/doctor/?clinics');
     $con->close();
 }
 
@@ -162,7 +162,7 @@ if (isset($_POST['approvedeny_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?appointments');
+    header('Location: http://localhost:8080/mccp/doctor/?appointments');
     $con->close();
 }
 
@@ -184,7 +184,7 @@ if (isset($_POST['cancel_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?appointments');
+    header('Location: http://localhost:8080/mccp/doctor/?appointments');
     $con->close();
 }
 
@@ -213,7 +213,7 @@ if (isset($_POST['add_schedule'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?schedule');
+    header('Location: http://localhost:8080/mccp/doctor/?schedule');
     $con->close();
 }
 
@@ -243,7 +243,7 @@ if (isset($_POST['edit_schedule'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?schedule');
+    header('Location: http://localhost:8080/mccp/doctor/?schedule');
     $con->close();
 }
 
@@ -265,7 +265,7 @@ if (isset($_POST['deactivate_sched'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?schedule');
+    header('Location: http://localhost:8080/mccp/doctor/?schedule');
     $con->close();
 }
 
@@ -291,7 +291,7 @@ if (isset($_POST['resched_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/doctor/?appointments');
+    header('Location: http://localhost:8080/mccp/doctor/?appointments');
     $con->close();
 }
 

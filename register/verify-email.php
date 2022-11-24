@@ -17,7 +17,7 @@
         $_SESSION['message'] = "Email verification successful. You can now login.";
         echo $_SESSION['message'];
         
-        //header("Location: https://motherchildcareportal.com/");
+        //header("Location: http://localhost:8080/mccp/");
         //exit(0);       
     }
 

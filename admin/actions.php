@@ -33,7 +33,7 @@ if (isset($_POST['deact_user'])) {
             $_SESSION['msg-bg'] = "#e8fae9";
         }
 
-        header("Location: https://motherchildcareportal.com/admin/?users");
+        header("Location: http://localhost:8080/mccp/admin/?users");
     } else {
         echo $con->error;
         echo 'error';
@@ -76,7 +76,7 @@ if (isset($_POST['add_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/admin/?clinics');
+    header('Location: http://localhost:8080/mccp/admin/?clinics');
     $con->close();
 }
 
@@ -105,7 +105,7 @@ if (isset($_POST['edit_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/admin/?clinics');
+    header('Location: http://localhost:8080/mccp/admin/?clinics');
     $con->close();
 }
 
@@ -129,7 +129,7 @@ if (isset($_POST['deactreact_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: https://motherchildcareportal.com/admin/?clinics');
+    header('Location: http://localhost:8080/mccp/admin/?clinics');
     $con->close();
 }
 

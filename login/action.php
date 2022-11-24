@@ -33,7 +33,7 @@ if (isset($_POST['register_doctor'])) {
     $re_pass = $_POST['r_repass'];
 
     $v_token = md5($email);
-    $url = "https://motherchildcareportal.com/register/verify-email.php?token=" . $v_token;
+    $url = "http://localhost:8080/mccp/register/verify-email.php?token=" . $v_token;
 
     // Validate if email is unique/not yet registered
     $q = "SELECT 1 FROM tb_users WHERE email = '" . $email . "' LIMIT 1";
@@ -46,7 +46,7 @@ if (isset($_POST['register_doctor'])) {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
 
-        header('Location: https://motherchildcareportal.com/register/?doctor');
+        header('Location: http://localhost:8080/mccp/register/?doctor');
         exit(0);
     }
 
@@ -69,7 +69,7 @@ if (isset($_POST['register_doctor'])) {
     //         $_SESSION['msg-h'] = "NOTICE";
     //         $_SESSION['msg-t'] = "danger";
 
-    //         header('Location: https://motherchildcareportal.com/register/?doctor');
+    //         header('Location: http://localhost:8080/mccp/register/?doctor');
     //         exit(0);
     //     }
     // } else {
@@ -77,7 +77,7 @@ if (isset($_POST['register_doctor'])) {
     //     $_SESSION['msg-h'] = "NOTICE";
     //     $_SESSION['msg-t'] = "danger";
 
-    //     header('Location: https://motherchildcareportal.com/register/?doctor');
+    //     header('Location: http://localhost:8080/mccp/register/?doctor');
     //     exit(0);
     // }
 
@@ -87,7 +87,7 @@ if (isset($_POST['register_doctor'])) {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
 
-        header('Location: https://motherchildcareportal.com/register/?doctor');
+        header('Location: http://localhost:8080/mccp/register/?doctor');
         exit(0);
     }
 
@@ -127,7 +127,7 @@ if (isset($_POST['register_doctor'])) {
             $_SESSION['msg-h'] = "ERROR";
             $_SESSION['msg-t'] = "danger";
         }
-        header('Location: https://motherchildcareportal.com/register/?doctor');
+        header('Location: http://localhost:8080/mccp/register/?doctor');
     } else {
         $_SESSION['msg'] = "Something went wrong." . $conn->error;
         $_SESSION['msg-h'] = "ERROR";
@@ -136,7 +136,7 @@ if (isset($_POST['register_doctor'])) {
         echo $con->error;
     }
 
-    header('Location: https://motherchildcareportal.com/register/?doctor');
+    header('Location: http://localhost:8080/mccp/register/?doctor');
 
     $con->close();
 }
@@ -175,7 +175,7 @@ if (isset($_POST['login_account'])) {
                 $_SESSION['msg-t'] = "success";
                 $_SESSION['msg-bg'] = "#e8fae9";
 
-                header('Location: https://motherchildcareportal.com/admin/?dashboard');
+                header('Location: http://localhost:8080/mccp/admin/?dashboard');
 
             } elseif ($row['role'] == '2') {
                 $_SESSION['msg-h'] = "WELCOME";
@@ -183,14 +183,14 @@ if (isset($_POST['login_account'])) {
                 $_SESSION['msg-t'] = "success";
                 $_SESSION['msg-bg'] = "#e8fae9";
 
-                header('Location: https://motherchildcareportal.com/doctor/?dashboard');
+                header('Location: http://localhost:8080/mccp/doctor/?dashboard');
             }
         } else {
             $_SESSION['msg-h'] = "NOTICE";
             $_SESSION['msg'] = "User not verified. Please check your email to verify your account";
             $_SESSION['msg-t'] = "danger";
 
-            header('Location: https://motherchildcareportal.com/login/?');
+            header('Location: http://localhost:8080/mccp/login/?');
             //echo 'Email not verified';
         }
     } else {
@@ -198,7 +198,7 @@ if (isset($_POST['login_account'])) {
         $_SESSION['msg'] = "We couldn't find any user that matches your data";
         $_SESSION['msg-t'] = "danger";
         
-        header('Location: https://motherchildcareportal.com/login/?');
+        header('Location: http://localhost:8080/mccp/login/?');
         //echo 'User does not exist.';
     }
 
