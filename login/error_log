@@ -1,0 +1,35 @@
+[21-Nov-2022 10:24:09 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 10:27:25 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 10:38:57 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 11:23:18 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 13:18:18 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 13:18:20 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 13:18:29 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 21:56:34 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 21:57:33 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 21:57:42 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[21-Nov-2022 21:59:45 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[22-Nov-2022 00:35:35 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[22-Nov-2022 03:48:46 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 215
+[22-Nov-2022 03:48:46 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[22-Nov-2022 04:10:42 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 215
+[22-Nov-2022 04:10:42 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 232
+[22-Nov-2022 04:18:36 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 216
+[22-Nov-2022 04:18:36 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 220
+[22-Nov-2022 04:21:28 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 216
+[22-Nov-2022 04:21:28 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 233
+[22-Nov-2022 13:01:08 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 216
+[22-Nov-2022 13:01:08 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 233
+[22-Nov-2022 13:52:42 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 216
+[22-Nov-2022 13:52:42 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 233
+[22-Nov-2022 14:03:09 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 216
+[22-Nov-2022 14:03:09 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 233
+[22-Nov-2022 14:09:09 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 216
+[22-Nov-2022 14:09:09 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 233
+[22-Nov-2022 14:19:18 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 216
+[22-Nov-2022 14:19:18 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 233
+[23-Nov-2022 02:31:09 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 154
+[23-Nov-2022 02:33:55 Asia/Manila] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, bool given in /home/w22hl01qnd6e/public_html/login/action.php on line 153
+[23-Nov-2022 02:33:55 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 170
+[22-Nov-2022 19:22:39 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/w22hl01qnd6e/public_html/login/action.php on line 192
+[22-Nov-2022 19:24:44 UTC] PHP Parse error:  syntax error, unexpected 't' (T_STRING), expecting ';' or ',' in /home/w22hl01qnd6e/public_html/login/action.php on line 301
