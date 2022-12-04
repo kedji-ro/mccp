@@ -17,28 +17,6 @@ include '../login/db_conn.php';
 //     header('Location: ?dashboard');
 // }
 
-$q = "SELECT COUNT(appointment_id) AS appt_count 
-FROM tb_appointment
-WHERE doctor_id = " . $_SESSION['D_ID'] . "  AND DATE(appointment_date) > (NOW()) AND a_stat = 0";
-
-$result = mysqli_query($con, $q);
-
-if ($result) {
-    $rows = mysqli_fetch_assoc($result);
-    $_SESSION['APPT_COUNT'] = $rows['appt_count'];
-}
-
-$q = "SELECT COUNT(appointment_id) AS atr_count 
-FROM tb_appointment
-WHERE doctor_id = " . $_SESSION['D_ID'] . "  AND DATE(transfer_date) = null AND a_stat = 3";
-
-$result = mysqli_query($con, $q);
-
-if ($result) {
-    $rows = mysqli_fetch_assoc($result);
-    $_SESSION['PATREQ_COUNT'] = $rows['atr_count'];
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,11 +29,26 @@ if ($result) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <?php if (isset($_GET['appointments']) != null) { ?>
-        <title>Appointments | MOTHER CHILD CARE PORTAL</title>
+    <?php if (isset($_GET['set-appointment']) != null) { ?>
+        <title>Set an Appointment | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
-    <?php if (isset($_GET['schedule']) != null) { ?>
-        <title>Schedule | MOTHER CHILD CARE PORTAL</title>
+    <?php if (isset($_GET['my-appointments']) != null) { ?>
+        <title>My Appointments | MOTHER CHILD CARE PORTAL</title>
+    <?php } ?>
+    <?php if (isset($_GET['req-info']) != null) { ?>
+        <title>Request Information | MOTHER CHILD CARE PORTAL</title>
+    <?php } ?>
+    <?php if (isset($_GET['reqs']) != null) { ?>
+        <title>Transfer Requests | MOTHER CHILD CARE PORTAL</title>
+    <?php } ?>
+    <?php if (isset($_GET['children']) != null) { ?>
+        <title>Registered Children | MOTHER CHILD CARE PORTAL</title>
+    <?php } ?>
+    <?php if (isset($_GET['my-profile']) != null) { ?>
+        <title>My Profile | MOTHER CHILD CARE PORTAL</title>
+    <?php } ?>
+    <?php if (isset($_GET['payments']) != null) { ?>
+        <title>Payments | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
 
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
@@ -91,34 +84,74 @@ if ($result) {
             <hr class="sidebar-divider my-0">
 
             <!-- RECORDS -->
-            <li class="nav-item <?php if (isset($_GET['appointments']) != null) {
+            <li class="nav-item <?php if (isset($_GET['set-appointment']) != null) {
                                     echo 'active';
                                 } ?>">
-                <a class="nav-link" href="?appointments">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Appointments</span><?php if ($_SESSION['APPT_COUNT'] != 0) { ?>
-                        <span class="badge badge-light" id="aReqCount" style="margin-left:55px; position:absolute;"><?php echo $_SESSION['APPT_COUNT']; ?></span>
-                    <?php } ?>
+                <a class="nav-link" href="?set-appointment">
+                    <i class="fas fa-fw fa-calendar-plus"></i>
+                    <span>Set an Appointment</span>
                 </a>
             </li>
-            <li class="nav-item <?php if (isset($_GET['schedule']) != null) {
+
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="sidebar-heading">RECORDS</div>
+            <li class="nav-item <?php if (isset($_GET['my-appointments']) != null) {
                                     echo 'active';
                                 } ?>">
-                <a class="nav-link" href="?schedule">
+                <a class="nav-link" href="?my-appointments">
                     <i class="fas fa-fw fa-calendar-days"></i>
-                    <span>Manage Schedule</span></a>
+                    <span>My Appointments</span></a>
+            </li>
+            <li class="nav-item <?php if (isset($_GET['req-info']) || isset($_GET['reqs'])) {
+                                    echo 'active';
+                                } ?>">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-paper-plane"></i>
+                    <span>Info Transfer</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item <?php if (isset($_GET['req-info'])) {
+                                                    echo 'active';
+                                                } ?>" href="?req-info">Send Request</a>
+                        <a class="collapse-item <?php if (isset($_GET['reqs'])) {
+                                                    echo 'active';
+                                                } ?>" href="?reqs">See Requests</a>
+                    </div>
+                </div>
             </li>
 
+            <li class="nav-item <?php if (isset($_GET['children']) != null) {
+                                    echo 'active';
+                                } ?>">
+                <a class="nav-link" href="?children">
+                    <i class="fas fa-fw fa-children"></i>
+                    <span>Registered Children</span></a>
+            </li>
+            <li class="nav-item <?php if (isset($_GET['payments']) != null) {
+                                    echo 'active';
+                                } ?>">
+                <a class="nav-link" href="?payments">
+                    <i class="fas fa-fw fa-coins"></i>
+                    <span>Payments</span></a>
+            </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="sidebar-heading">Settings</div>
+            <li class="nav-item <?php if (isset($_GET['my-profile']) != null) {
+                                    echo 'active';
+                                } ?>">
+                <a class="nav-link" href="?my-profile">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>My Profile</span></a>
+            </li>
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Version -->
-            <div class="text-center d-none d-md-inline">
-                <?php include '../version.php'; ?>
             </div>
         </ul>
         <!-- End of Sidebar -->
@@ -164,14 +197,28 @@ if ($result) {
                 <div class="container-fluid">
                     <?php
 
-                    if (isset($_GET['appointments']) != null) {
-                        include('pages/appointments.php');
+                    if (isset($_GET['set-appointment']) != null) {
+                        include('pages/set-appointment.php');
+                    }
+                    if (isset($_GET['my-appointments']) != null) {
+                        include('pages/my-appointments.php');
+                    }
+                    if (isset($_GET['req-info']) != null) {
+                        include('pages/request-info.php');
+                    }
+                    if (isset($_GET['reqs']) != null) {
+                        include('pages/reqs.php');
+                    }
+                    if (isset($_GET['children']) != null) {
+                        include('pages/children.php');
+                    }
+                    if (isset($_GET['my-profile']) != null) {
+                        include('pages/profile.php');
+                    }
+                    if (isset($_GET['payments']) != null) {
+                        include('pages/payments.php');
                     }
 
-                    if (isset($_GET['schedule']) != null) {
-                        include('pages/schedule.php');
-                    }
-                    
                     ?>
                 </div>
                 <!-- End of Page Content -->
@@ -253,12 +300,8 @@ if ($result) {
     });
 
     $('.toast').toast({
-        delay: 3000
+        delay: 5000
     })
-
-    $(document).ready(function() {
-        $('#list').DataTable();
-    });
 
     <?php unset($_SESSION['msg']); ?>
 </script>
