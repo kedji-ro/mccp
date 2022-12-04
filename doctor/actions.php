@@ -21,7 +21,7 @@ if (isset($_POST['transfer_patient'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?patient-transfer');
+    header('Location: '.home.'/doctor/?patient-transfer');
     $con->close();
 }
 
@@ -86,7 +86,7 @@ if (isset($_POST['add_clinic'])) {
         }
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?clinics');
+    header('Location: '.home.'/doctor/?clinics');
     $con->close();
 }
 
@@ -115,7 +115,7 @@ if (isset($_POST['edit_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?clinics');
+    header('Location: '.home.'/doctor/?clinics');
     $con->close();
 }
 
@@ -139,7 +139,7 @@ if (isset($_POST['deactreact_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?clinics');
+    header('Location: '.home.'/doctor/?clinics');
     $con->close();
 }
 
@@ -162,7 +162,7 @@ if (isset($_POST['approvedeny_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?appointments');
+    header('Location: '.home.'/doctor/?appointments');
     $con->close();
 }
 
@@ -184,7 +184,7 @@ if (isset($_POST['cancel_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?appointments');
+    header('Location: '.home.'/doctor/?appointments');
     $con->close();
 }
 
@@ -196,10 +196,13 @@ if (isset($_POST['add_schedule'])) {
     $color = $_POST['sm_color'];
     $start = $_POST['sm_st'];
     $end = $_POST['sm_et'];
+    $slots = $_POST['smsls'];
     
+    $daysofweek = explode(' ', $_POST['sdays']);
+    $rdays = implode(',', $rdays);
 
-    $q = "INSERT INTO tb_doctor_schedule (doctor_id, clinic_id, date_available, start_time, end_time, bg_color, s_stat)
-                        VALUES ('".$d_id."','".$clinic."','".$date."','".$start."','".$end."','".$color."','1')";
+    $q = "INSERT INTO tb_doctor_schedule (doctor_id, clinic_id, date_available, start_time, end_time, bg_color, s_stat, slots,days_available)
+                        VALUES ('".$d_id."','".$clinic."','".$date."','".$start."','".$end."','".$color."','1','".$slots."',$rdays)";
 
     if (mysqli_query($con,$q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -213,7 +216,7 @@ if (isset($_POST['add_schedule'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?schedule');
+    header('Location: '.home.'/doctor/?schedule');
     $con->close();
 }
 
@@ -225,10 +228,15 @@ if (isset($_POST['edit_schedule'])) {
     $color = $_POST['esc'];
     $start = $_POST['esst'];
     $end = $_POST['eset'];
+    $slots = $_POST['smslse'];
     
+    $daysofweek = explode(' ', $_POST['esdays']);
+    $rdays = implode(',', $rdays);
 
     $q = "UPDATE tb_doctor_schedule SET clinic_id = '".$clinic."', date_available = '".$date."' ,
-                                        start_time = '".$start."', end_time = '".$end."', bg_color = '".$color."' 
+                                        start_time = '".$start."', end_time = '".$end."', bg_color = '".$color."' ,
+                                        slots = '".$slots."',
+                                        days_available = '".$rdays."'
                                         WHERE schedule_id = '".$sid."'";
 
     if (mysqli_query($con,$q)) {
@@ -243,7 +251,7 @@ if (isset($_POST['edit_schedule'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?schedule');
+    header('Location: '.home.'/doctor/?schedule');
     $con->close();
 }
 
@@ -265,7 +273,7 @@ if (isset($_POST['deactivate_sched'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?schedule');
+    header('Location: '.home.'/doctor/?schedule');
     $con->close();
 }
 
@@ -291,7 +299,39 @@ if (isset($_POST['resched_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: http://localhost:8080/mccp/doctor/?appointments');
+    header('Location: '.home.'/doctor/?appointments');
+    $con->close();
+}
+
+if (isset($_POST['request_info'])) {
+
+    $aid = $_POST['arid'];
+
+    $q = "INSERT INTO tb_appointment(doctor_id, clinic_id, original_id, appointment_date, doctor_remarks, a_stat, date_logged, req_by_id, a_desc)
+                              SELECT doctor_id, clinic_id, appointment_id, appointment_date, doctor_remarks, 4, '" . $datetime . "', " . $_SESSION['U_ID'] . ", a_desc 
+                              FROM tb_appointment WHERE appointment_id = " . $aid;
+
+    if (mysqli_query($con, $q)) {
+        $qr = "UPDATE tb_appointment SET a_stat = 4 WHERE appointment_id = " . $aid;
+        if (mysqli_query($con, $qr)) {
+            $_SESSION['msg-h'] = "SUCCESS";
+            $_SESSION['msg'] = "Patient info request sent.";
+            $_SESSION['msg-t'] = "success";
+            $_SESSION['msg-bg'] = "#e8fae9";
+        } else {
+            $_SESSION['msg-h'] = "ERROR";
+            $_SESSION['msg'] = "Something went wrong." . $con->error;
+            $_SESSION['msg-type'] = "danger";
+            $_SESSION['msg-bg'] = "#fae8ea";
+        }
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/doctor/?patient-transfer');
     $con->close();
 }
 

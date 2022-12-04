@@ -33,3 +33,54 @@
 [23-Nov-2022 02:33:55 Asia/Manila] PHP Notice:  Undefined index: doctor_id in /home/w22hl01qnd6e/public_html/login/action.php on line 170
 [22-Nov-2022 19:22:39 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/w22hl01qnd6e/public_html/login/action.php on line 192
 [22-Nov-2022 19:24:44 UTC] PHP Parse error:  syntax error, unexpected 't' (T_STRING), expecting ';' or ',' in /home/w22hl01qnd6e/public_html/login/action.php on line 301
+[26-Nov-2022 17:14:18 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:14:18 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:14:18 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[26-Nov-2022 17:17:56 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:17:56 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:17:56 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[26-Nov-2022 17:31:30 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:31:30 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:31:30 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[26-Nov-2022 17:31:57 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:31:57 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:31:57 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[26-Nov-2022 17:33:56 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:33:56 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:33:56 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[26-Nov-2022 17:34:32 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:34:32 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:34:32 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[26-Nov-2022 17:36:16 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:36:16 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:36:16 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[26-Nov-2022 17:36:26 UTC] PHP Warning:  include(login/db_conn.php): failed to open stream: No such file or directory in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:36:26 UTC] PHP Warning:  include(): Failed opening 'login/db_conn.php' for inclusion (include_path='.:/opt/alt/php74/usr/share/pear') in /home/w22hl01qnd6e/public_html/login/index.php on line 2
+[26-Nov-2022 17:36:26 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 17
+[27-Nov-2022 01:50:08 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[27-Nov-2022 01:50:23 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[27-Nov-2022 01:50:32 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[27-Nov-2022 01:50:40 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[28-Nov-2022 12:15:40 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[28-Nov-2022 22:23:49 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[29-Nov-2022 00:57:21 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[04-Dec-2022 10:28:34 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 10:28:34 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 10:29:57 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 10:29:57 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 10:30:13 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 10:30:13 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 10:39:24 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 10:39:24 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 13:13:31 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 13:13:31 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[04-Dec-2022 13:17:38 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 13:17:38 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 13:27:24 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 13:27:24 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 13:52:02 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 13:52:02 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 15:46:47 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 15:46:47 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 17:12:06 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 17:12:06 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172

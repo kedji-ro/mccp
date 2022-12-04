@@ -1,0 +1,7 @@
+[04-Dec-2022 13:17:38 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:40 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:40 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/pages/appointments.php on line 84
+[04-Dec-2022 13:17:42 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:42 Asia/Manila] PHP Warning:  Invalid argument supplied for foreach() in /home/w22hl01qnd6e/public_html/patient/pages/schedule.php on line 20
+[04-Dec-2022 13:17:47 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:47 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/pages/appointments.php on line 84

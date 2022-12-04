@@ -1,3 +1,23 @@
+<?php
+include 'login/db_conn.php';
+
+if (isset($_SESSION['U_ID'])) {
+  if (isset($_SESSION['U_ROLE'])) {
+    if ($_SESSION['U_ROLE'] == '1') {
+      header('Location: '.home.'/admin/?dashboard');
+    } elseif ($_SESSION['U_ROLE'] == '2') {
+      header('Location: '.home.'/doctor/?dashboard');
+    } else {
+      header('Location: '.home.'/?');
+    }
+  } else {
+    session_destroy();
+  }
+} else {
+  session_destroy();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

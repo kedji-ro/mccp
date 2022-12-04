@@ -16,11 +16,12 @@ $q = "SELECT    tb_appointment.appointment_id as a_id,
                 tb_users.phone_no as p_cn,
                 tb_users.tel_no as p_tel,
                 tb_users.email as p_email,
-                tb_appointment.date_logged
+                tb_appointment.date_logged,
+                tb_appointment.a_desc
                 FROM tb_appointment 
                 LEFT JOIN tb_users on tb_users.user_id = tb_appointment.patient_id
                 LEFT JOIN tb_clinic on tb_clinic.clinic_id = tb_appointment.clinic_id
-                    WHERE tb_appointment.doctor_id = '" . $_SESSION['ADMIN_ID'] . "';";
+                    WHERE tb_appointment.doctor_id = '" . $_SESSION['U_ID'] . "';";
                 
 
 $rs = $con->query($q);
@@ -30,25 +31,24 @@ $appt = [];
 
 while ($r = $rs->fetch_array()) {
     if ($r['a_stat'] !== 2) {
-        $appt['id'] = $r['a_id'];
-        $appt['title'] = $r['a_t'];
-        $appt['start'] = $r['a_d'];
-
-        if ($r['a_stat'] == 1) {
-            if ($r['a_d'] > $date) {
-                $appt['backgroundColor'] = '#4e73df';
-                $appt['borderColor'] = '#4e73df';
+            $appt['id'] = $r['a_id'];
+            $appt['title'] = $r['a_t'];
+            $appt['start'] = $r['a_d'];
+    
+            if ($r['a_stat'] == 1) {
+    
+                    $appt['backgroundColor'] = '#4e73df';
+                    $appt['borderColor'] = '#4e73df';
+    
+            } elseif ($r['a_stat'] == 0) {
+                $appt['backgroundColor'] = '#f6c23e';
+                $appt['borderColor'] = '#f6c23e';
             } else {
                 $appt['backgroundColor'] = '#1cc88a';
                 $appt['borderColor'] = '#1cc88a';
             }
-        } elseif ($r['a_stat'] == 0) {
-            $appt['backgroundColor'] = '#f6c23e';
-            $appt['borderColor'] = '#f6c23e';
-            //$appt['textColor'] = '#000000';
-        }
-        
-       // $appt['textColor'] = strpos(strval($row['bg_color']),'99') ? 'black' : 'white';
+
+        $appt['textColor'] = ($appt['backgroundColor'] == '#f6c23e') ? 'black' : 'white';
     }
 
     $appt_col[] = $appt;
@@ -99,7 +99,6 @@ if (count($appt_col) !== 0) {
                                 <span class="badge badge-warning text-gray-900">PENDING</span>
                                 <span class="badge badge-primary">APPROVED</span>
                                 <span class="badge badge-success">COMPLETED</span>
-                                <span class="badge badge-secondary">RESCHEDULED</span>
                                 <span class="badge badge-danger">CANCELLED</span>
                             </h5>
                         </div>
@@ -109,7 +108,33 @@ if (count($appt_col) !== 0) {
 
                 <!-- Appointments List -->
                 <div class="tab-pane" id="apptLists">
-                    <div class="table-responsive animated--fade-in">
+                    <div class="table-responsive animated--fade-in container-fluid">
+                        <div class="row mb-4">
+                            <div class="form-check" style="padding: 0% 2% 0% 30px;">
+                                <input class="form-check-input" type="radio" name="rbAppts" id="rbShowApproved" checked>
+                                <label class="form-check-label" for="rbShowApproved">
+                                    Show Approved Only
+                                </label>
+                            </div>
+                            <div class="form-check" style="padding-right: 2%;">
+                                <input class="form-check-input" type="radio" name="rbAppts" id="rbShowCompleted">
+                                <label class="form-check-label" for="rbShowCompleted">
+                                    Show Completed Only
+                                </label>
+                            </div>
+                            <div class="form-check" style="padding-right: 2%;">
+                                <input class="form-check-input" type="radio" name="rbAppts" id="rbShowCancelled">
+                                <label class="form-check-label" for="rbShowCancelled">
+                                    Show Cancelled Only
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="rbAppts" id="rbShowAllAppts">
+                                <label class="form-check-label" for="rbShowAllAppts">
+                                    Show All
+                                </label>
+                            </div>
+                        </div>
                         <table class="table table-bordered table-condensed table-fixed table-striped" id="apptListDT" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -132,7 +157,7 @@ if (count($appt_col) !== 0) {
                             <?php
                             $result = $con->query($q);
                             while ($row = $result->fetch_array()) {
-                                if ($row['a_stat'] > 0) {
+                                if ($row['a_stat'] == 1 || $row['a_stat'] == 3 || $row['a_stat'] == 4) {
                             ?>
                                     <tr>
                                         <td><?php echo $row['a_id']; ?></td>
@@ -142,25 +167,26 @@ if (count($appt_col) !== 0) {
                                         <td><?php echo $row['a_day']; ?></td>
                                         <td><?php echo $row['c_name']; ?></td>
 
-                                        <?php if ($row['a_stat'] == 1 && $row['a_d'] >= $date) { ?>
+                                        <?php if ($row['a_stat'] == 1) { ?>
                                             <td class="text-center">
                                                 <h5><span class="badge badge-pill badge-primary">Approved</span></h5>
                                             </td>
-                                        <?php } elseif ($row['a_stat'] == 2) { ?>
+                                        <?php } elseif ($row['a_stat'] == 3) { ?>
                                             <td class="text-center">
                                                 <h5><span class="badge badge-pill badge-danger">Cancelled</span></h5>
                                             </td>
-                                        <?php } elseif ($row['a_stat'] == 1 && $row['a_d'] < $date) { ?>
+                                        <?php } elseif ($row['a_stat'] == 4) { ?>
                                             <td class="text-center">
                                                 <h5><span class="badge badge-pill badge-success">Completed</span></h5>
                                             </td>
                                         <?php } ?>
 
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-primary btn-circle btn-sm viewABtn" title="View Details"><i class="fas fa-search"></i></button>
-                                            <span><button type="button" class="btn btn-secondary btn-circle btn-sm printABtn" title="Print" onclick="window.print();"><i class="fas fa-print"></i></button></span>
-                                            <span><button type="button" class="btn btn-danger btn-circle btn-sm cancelABtn" title="Cancel" <?php echo (($row['a_d'] < $date || $row['a_stat'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
-                                            <span><button type="button" class="btn btn-warning btn-circle btn-sm resABtn" title="Reschedule" <?php echo (($row['a_d'] < $date || $row['a_stat'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-calendar-days text-gray-900"></i></button></span>
+                                            <button type="button" class="btn btn-primary btn-circle btn-sm viewABtn" title="View/Add Details"><i class="fas fa-edit"></i></button>
+                                            <span><button type="button" class="btn btn-success btn-circle btn-sm completeABtn" title="Mark As Comlpete" <?php echo (($row['a_stat'] == 2 || $row['a_stat'] == 4) ? 'disabled' : ''); ?>><i class="fas fa-check"></i></button></span>
+                                            <span><button type="button" class="btn btn-danger btn-circle btn-sm cancelABtn" title="Cancel" <?php echo (($row['a_stat'] == 2 || $row['a_stat'] == 4) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
+                                            <span><button type="button" class="btn btn-secondary btn-circle btn-sm printABtn" title="Print"><i class="fas fa-print"></i></button></span>
+                                            <span><button type="button" class="btn btn-warning btn-circle btn-sm resABtn" title="Reschedule" <?php echo (($row['a_stat'] == 2 || $row['a_stat'] == 4) ? 'disabled' : ''); ?>><i class="fas fa-calendar-days text-gray-900"></i></button></span>
                                         </td>
                                         <td hidden><?php echo $row['p_email']; ?></td>
                                         <td hidden><?php echo $row['p_cn']; ?></td>
@@ -224,26 +250,102 @@ if (count($appt_col) !== 0) {
                             $('#rad').val(data[2]);
                             $('#rat').val(data[12]);
                         });
+                        
+                        $('.printABtn').on('click', function() {
+                            
+                            $tr = $(this).closest('tr');
+                            var data = $tr.children("td").map(function() {
+                                return $(this).text();
+                            }).get();
+
+                            window.location.href = "<?php echo home;?>/doctor/print/appointments-data.php?id=" + data[0];
+                        });
+                        
+                        $('#rbShowApproved').on('click', function() {
+                            if($('#rbShowApproved').is(':checked')) {
+ 
+                                
+                                var $rowsNo2 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) !== "Approved"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) === "Approved"
+                                }).show();
+                            }
+                        });
+                        
+                        $('#rbShowCancelled').on('click', function() {
+                            if($('#rbShowCancelled').is(':checked')) {
+                                var $rowsNo2 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) !== "Cancelled"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) === "Cancelled"
+                                }).show();
+                            }
+                        });
+                        
+                        $('#rbShowCompleted').on('click', function() {
+                            if($('#rbShowCompleted').is(':checked')) {
+                                var $rowsNo2 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) !== "Completed"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) === "Completed"
+                                }).show();
+                            }
+                        });
+                        
+                        $('#rbShowAllAppts').on('click', function() {
+                            if($('#rbShowAllAppts').is(':checked')) {
+                               var $rowsNo = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) === "Completed"
+                                }).show();
+                                
+                                var $rowsNo2 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) === "Cancelled"
+                                }).show();
+                                
+                                var $rowsNo3 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) === "Approved"
+                                }).show();
+                            }
+                        });
+                        
+                        $(document).ready(function () {
+                            if($('#rbShowApproved').is(':checked')) {
+                                var $rowsNo2 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) !== "Approved"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptListDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(6).text()) === "Approved"
+                                }).show();
+                            }
+                        });
                     </script>
                 </div>
 
                 <!-- Pending Requests -->
                 <div class="tab-pane" id="apptRequests">
                     <div class="row mb-4">
-                        <div class="form-check" style="padding: 0% 2% 0% 2%;">
-                            <input class="form-check-input" type="radio" name="rbShowPending" id="rbShowPending" value="1" checked>
+                        <div class="form-check" style="padding: 0% 2% 0% 30px;">
+                            <input class="form-check-input" type="radio" name="rbReqs" id="rbShowPending" checked>
                             <label class="form-check-label" for="rbShowPending">
                                 Show Pending Only
                             </label>
                         </div>
                         <div class="form-check" style="padding-right: 2%;">
-                            <input class="form-check-input" type="radio" name="rbShowDenied" id="rbShowDenied" value="2">
+                            <input class="form-check-input" type="radio" name="rbReqs" id="rbShowDenied">
                             <label class="form-check-label" for="rbShowDenied">
                                 Show Denied Only
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="chkShowAll">
+                            <input class="form-check-input" type="radio" name="rbReqs" id="rbShowAll">
                             <label class="form-check-label" for="chkShowAll">
                                 Show All
                             </label>
@@ -272,7 +374,7 @@ if (count($appt_col) !== 0) {
                             <?php
                             $res = $con->query($q);
                             while ($rows = $res->fetch_array()) {
-                                if ($rows['a_stat'] == 0) {
+                                if ($rows['a_stat'] == 0 || $rows['a_stat'] == 2) {
                             ?>
                                     <tr>
                                         <td hidden><?php echo $rows['a_id']; ?></td>
@@ -283,24 +385,24 @@ if (count($appt_col) !== 0) {
                                         <td><?php echo $rows['c_name']; ?></td>
                                         <td><?php echo $rows['date_logged']; ?></td>
                                         <?php if ($rows['a_stat'] == 0) {
-                                            if ($rows['a_d'] < $date) { ?>
+                                            if ($rows['a_stat'] == 2) { ?>
                                                 <td class="text-center">
-                                                    <h5><span class="badge badge-pill badge-secondary">Expired</span></h5>
+                                                    <h5><span class="badge badge-pill badge-danger">Denied</span></h5>
                                                 </td>
                                             <?php } else { ?>
                                                 <td class="text-center">
                                                     <h5><span class="badge badge-pill badge-warning text-gray-900">Pending</span></h5>
                                                 </td>
                                             <?php } ?>
-                                        <?php } elseif ($rows['a_stat'] == 3) { ?>
+                                        <?php } elseif ($rows['a_stat'] == 2) { ?>
                                             <td class="text-center">
                                                 <h5><span class="badge badge-pill badge-danger">Denied</span></h5>
                                             </td>
                                         <?php } ?>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-primary btn-circle btn-sm viewPRBtn" title="View Details"><i class="fas fa-search"></i></button>
-                                            <span><button type="button" class="btn btn-success btn-circle btn-sm approveBtn" title="Approve Request" <?php echo (($rows['a_d'] < $date || $rows['a_req'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-check"></i></button></span>
-                                            <span><button type="button" class="btn btn-danger btn-circle btn-sm denyBtn" title="Deny Request" <?php echo (($rows['a_d'] < $date || $rows['a_req'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
+                                            <span><button type="button" class="btn btn-success btn-circle btn-sm approveBtn" title="Approve Request" <?php echo (($rows['a_stat'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-check"></i></button></span>
+                                            <span><button type="button" class="btn btn-danger btn-circle btn-sm denyBtn" title="Deny Request" <?php echo (($rows['a_stat'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
                                         </td>
                                         <td hidden><?php echo $rows['p_email']; ?></td>
                                         <td hidden><?php echo $rows['p_cn']; ?></td>
@@ -326,13 +428,13 @@ if (count($appt_col) !== 0) {
 
                             $('#alp_id').val(data[0]);
                             $('#alp_name').val(data[1]);
-                            $('#alp_pemail').val(data[8]);
-                            $('#alp_con').val(data[9]);
-                            $('#alp_tel').val(data[10]);
+                            $('#alp_pemail').val(data[9]);
+                            $('#alp_con').val(data[10]);
+                            $('#alp_tel').val(data[11]);
                             $('#alp_date').val(data[2]);
                             $('#alp_time').val(data[3]);
                             $('#alp_clinic').val(data[5]);
-                            $('#alp_cadd').val(data[11]);
+                            $('#alp_cadd').val(data[12]);
                         });
 
                         $('.approveBtn').on('click', function() {
@@ -368,6 +470,86 @@ if (count($appt_col) !== 0) {
                             $('#am_id').val(data[0]);
                             $('#am_appstat').val(2);
                         });
+                        
+                        $('#rbShowPending').on('click', function() {
+                            if($('#rbShowPending').is(':checked')) {
+                               var $rowsNo = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Expired"
+                                }).hide();
+                                
+                                var $rowsNo2 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Denied"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Pending"
+                                }).show();
+                            }
+                        });
+                        
+                        $('#rbShowDenied').on('click', function() {
+                            if($('#rbShowDenied').is(':checked')) {
+                               var $rowsNo = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Pending"
+                                }).hide();
+                                
+                                var $rowsNo2 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Expired"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Denied"
+                                }).show();
+                            }
+                        });
+                        
+                        $('#rbShowExpired').on('click', function() {
+                            if($('#rbShowExpired').is(':checked')) {
+                               var $rowsNo = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Pending"
+                                }).hide();
+                                
+                                var $rowsNo2 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Denied"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Expired"
+                                }).show();
+                            }
+                        });
+                        
+                        $('#rbShowAll').on('click', function() {
+                            if($('#rbShowAll').is(':checked')) {
+                               var $rowsNo = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Pending"
+                                }).show();
+                                
+                                var $rowsNo2 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Denied"
+                                }).show();
+                                
+                                var $rowsNo3 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Expired"
+                                }).show();
+                            }
+                        });
+                        
+                        $(document).ready(function () {
+                            if($('#rbShowPending').is(':checked')) {
+                               var $rowsNo = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Expired"
+                                }).hide();
+                                
+                                var $rowsNo2 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Denied"
+                                }).hide();
+                                
+                                var $rowsNo3 = $('#apptReqsDT tbody tr').filter(function () {
+                                    return $.trim($(this).find('td').eq(7).text()) === "Pending"
+                                }).show();
+                            }
+                        });
                     </script>
                 </div>
 
@@ -380,7 +562,7 @@ if (count($appt_col) !== 0) {
 <script>
     $(document).ready(function() {
         $('#apptReqsDT').dataTable().fnSort([
-            [6, 'desc']
+            [7, 'desc']
         ]);
         $('#apptListDT').dataTable().fnSort([
             [6, 'asc']

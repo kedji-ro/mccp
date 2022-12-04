@@ -121,6 +121,36 @@
         </div>
     </div>
 </div>
+
+<!-- Request Patient Info Modal -->
+<div class="modal fade" id="reqInfoModal" tabindex="-1" role="dialog" aria-labelledby="reqInfoModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="c_deactReactTitle">Request Information</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="arid" name="arid" class="form-control">
+                            <div class="col-sm-12">
+                                <p>Send information transfer request?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="request_info" name="request_info" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!----------- Patient Transfer Modals End ------------>
 
 
@@ -137,7 +167,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="actions.php" method="POST">
+            <form action="actions.php" method="POST" id="frmAddEditClinic">
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
@@ -170,6 +200,16 @@
                                 <div class="col-sm-12">
                                     <label for="c_name">Clinic Name <span style="color: red;">*</span></label>
                                     <input type="text" id="c_name" name="c_name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-6">
+                                    <label>Open From</label>
+                                    <input type="time" id="co" name="co" class="form-control">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label>To</label>
+                                    <input type="time" id="cc" name="cc" class="form-control">
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -312,7 +352,7 @@
 
 <!-- View Appointment From List Modal -->
 <div class="modal fade" id="viewAppointmentListModal" tabindex="-1" role="dialog" aria-labelledby="viewAppointmentListModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Appointment Information</h5>
@@ -321,65 +361,94 @@
                 </button>
             </div>
             <form action="actions.php" method="POST">
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row mt-3 text-gray-900">
-                            <div class="col-sm-12">
-                                <h5>Patient Information</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <input type="hidden" id="alp_id" name="alp_id" class="form-control">
-                            <div class="col-sm-12">
-                                <label for="alp_name">Name</span></label>
-                                <input type="text" id="alp_name" name="alp_name" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-12">
-                                <label for="alp_pemail">Email</label>
-                                <input type="text" id="alp_pemail" name="alp_pemail" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-6">
-                                <label for="alp_con">Contact No.</label>
-                                <input type="text" id="alp_con" name="alp_con" class="form-control" readonly>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="alp_tel">Tel No.</label>
-                                <input type="text" id="alp_tel" name="alp_tel" class="form-control" readonly>
-                            </div>
-                        </div> <br>
-                        <div class="row mt-3 text-gray-900">
-                            <div class="col-sm-12">
-                                <h5>Appointment Information</h5>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-7">
-                                <label for="alp_date">Date</label>
-                                <input type="text" id="alp_date" name="alp_date" class="form-control" readonly>
-                            </div>
-                            <div class="col-sm-5">
-                                <label for="alp_time">Time</label>
-                                <input type="text" id="alp_time" name="alp_time" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-12">
-                                <label for="ap_clinic">Clinic</label>
-                                <input type="text" id="alp_clinic" name="alp_clinic" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-12">
-                                <label for="alp_cadd">Clinic Address</label>
-                                <textarea id="alp_cadd" name="alp_cadd" class="form-control" readonly></textarea>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row mt-3 text-gray-900">
+                                    <div class="col-sm-12">
+                                        <h5>Patient Information</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <input type="hidden" id="alp_id" name="alp_id" class="form-control">
+                                    <div class="col-sm-12">
+                                        <label for="alp_name">Name</span></label>
+                                        <input type="text" id="alp_name" name="alp_name" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <label for="alp_pemail">Email</label>
+                                        <input type="text" id="alp_pemail" name="alp_pemail" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-6">
+                                        <label for="alp_con">Contact No.</label>
+                                        <input type="text" id="alp_con" name="alp_con" class="form-control" readonly>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="alp_tel">Tel No.</label>
+                                        <input type="text" id="alp_tel" name="alp_tel" class="form-control" readonly>
+                                    </div>
+                                </div> <br>
+                                <div class="row mt-3 text-gray-900">
+                                    <div class="col-sm-12">
+                                        <h5>Appointment Information</h5>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-7">
+                                        <label for="alp_date">Date</label>
+                                        <input type="text" id="alp_date" name="alp_date" class="form-control" readonly>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label for="alp_time">Time</label>
+                                        <input type="text" id="alp_time" name="alp_time" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <label for="ap_clinic">Clinic</label>
+                                        <input type="text" id="alp_clinic" name="alp_clinic" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <label for="alp_cadd">Clinic Address</label>
+                                        <textarea id="alp_cadd" name="alp_cadd" class="form-control" readonly></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div><br>
+                    <div class="col-sm-6">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row mt-3 text-gray-900">
+                                    <div class="col-sm-12">
+                                        <h5>Additional Information</h5>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <input type="hidden" id="alp_id" name="alp_id" class="form-control">
+                                    <div class="col-sm-12">
+                                        <label for="alp_desc">Appointment Description</span></label>
+                                        <textarea id="alp_desc" name="alp_desc" class="form-control" readonly></textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <label for="alp_drem">Remarks (500 characters)</label>
+                                        <textarea id="alp_drem" name="alp_drem" rows="10" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="button" data-dismiss="modal">Close</button>
                 </div>
@@ -413,6 +482,36 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <button type="submit" id="approvedeny_appointment" name="approvedeny_appointment" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Complete Appointment -->
+<div class="modal fade" id="compApptModal" tabindex="-1" role="dialog" aria-labelledby="compApptModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="am_title">Complete</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="acid" name="acid" class="form-control">
+                            <div class="col-sm-12">
+                                <p>Mark appointment as complete?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="complete_appointment" name="complete_appointment" class="btn btn-primary">Confirm</button>
                 </div>
             </form>
         </div>
@@ -524,7 +623,7 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-sm-12">
+                            <div class="col-sm-9">
                                 <label for="sm_clinic">Clinic</label>
                                 <select class="form-control" name="sm_clinic" id="sm_clinic" required>
                                     <option selected>Select clinic...</option>
@@ -535,20 +634,26 @@
                                     <?php }
                                     } ?>
                                 </select>
+
+                            </div>
+                            <div class="col-sm-3">
+                                <label>Slots</label>
+                                <input type="number" id="smsls" name="smsls" class="form-control" required>
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-sm-12">
                                 <label for="">Repeat</label><br>
                                 <div id="" class="d-sm-flex align-items-center justify-content-between">
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rSu">Su</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rMo">Mo</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rTu">Tu</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rWe">We</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rTh">Th</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rFr">Fr</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rSa">Sa</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('rSu','0','sdays');" id="rSu">Su</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('rMo','1','sdays');" id="rMo">Mo</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('rTu','2','sdays');" id="rTu">Tu</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('rWe','3','sdays');" id="rWe">We</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('rTh','4','sdays');" id="rTh">Th</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('rFr','5','sdays');" id="rFr">Fr</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('rSa','6','sdays');" id="rSa">Sa</a>
                                 </div>
+                                <input type="hidden" id="sdays" name="sdays">
                             </div>
                         </div>
                     </div>
@@ -597,7 +702,7 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-sm-12">
+                            <div class="col-sm-9">
                                 <label for="sm_clinic">Clinic</label>
                                 <select class="form-control" name="escl" id="escl" required>
                                     <option selected>Select clinic...</option>
@@ -609,19 +714,24 @@
                                     } ?>
                                 </select>
                             </div>
+                            <div class="col-sm-3">
+                                <label>Slots</label>
+                                <input type="number" id="smslse" name="smslse" class="form-control" required>
+                            </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-sm-12">
+                        <div class="col-sm-12">
                                 <label for="">Repeat</label><br>
                                 <div id="" class="d-sm-flex align-items-center justify-content-between">
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rSu">Su</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rMo">Mo</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rTu">Tu</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rWe">We</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rTh">Th</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rFr">Fr</a>
-                                    <a class="btn btn-light btn-circle" onclick="$(this).addClass('btn btn-primary btn-circle active');" id="rSa">Sa</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('erSu','0','esdays');" id="erSu">Su</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('erMo','1','esdays');" id="erMo">Mo</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('erTu','2','esdays');" id="erTu">Tu</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('erWe','3','esdays');" id="erWe">We</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('erTh','4','esdays');" id="erTh">Th</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('erFr','5','esdays');" id="erFr">Fr</a>
+                                    <a class="btn btn-light btn-circle" onclick="markActive('erSa','6','esdays');" id="erSa">Sa</a>
                                 </div>
+                                <input type="hidden" id="esdays" name="esdays">
                             </div>
                         </div>
                     </div>
@@ -664,3 +774,41 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#addEditClinicModal').find('input:text').val('');
+
+        $('#addEditClinicModal').on('hidden.bs.modal', function() {
+            $('#addEditClinicModal').find('input').val('');
+            $('#addEditClinicModal').find('textarea').val('');
+        });
+    });
+    
+    function markActive(id, no, input) {
+        var el = document.getElementById(id);
+        var d = document.getElementById(input);
+
+        if (el.classList.contains('active')) {
+            console.log('F');
+            $('#' + id + '').removeClass('btn btn-primary btn-circle active');
+            $('#' + id + '').addClass('btn btn-primary btn-circle');
+            
+            var rVal = d.value;
+            
+            $('#'+input+'').val(rVal.replace(no,'')); 
+            
+        } else {
+            console.log('G');
+            $('#' + id + '').removeClass('btn btn-primary btn-circle');
+            $('#' + id + '').addClass('btn btn-primary btn-circle active');
+
+            if (d.value == '') {
+                $('#'+input+'').val(no);
+            } else {
+                $('#'+input+'').val(d.value + ' ' + no);
+            }
+        }
+    }
+</script>

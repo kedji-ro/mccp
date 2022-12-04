@@ -2,8 +2,6 @@
 SESSION_START();
 include 'db_conn.php';
 
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -33,7 +31,7 @@ if (isset($_POST['register_doctor'])) {
     $re_pass = $_POST['r_repass'];
 
     $v_token = md5($email);
-    $url = "http://localhost:8080/mccp/register/verify-email.php?token=" . $v_token;
+    $url = "".home."/register/verify-email.php?token=" . $v_token;
 
     // Validate if email is unique/not yet registered
     $q = "SELECT 1 FROM tb_users WHERE email = '" . $email . "' LIMIT 1";
@@ -87,7 +85,7 @@ if (isset($_POST['register_doctor'])) {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
 
-        header('Location: http://localhost:8080/mccp/register/?doctor');
+        header('Location: '.home.'/register/?doctor');
         exit(0);
     }
 
@@ -95,7 +93,7 @@ if (isset($_POST['register_doctor'])) {
     $qry = "INSERT INTO `tb_users`(`username`, `password`, `email`, 
                                     `firstname`, `middlename`, `lastname`, `suffix`, 
                                     `DOB`, `address`, `phone_no`,  `tel_no`, `license_no`, 
-                                    `specialization`, `title`, `verification_token`, `role`,`is_active`, `registration_date`)
+                                    `spec_id`, `title`, `verification_token`, `role`,`is_active`, `registration_date`)
                         VALUES ('" . $email . "',
                             MD5('" . $pass . "'),
                                 '" . $email . "',
@@ -127,16 +125,16 @@ if (isset($_POST['register_doctor'])) {
             $_SESSION['msg-h'] = "ERROR";
             $_SESSION['msg-t'] = "danger";
         }
-        header('Location: http://localhost:8080/mccp/register/?doctor');
+        header('Location: '.home.'/register/?doctor');
     } else {
-        $_SESSION['msg'] = "Something went wrong." . $conn->error;
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
         $_SESSION['msg-h'] = "ERROR";
         $_SESSION['msg-t'] = "danger";
 
         echo $con->error;
     }
 
-    header('Location: http://localhost:8080/mccp/register/?doctor');
+    header('Location: '.home.'/register/?doctor');
 
     $con->close();
 }
@@ -168,6 +166,8 @@ if (isset($_POST['login_account'])) {
             $_SESSION['U_ID'] = $row['user_id'];
             $_SESSION['U_EMAIL'] = $row['email'];
             $_SESSION['U_FULLNAME'] = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffix'];
+            $_SESSION['U_ROLE'] = $row['role'];
+            $_SESSION['D_ID'] = $row['d_id'];
 
             if ($row['role'] == '1') {
                 $_SESSION['msg-h'] = "WELCOME";
@@ -175,31 +175,40 @@ if (isset($_POST['login_account'])) {
                 $_SESSION['msg-t'] = "success";
                 $_SESSION['msg-bg'] = "#e8fae9";
 
-                header('Location: http://localhost:8080/mccp/admin/?dashboard');
-
+                header('Location: '.home.'/admin/?dashboard');
             } elseif ($row['role'] == '2') {
                 $_SESSION['msg-h'] = "WELCOME";
                 $_SESSION['msg'] = "Welcome admin " . $_SESSION['FULLNAME'];
                 $_SESSION['msg-t'] = "success";
                 $_SESSION['msg-bg'] = "#e8fae9";
 
-                header('Location: http://localhost:8080/mccp/doctor/?dashboard');
+                header('Location: '.home.'/doctor/?dashboard');
+            } elseif ($row['role'] == '4') {
+                $_SESSION['msg-h'] = "WELCOME";
+                $_SESSION['msg'] = "Welcome secretary " . $_SESSION['FULLNAME'];
+                $_SESSION['msg-t'] = "success";
+                $_SESSION['msg-bg'] = "#e8fae9";
+
+                header('Location: '.home.'/secretary/?appointments');
+            } elseif ($row['role'] == '3') {
+                $_SESSION['msg-h'] = "WELCOME";
+                $_SESSION['msg'] = "Welcome patient " . $_SESSION['FULLNAME'];
+                $_SESSION['msg-t'] = "success";
+                $_SESSION['msg-bg'] = "#e8fae9";
+
+                header('Location: '.home.'/patient/?appointment');
             }
         } else {
             $_SESSION['msg-h'] = "NOTICE";
             $_SESSION['msg'] = "User not verified. Please check your email to verify your account";
             $_SESSION['msg-t'] = "danger";
-
-            header('Location: http://localhost:8080/mccp/login/?');
-            //echo 'Email not verified';
+            header('Location: '.home.'/login/?');
         }
     } else {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg'] = "We couldn't find any user that matches your data";
-        $_SESSION['msg-t'] = "danger";
-        
-        header('Location: http://localhost:8080/mccp/login/?');
-        //echo 'User does not exist.';
+        $_SESSION['msg-t'] = "danger";     
+        header('Location: '.home.'/login/?');
     }
 
     $con->close();

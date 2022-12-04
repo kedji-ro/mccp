@@ -1,16 +1,44 @@
 <?php
 include '../login/db_conn.php';
 
+if (isset($_SESSION['U_ID'])) {
+    if (isset($_SESSION['U_ROLE'])) {
+        if ($_SESSION['U_ROLE'] != '2') {
+            header('Location: '.home.'/admin/?dashboard');
+        }
+    } else {
+        header('Location: '.home.'/?');
+    }
+} else {
+    header('Location: '.home.'/?');
+}
+
+if (empty($_GET)) {
+    header('Location: ?dashboard');
+}
+
 $q = "SELECT COUNT(appointment_id) AS appt_count 
 FROM tb_appointment
-WHERE doctor_id = " . $_SESSION['ADMIN_ID'] . "  AND DATE(appointment_date) > (NOW()) AND a_stat = 0";
+WHERE doctor_id = " . $_SESSION['U_ID'] . " AND a_stat = 0";
 
 $result = mysqli_query($con, $q);
-$rows = mysqli_fetch_assoc($result);
 
 if ($result) {
+    $rows = mysqli_fetch_assoc($result);
     $_SESSION['APPT_COUNT'] = $rows['appt_count'];
 }
+
+$q = "SELECT COUNT(appointment_id) AS atr_count 
+FROM tb_appointment
+WHERE doctor_id = " . $_SESSION['U_ID'] . "  AND DATE(transfer_date) = null AND a_stat = 3";
+
+$result = mysqli_query($con, $q);
+
+if ($result) {
+    $rows = mysqli_fetch_assoc($result);
+    $_SESSION['PATREQ_COUNT'] = $rows['atr_count'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +55,7 @@ if ($result) {
         <title>Dashboard | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
     <?php if (isset($_GET['patient-transfer']) != null) { ?>
-        <title>Patient Transfer | MOTHER CHILD CARE PORTAL</title>
+        <title>Patient Info Request | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
     <?php if (isset($_GET['clinics']) != null) { ?>
         <title>Clinics | MOTHER CHILD CARE PORTAL</title>

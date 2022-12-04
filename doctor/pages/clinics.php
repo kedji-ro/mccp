@@ -7,9 +7,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3"></div>
     <?php
-    $q = "SELECT DISTINCT `tb_clinic`.* FROM `tb_doctor_clinics` 
-            INNER JOIN `tb_clinic` ON `tb_doctor_clinics`.`clinic_id` = `tb_clinic`.`clinic_id`
-            WHERE `tb_doctor_clinics`.`doctor_id` = '" .  $_SESSION['U_ID'] . "'";
+    $q = "SELECT * FROM tb_clinic";
     $q_run = mysqli_query($con, $q);
     ?>
     <div class="card-body">
@@ -22,8 +20,11 @@
                         <th>Address</th>
                         <th>Phone No.</th>
                         <th>Tel No.</th>
-                        <th class="text-center" style="width: 8%;">Status</th>
-                        <th class="text-center" style="width: 8%;">Action</th>
+                        <th>Operating Hours.</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                        <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
 
@@ -37,6 +38,7 @@
                             <td><?php echo $rows['clinic_address']; ?></td>
                             <td><?php echo $rows['contact_no']; ?></td>
                             <td><?php echo $rows['tel_no']; ?></td>
+                            <td><?php echo $rows['open_time']. ' - ' .$rows['close_time']; ?></td>
                             <?php if ($rows['c_stat'] == '1') { ?>
                                 <td class="text-center">
                                     <h5><span class="badge badge-pill badge-success">Active</span></h5>
@@ -50,9 +52,12 @@
                                 <?php if ($rows['c_stat'] == '1') { ?>
                                     <span><button type="button" class="btn btn-danger btn-circle btn-sm deactClinicBtn" title="Deactivate"><i class="fa fa-close"></i></button></span>
                                 <?php } else { ?>
-                                    <span><button type="button" class="btn btn-success btn-circle btn-sm reactClinicBtn" title="Reactivate"><i class="fa fa-check"></i></button></span>
+                                    <span><button type="button" class="btn btn-success btn-circle btn-sm reactClinicBtn" title="Reactivate" <?php echo ($rows['c_stat'] == 2) ? 'disabled': '';?>><i class="fa fa-check"></i></button></span>
+                                    <span><button type="button" class="btn btn-secondary btn-circle btn-sm archiveClinicBtn" title="Archive" <?php echo ($rows['c_stat'] == 2) ? 'disabled': '';?>><i class="fa fa-archive"></i></button></span>
                                 <?php } ?>
                             </td>
+                            <td hidden><?php echo $rows['open_time']; ?></td>
+                            <td hidden><?php echo $rows['close_time']; ?></td>
                         </tr>
                 <?php
                     }
@@ -68,10 +73,6 @@
         $('#clinic_list').dataTable();
 
         $('.editClinic').on('click', function() {
-            
-            $('.addNewClinicDiv').attr('hidden', false);
-            $('.addExistingClinicDiv').attr('hidden', true);
-            $('.newClinicBtn').attr('hidden', true);
 
             $('#addEditClinicModal').modal('show');
 
@@ -88,6 +89,8 @@
             $('#c_phoneno').val(data[3]);
             $('#c_telno').val(data[4]);
             $('#addedit_clinic').attr('name','edit_clinic');
+            $('#co').val(data[8]);
+            $('#cc').val(data[9]);
         });
 
         $('.deactClinicBtn').on('click', function() {
@@ -122,6 +125,21 @@
             $('#c_drid').val(data[0]);
             $('#c_drname').html(data[1]);
             $('#c_stat').val($.trim(data[5]));
+        });
+        
+        $('.archiveClinicBtn').on('click', function() {
+
+            $('#archiveClinicModal').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+
+            $('#ct').html('Archive');
+            $('#carid').val(data[0]);
+            $('#cnm').html(data[1]);
         });
     });
 </script>

@@ -3,16 +3,17 @@
 $q = $con->query("SELECT    schedule_id as s_id,
                             doctor_id as sd_id, 
                             days_available as s_days, 
-                            TIME_FORMAT(start_time, '%h:%i %p') as s_st, 
+                            TIME_FORMAT(open_time, '%h:%i %p') as s_st, 
                             date_available as s_d, 
+                            slots,
                             tb_doctor_schedule.s_stat,
                             TIME_FORMAT(end_time, '%h:%i %p') as s_et,
                             tb_clinic.clinic_name as s_cname,
                             tb_clinic.clinic_address as s_caddrs,
                             tb_doctor_schedule.bg_color,
-                            start_time, end_time, tb_doctor_schedule.clinic_id as c_id
+                            tb_doctor_schedule.start_time, tb_doctor_schedule.end_time, tb_doctor_schedule.clinic_id as c_id
                             FROM tb_doctor_schedule     
-                            LEFT JOIN tb_clinic ON tb_clinic.clinic_id = tb_doctor_schedule.clinic_id WHERE doctor_id = " . $_SESSION['ADMIN_ID']);
+                            LEFT JOIN tb_clinic ON tb_clinic.clinic_id = tb_doctor_schedule.clinic_id WHERE doctor_id = " . $_SESSION['U_ID']);
 
 $schedules = [];
 $sched = [];
@@ -98,6 +99,7 @@ foreach ($q as $row) {
                                 <th>Recurring Days</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
+                                <th>Slots</th>
                                 <th>Color</th>
                                 <th class="text-center" style="width: 8%;">Status</th>
                                 <th class="text-center" style="width: 8%;">Actions</th>
@@ -127,6 +129,7 @@ foreach ($q as $row) {
                                     <td><?php echo $rdays; ?></td>
                                     <td><?php echo $rows['s_st']; ?></td>
                                     <td><?php echo $rows['s_et']; ?></td>
+                                    <td><?php echo $rows['slots']; ?></td>
                                     <td><div class="container-fluid" style="background-color: <?php echo $rows['bg_color']; ?>;">&nbsp;</div></td>
                                     <?php if ($rows['s_stat'] == '1') { ?>
                                         <td class="text-center">
@@ -182,11 +185,12 @@ foreach ($q as $row) {
         }).get();
 
         $('#esid').val(data[0]);
-        $('#esc').val(data[9]);
-        $('#escl').val(data[12]);
+        $('#esc').val(data[10]);
+        $('#escl').val(data[13]);
         $('#esd').val(data[2]);
-        $('#esst').val(data[10]);
-        $('#eset').val(data[11]);
+        $('#esst').val(data[11]);
+        $('#eset').val(data[12]);
+        $('#smslse').val(data[6]);
     });
 
 
