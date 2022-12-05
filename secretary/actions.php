@@ -37,4 +37,80 @@ if (isset($_POST['register_patient'])) {
     $con->error;
 }
 
+if (isset($_POST['complete_appointment'])) {
+
+    $id = $_POST['coaid'];
+
+    $q = "UPDATE tb_appointment SET a_stat = 1 WHERE appointment_id = '".$id."'";
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Appointment marked as complete.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/secretary/?appointments');
+
+    $con->error;
+}
+
+if (isset($_POST['cancel_appointment'])) {
+
+    $id = $_POST['canid'];
+
+    $q = "UPDATE tb_appointment SET a_stat = 2 WHERE appointment_id = '".$id."'";
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Appointment cancelled.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/secretary/?appointments');
+
+    $con->error;
+}
+
+if (isset($_POST['resched_appointment'])) {
+
+    $id = $_POST['raid'];
+    $dt = $_POST['rad'] . ' ' . $_POST['rat'];
+
+    $q = "UPDATE tb_appointment SET a_stat = 0, appointment_date = '".$dt."' WHERE appointment_id = '".$id."'";
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Appointment cancelled.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/secretary/?appointments');
+
+    $con->error;
+}
+
 ?>
