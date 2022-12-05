@@ -10,13 +10,38 @@
                     </div>
                     <form class="user">
                         <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="col-sm-4 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Middle Name">
+                            </div>
+                            <div class="col-sm-4">
                                 <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Marital Status">
+                            </div>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="date" class="form-control form-control-user" id="exampleInputPassword" title="First Day of Last Men Period">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="date" class="form-control form-control-user" id="exampleInputPassword" title="Date of Birth">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Phone No.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="Address">
+                        </div>
+
+                        <hr>
+
                         <div class="form-group">
                             <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
                         </div>
@@ -28,9 +53,10 @@
                                 <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
                             </div>
                         </div>
-                        <a href="login.html" class="btn btn-primary btn-user btn-block">
-                            Register Account
-                        </a>
+                        <button type="submit" class="btn btn-primary btn-user btn-block regBtn" id="register_patient" name="register_patient">
+                            <i class="fas fa-user fa-fw"></i>
+                            Register as Patient
+                        </button>
                     </form>
                     <hr>
                     <div class="text-center">

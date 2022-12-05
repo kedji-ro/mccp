@@ -11,7 +11,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Doctor Registration | Mother Child Care Portal</title>
+    <?php if (isset($_GET['doctor']) != null) { ?>
+        <title>Doctor Registration | Mother Child Care Portal</title>
+    <?php } ?>
+    <?php if (isset($_GET['patient']) != null) { ?>
+        <title>Patient Registration | Mother Child Care Portal</title>
+    <?php } ?>
 
     <!-- Custom fonts for this template-->
     <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -66,7 +71,6 @@
     } ?>
 
     <!-- Bootstrap core JavaScript-->
-    <!-- <script src="../assets/vendor/jquery/jquery.min.js"></script> -->
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->

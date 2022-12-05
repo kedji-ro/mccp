@@ -80,7 +80,7 @@ if (isset($_SESSION['U_ID'])) {
           <li class="dropdown"><a href="#"><span>Register</span> <i class="bi bi-chevron-down"></a></i>
             <ul>
               <li><a href="register/?doctor">Register as Doctor</a></li>
-              <li><a href="register/?patient">Register as Patient (Test)</a></li>
+              <li><a href="register/?patient">Register as Patient</a></li>
             </ul>
           </li>
         </ul>

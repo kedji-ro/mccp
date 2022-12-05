@@ -17,9 +17,11 @@ include '../login/db_conn.php';
 //     header('Location: ?dashboard');
 // }
 
-$q = "SELECT COUNT(appointment_id) AS appt_count 
-FROM tb_appointment
-WHERE doctor_id = " . $_SESSION['D_ID'] . "  AND DATE(appointment_date) > (NOW()) AND a_stat = 0";
+// $q = "SELECT COUNT(appointment_id) AS appt_count 
+// FROM tb_appointment
+// WHERE doctor_id = " . $_SESSION['D_ID'] . "  AND DATE(appointment_date) > (NOW()) AND a_stat = 0";
+
+$q = "SELECT COUNT(appointment_id) AS appt_count  FROM tb_appointment ta WHERE ta.a_stat = 0 AND ta.doctor_id = '" . $_SESSION['D_ID'] . "'";
 
 $result = mysqli_query($con, $q);
 
@@ -54,8 +56,8 @@ if ($result) {
     <?php if (isset($_GET['appointments']) != null) { ?>
         <title>Appointments | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
-    <?php if (isset($_GET['schedule']) != null) { ?>
-        <title>Schedule | MOTHER CHILD CARE PORTAL</title>
+    <?php if (isset($_GET['reg-patient']) != null) { ?>
+        <title>Register Patient | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
 
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
@@ -101,12 +103,12 @@ if ($result) {
                     <?php } ?>
                 </a>
             </li>
-            <li class="nav-item <?php if (isset($_GET['schedule']) != null) {
+            <li class="nav-item <?php if (isset($_GET['reg-patient']) != null) {
                                     echo 'active';
                                 } ?>">
-                <a class="nav-link" href="?schedule">
-                    <i class="fas fa-fw fa-calendar-days"></i>
-                    <span>Manage Schedule</span></a>
+                <a class="nav-link" href="?reg-patient">
+                    <i class="fas fa-fw fa-id-card"></i>
+                    <span>Register Patient</span></a>
             </li>
 
             <hr class="sidebar-divider d-none d-md-block">
@@ -168,8 +170,8 @@ if ($result) {
                         include('pages/appointments.php');
                     }
 
-                    if (isset($_GET['schedule']) != null) {
-                        include('pages/schedule.php');
+                    if (isset($_GET['reg-patient']) != null) {
+                        include('pages/reg-patient.php');
                     }
                     
                     ?>

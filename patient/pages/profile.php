@@ -1,6 +1,6 @@
-<div class="row animated--fade-in container-fluid">
-    <div class="col-sm-7">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+<div class="row animated--fade-in">
+    <div class="col-sm-7 container-fluid">
+        <div class="text-center mb-4">
             <h1 class="h3 mb-0 text-gray-800">Edit Profile</h1>
         </div>
         <div class="card shadow mb-4">
@@ -95,7 +95,5 @@
             </div>
             </form>
         </div>
-    </div>
-    <div class="col-sm-4">
     </div>
 </div>

@@ -1,7 +1,7 @@
 <?php require_once('../../login/db_conn.php'); ?>
 <?php if (isset($_SESSION['U_ID']) == null) : ?>
     <script>
-        window.location.href = "http://localhost:8080/mccp/?";
+        window.location.href = "<?php echo home;?>/?";
     </script>
 <?php elseif (isset($_SESSION['U_ID'])) : ?>
     <!DOCTYPE html>
