@@ -141,26 +141,23 @@ if (isset($_POST['register_doctor'])) {
 
 if (isset($_POST['register_patient'])) {
 
-    $fn = $_POST['r_fn'];
-    $mn = $_POST['r_mn'];
-    $ln = $_POST['r_ln'];
-    $sf = $_POST['r_sn'];
-    $addr = $_POST['r_addr'];
-    $dob = $_POST['r_dob'];
-    $phone = $_POST['r_phone'];
-    $tel = $_POST['r_tel'];
-    $lic = $_POST['r_lic'];
-    $spec = $_POST['r_spec'];
-    $ti = $_POST['r_ti'];
-    $email = $_POST['r_email'];
-    $pass = $_POST['r_pass'];
-    $re_pass = $_POST['r_repass'];
+    $fn = $_POST['rpfn'];
+    $mn = $_POST['rpmn'];
+    $ln = $_POST['rpln'];
+    $ms = $_POST['rpms'];
+    $men = $_POST['rpmen'];
+    $dob = $_POST['rpdob'];
+    $no = $_POST['rpno'];
+    $addr = $_POST['rpaddr'];
+    $em = $_POST['rpem'];
+    $pass = $_POST['rppass'];
+    $rpass = $_POST['rprepass'];
 
     $v_token = md5($email);
     $url = "".home."/register/verify-email.php?token=" . $v_token;
 
     // Validate if email is unique/not yet registered
-    $q = "SELECT 1 FROM tb_users WHERE email = '" . $email . "' LIMIT 1";
+    $q = "SELECT 1 FROM tb_users WHERE email = '" . $em . "' LIMIT 1";
     $res = mysqli_query($con, $q);
 
     $email_count = mysqli_num_rows($res);
@@ -170,7 +167,7 @@ if (isset($_POST['register_patient'])) {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
 
-        header('Location: '.home.'/register/?doctor');
+        header('Location: '.home.'/register/?patient');
         exit(0);
     }
 
@@ -206,7 +203,7 @@ if (isset($_POST['register_patient'])) {
     // }
 
     /** Uncomment and comment code above to bypass length and character validation of password */
-    if ($re_pass !== $pass) {
+    if ($rpass !== $pass) {
         $_SESSION['msg'] = "Passwords don't match.";
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
@@ -217,32 +214,29 @@ if (isset($_POST['register_patient'])) {
 
     // Will proceed to inserting data to db if validations passed
     $qry = "INSERT INTO `tb_users`(`username`, `password`, `email`, 
-                                    `firstname`, `middlename`, `lastname`, `suffix`, 
-                                    `DOB`, `address`, `phone_no`,  `tel_no`, `license_no`, 
-                                    `spec_id`, `title`, `verification_token`, `role`,`is_active`, `registration_date`)
-                        VALUES ('" . $email . "',
+                                    `firstname`, `middlename`, `lastname`, marital_status,
+                                    `DOB`, `address`, `phone_no`, date_first_men_period,
+                                    `verification_token`, `role`,`is_active`, `registration_date`)
+                        VALUES ('" . $em . "',
                             MD5('" . $pass . "'),
-                                '" . $email . "',
+                                '" . $em . "',
                                 '" . $fn . "',
                                 '" . $mn . "',
                                 '" . $ln . "',
-                                '" . $sf . "',
+                                '" . $ms . "',
                                 '" . $dob . "',
                                 '" . $addr . "', 
-                                '" . $phone . "',
-                                '" . $tel . "', 
-                                '" . $lic . "',
-                                '" . $spec . "',
-                                '" . $ti . "',
+                                '" . $no . "',
+                                '" . $men . "', 
                                 '" . $v_token . "',
-                                2, 
-                                0,
+                                '3',
+                                '0',
                                 '".$datetime."')";
 
     $result = mysqli_query($con, $qry);
 
     if ($result) {
-        if (send_VerifyEmail($ln, $email, $url)) {
+        if (send_VerifyEmail($ln, $em, $url)) {
             $_SESSION['msg'] = "Registered succesfully. Please check your email to verify your account.";
             $_SESSION['msg-h'] = "SUCCESS";
             $_SESSION['msg-t'] = "success";
