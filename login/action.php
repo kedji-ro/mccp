@@ -44,7 +44,7 @@ if (isset($_POST['register_doctor'])) {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
 
-        header('Location: http://localhost:8080/mccp/register/?doctor');
+        header('Location: '.home.'/register/?doctor');
         exit(0);
     }
 
@@ -139,6 +139,132 @@ if (isset($_POST['register_doctor'])) {
     $con->close();
 }
 
+if (isset($_POST['register_patient'])) {
+
+    $fn = $_POST['r_fn'];
+    $mn = $_POST['r_mn'];
+    $ln = $_POST['r_ln'];
+    $sf = $_POST['r_sn'];
+    $addr = $_POST['r_addr'];
+    $dob = $_POST['r_dob'];
+    $phone = $_POST['r_phone'];
+    $tel = $_POST['r_tel'];
+    $lic = $_POST['r_lic'];
+    $spec = $_POST['r_spec'];
+    $ti = $_POST['r_ti'];
+    $email = $_POST['r_email'];
+    $pass = $_POST['r_pass'];
+    $re_pass = $_POST['r_repass'];
+
+    $v_token = md5($email);
+    $url = "".home."/register/verify-email.php?token=" . $v_token;
+
+    // Validate if email is unique/not yet registered
+    $q = "SELECT 1 FROM tb_users WHERE email = '" . $email . "' LIMIT 1";
+    $res = mysqli_query($con, $q);
+
+    $email_count = mysqli_num_rows($res);
+
+    if ($email_count > 0) {
+        $_SESSION['msg'] = "Email already exist.";
+        $_SESSION['msg-h'] = "NOTICE";
+        $_SESSION['msg-t'] = "danger";
+
+        header('Location: '.home.'/register/?doctor');
+        exit(0);
+    }
+
+    /** Validate if passwords match and if matches criteria */
+    // $number = preg_match('@[0-9]@', $pass);
+    // $uppercase = preg_match('@[A-Z]@', $pass);
+    // $lowercase = preg_match('@[a-z]@', $pass);
+    // $spChars = preg_match('@[^\w]@', $pass);
+
+    // if ($re_pass === $pass) {
+    //     if (strlen($pass) < 8 || strlen($pass) > 20  || !$number || !$uppercase || !$lowercase || $spChars) {
+    //         $_SESSION['msg'] = "Password must be at least: <br>
+    //                                 <ul>
+    //                                     <li>8 characters in length</li>
+    //                                     <li>Must contain at least one number</li>
+    //                                     <li>Must contain at least one upper case letter</li>
+    //                                     <li>Must contain at least one lower case letter</li>
+    //                                     <li>Must contain at least one special character</li>
+    //                                 </ul>";
+    //         $_SESSION['msg-h'] = "NOTICE";
+    //         $_SESSION['msg-t'] = "danger";
+
+    //         header('Location: http://localhost:8080/mccp/register/?doctor');
+    //         exit(0);
+    //     }
+    // } else {
+    //     $_SESSION['msg'] = "Passwords don't match.";
+    //     $_SESSION['msg-h'] = "NOTICE";
+    //     $_SESSION['msg-t'] = "danger";
+
+    //     header('Location: http://localhost:8080/mccp/register/?doctor');
+    //     exit(0);
+    // }
+
+    /** Uncomment and comment code above to bypass length and character validation of password */
+    if ($re_pass !== $pass) {
+        $_SESSION['msg'] = "Passwords don't match.";
+        $_SESSION['msg-h'] = "NOTICE";
+        $_SESSION['msg-t'] = "danger";
+
+        header('Location: '.home.'/register/?doctor');
+        exit(0);
+    }
+
+    // Will proceed to inserting data to db if validations passed
+    $qry = "INSERT INTO `tb_users`(`username`, `password`, `email`, 
+                                    `firstname`, `middlename`, `lastname`, `suffix`, 
+                                    `DOB`, `address`, `phone_no`,  `tel_no`, `license_no`, 
+                                    `spec_id`, `title`, `verification_token`, `role`,`is_active`, `registration_date`)
+                        VALUES ('" . $email . "',
+                            MD5('" . $pass . "'),
+                                '" . $email . "',
+                                '" . $fn . "',
+                                '" . $mn . "',
+                                '" . $ln . "',
+                                '" . $sf . "',
+                                '" . $dob . "',
+                                '" . $addr . "', 
+                                '" . $phone . "',
+                                '" . $tel . "', 
+                                '" . $lic . "',
+                                '" . $spec . "',
+                                '" . $ti . "',
+                                '" . $v_token . "',
+                                2, 
+                                0,
+                                '".$datetime."')";
+
+    $result = mysqli_query($con, $qry);
+
+    if ($result) {
+        if (send_VerifyEmail($ln, $email, $url)) {
+            $_SESSION['msg'] = "Registered succesfully. Please check your email to verify your account.";
+            $_SESSION['msg-h'] = "SUCCESS";
+            $_SESSION['msg-t'] = "success";
+        } else {
+            $_SESSION['msg'] = "Something wrong with sending email verification.";
+            $_SESSION['msg-h'] = "ERROR";
+            $_SESSION['msg-t'] = "danger";
+        }
+        header('Location: '.home.'/register/?doctor');
+    } else {
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg-t'] = "danger";
+
+        echo $con->error;
+    }
+
+    header('Location: '.home.'/register/?patient');
+
+    $con->close();
+}
+
 if (isset($_POST['login_account'])) {
 
     $email = $_POST['l_email'];
@@ -167,7 +293,7 @@ if (isset($_POST['login_account'])) {
             $_SESSION['U_EMAIL'] = $row['email'];
             $_SESSION['U_FULLNAME'] = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'] . ' ' . $row['suffix'];
             $_SESSION['U_ROLE'] = $row['role'];
-            $_SESSION['D_ID'] = $row['d_id'];
+            $_SESSION['D_ID'] = $row['sec_docid'];
 
             if ($row['role'] == '1') {
                 $_SESSION['msg-h'] = "WELCOME";
@@ -196,7 +322,7 @@ if (isset($_POST['login_account'])) {
                 $_SESSION['msg-t'] = "success";
                 $_SESSION['msg-bg'] = "#e8fae9";
 
-                header('Location: '.home.'/patient/?appointment');
+                header('Location: '.home.'/patient/?set-appointment');
             }
         } else {
             $_SESSION['msg-h'] = "NOTICE";
@@ -250,7 +376,7 @@ function send_VerifyEmail($d_lname, $d_email, $url)
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
                         <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
-                            <h1 style="font-size: 48px; font-weight: 400; margin: 2;">Welcome<br>Dr. ' . $d_lname . '!</h1> <img src=" https://img.icons8.com/clouds/100/000000/handshake.png" width="125" height="120" style="display: block; border: 0px;" />
+                            <h1 style="font-size: 48px; font-weight: 400; margin: 2;">Welcome <br> ' . $d_lname . '!</h1> <img src=" https://img.icons8.com/clouds/100/000000/handshake.png" width="125" height="120" style="display: block; border: 0px;" />
                         </td>
                     </tr>
                 </table>
