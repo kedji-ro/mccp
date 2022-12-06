@@ -4,11 +4,11 @@ include 'login/db_conn.php';
 if (isset($_SESSION['U_ID'])) {
   if (isset($_SESSION['U_ROLE'])) {
     if ($_SESSION['U_ROLE'] == '1') {
-      header('Location: '.home.'/admin/?dashboard');
+      header('Location: ' . home . '/admin/?dashboard');
     } elseif ($_SESSION['U_ROLE'] == '2') {
-      header('Location: '.home.'/doctor/?dashboard');
+      header('Location: ' . home . '/doctor/?dashboard');
     } else {
-      header('Location: '.home.'/?');
+      header('Location: ' . home . '/?');
     }
   } else {
     session_destroy();
@@ -110,7 +110,7 @@ if (isset($_SESSION['U_ID'])) {
       <div class="container">
 
         <div class="row">
-          <div class="col-lg-3 d-flex align-items-stretch">
+          <div class="col-lg-4 d-flex align-items-stretch">
             <div class="content">
               <h3>Quick Guide</h3>
               <p>
@@ -121,42 +121,34 @@ if (isset($_SESSION['U_ID'])) {
               </div> -->
             </div>
           </div>
-          <div class="col-lg-9 d-flex align-items-stretch">
+          <div class="col-lg-8 d-flex align-items-stretch">
             <div class="icon-boxes d-flex flex-column justify-content-center">
               <div class="row">
-                <div class="col-xl-3 d-flex align-items-stretch">
+                <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-receipt"></i>
                     <h4>Step 1</h4>
                     <p>Register to create your own account</p>
                   </div>
                 </div>
-                <div class="col-xl-3 d-flex align-items-stretch">
+                <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-cube-alt"></i>
                     <h4>Step 2</h4>
                     <p>Check your email to verify your account.</p>
                   </div>
                 </div>
-                <div class="col-xl-3 d-flex align-items-stretch">
+                <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-images"></i>
                     <h4>Step 3</h4>
                     <p>When verified, log in to your account and start managing your appointments (patients) or schedules (doctors)</p>
                   </div>
                 </div>
-                <div class="col-xl-3 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-images"></i>
-                    <h4>Step 4</h4>
-                    <p>For more convenience and accesibility with booking or viewing appointments, patients may download our mobile app <span><a href="#">here</a></span>. </p>
-                  </div>
-                </div>
               </div>
             </div><!-- End .content-->
           </div>
         </div>
-
       </div>
     </section><!-- End Why Us Section -->
 
@@ -199,7 +191,7 @@ if (isset($_SESSION['U_ID'])) {
     <!-- End About Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    <!-- <section id="services" class="services">
       <div class="container">
 
         <div class="section-title">
@@ -259,7 +251,8 @@ if (isset($_SESSION['U_ID'])) {
         </div>
 
       </div>
-    </section><!-- End Services Section -->
+    </section>  -->
+    <!-- End Services Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -311,7 +304,7 @@ if (isset($_SESSION['U_ID'])) {
 
       <div class="me-md-auto text-center text-md-start">
         <div class="copyright">
-          &copy; Copyright <strong><span>Mother Child Care Portal</span></strong>. All Rights Reserved
+          &copy; Copyright <strong><span>Mother Child Care Portal</span></strong>. All Rights Reserved 2022.
         </div>
       </div>
     </div>
