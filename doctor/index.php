@@ -28,15 +28,15 @@ if ($result) {
     $_SESSION['APPT_COUNT'] = $rows['appt_count'];
 }
 
-$q = "SELECT COUNT(appointment_id) AS atr_count 
-FROM tb_appointment
-WHERE doctor_id = " . $_SESSION['U_ID'] . "  AND DATE(transfer_date) = null AND a_stat = 3";
+$qr = "SELECT COUNT(req_id) AS req_count 
+FROM tb_requests
+WHERE docfrom_id = " . $_SESSION['U_ID'] . " AND  req_stat = 0";
 
-$result = mysqli_query($con, $q);
+$res = mysqli_query($con, $qr);
 
-if ($result) {
-    $rows = mysqli_fetch_assoc($result);
-    $_SESSION['PATREQ_COUNT'] = $rows['atr_count'];
+if ($res) {
+    $rows = mysqli_fetch_assoc($res);
+    $_SESSION['REQ_COUNT'] = $rows['req_count'];
 }
 
 ?>
@@ -55,7 +55,7 @@ if ($result) {
         <title>Dashboard | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
     <?php if (isset($_GET['patient-transfer']) != null) { ?>
-        <title>Patient Info Request | MOTHER CHILD CARE PORTAL</title>
+        <title>Patient Info Requests | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
     <?php if (isset($_GET['clinics']) != null) { ?>
         <title>Clinics | MOTHER CHILD CARE PORTAL</title>
@@ -117,9 +117,9 @@ if ($result) {
                                 } ?>">
                 <a class="nav-link" href="?patient-transfer">
                     <i class="fas fa-fw fa-paper-plane"></i>
-                    <span>Patient Info Request</span>
-                    <?php if ($_SESSION['PATREQ_COUNT'] != 0) { ?>
-                        <span class="badge badge-light" id="aReqCount" style="margin-left: 15px; position:absolute;"><?php echo $_SESSION['PATREQ_COUNT']; ?></span>
+                    <span>Patient Info Requests</span>
+                    <?php if ($_SESSION['REQ_COUNT'] != 0) { ?>
+                        <span class="badge badge-light" id="aReqCount" style="margin-left: 15px; position:absolute;"><?php echo $_SESSION['REQ_COUNT']; ?></span>
                     <?php } ?>
                 </a>
             </li>

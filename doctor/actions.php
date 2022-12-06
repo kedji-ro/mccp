@@ -21,7 +21,7 @@ if (isset($_POST['transfer_patient'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?patient-transfer');
+    header('Location: ' . home . '/doctor/?patient-transfer');
     $con->close();
 }
 
@@ -86,7 +86,7 @@ if (isset($_POST['add_clinic'])) {
         }
     }
 
-    header('Location: '.home.'/doctor/?clinics');
+    header('Location: ' . home . '/doctor/?clinics');
     $con->close();
 }
 
@@ -98,10 +98,10 @@ if (isset($_POST['edit_clinic'])) {
     $c_phone = mysqli_real_escape_string($con, $_POST['c_phoneno']);
     $c_tel = mysqli_real_escape_string($con, $_POST['c_telno']);
 
-    $q = "UPDATE tb_clinic SET clinic_name = '".$c_name."',
-                               clinic_address = '".$c_add."', 
-                               contact_no = '".$c_phone."', 
-                               tel_no = '".$c_tel."' WHERE clinic_id = '".$c_id."'";
+    $q = "UPDATE tb_clinic SET clinic_name = '" . $c_name . "',
+                               clinic_address = '" . $c_add . "', 
+                               contact_no = '" . $c_phone . "', 
+                               tel_no = '" . $c_tel . "' WHERE clinic_id = '" . $c_id . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -115,7 +115,7 @@ if (isset($_POST['edit_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?clinics');
+    header('Location: ' . home . '/doctor/?clinics');
     $con->close();
 }
 
@@ -125,7 +125,7 @@ if (isset($_POST['deactreact_clinic'])) {
     $c_stat = $_POST['c_stat'];
     $stat = ($c_stat == 'Active') ? 0 : 1;
 
-    $q = "UPDATE tb_clinic SET c_stat = '".$stat."' WHERE clinic_id = '" . $c_id . "'";
+    $q = "UPDATE tb_clinic SET c_stat = '" . $stat . "' WHERE clinic_id = '" . $c_id . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -139,7 +139,7 @@ if (isset($_POST['deactreact_clinic'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?clinics');
+    header('Location: ' . home . '/doctor/?clinics');
     $con->close();
 }
 
@@ -148,7 +148,7 @@ if (isset($_POST['approvedeny_appointment'])) {
     $a_id = $_POST['am_id'];
     $a_stat = $_POST['am_appstat'];
 
-    $q = "UPDATE tb_appointment SET a_stat = '".$a_stat."' WHERE appointment_id = '" . $a_id . "'";
+    $q = "UPDATE tb_appointment SET a_stat = '" . $a_stat . "' WHERE appointment_id = '" . $a_id . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -162,7 +162,7 @@ if (isset($_POST['approvedeny_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?appointments');
+    header('Location: ' . home . '/doctor/?appointments');
     $con->close();
 }
 
@@ -184,7 +184,7 @@ if (isset($_POST['cancel_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?appointments');
+    header('Location: ' . home . '/doctor/?appointments');
     $con->close();
 }
 
@@ -197,14 +197,14 @@ if (isset($_POST['add_schedule'])) {
     $start = $_POST['sm_st'];
     $end = $_POST['sm_et'];
     $slots = $_POST['smsls'];
-    
+
     $daysofweek = explode(' ', $_POST['sdays']);
     $rdays = implode(',', $rdays);
 
     $q = "INSERT INTO tb_doctor_schedule (doctor_id, clinic_id, date_available, start_time, end_time, bg_color, s_stat, slots,days_available)
-                        VALUES ('".$d_id."','".$clinic."','".$date."','".$start."','".$end."','".$color."','1','".$slots."',$rdays)";
+                        VALUES ('" . $d_id . "','" . $clinic . "','" . $date . "','" . $start . "','" . $end . "','" . $color . "','1','" . $slots . "',$rdays)";
 
-    if (mysqli_query($con,$q)) {
+    if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
         $_SESSION['msg'] = "Schedule added.";
         $_SESSION['msg-t'] = "success";
@@ -216,7 +216,7 @@ if (isset($_POST['add_schedule'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?schedule');
+    header('Location: ' . home . '/doctor/?schedule');
     $con->close();
 }
 
@@ -229,17 +229,17 @@ if (isset($_POST['edit_schedule'])) {
     $start = $_POST['esst'];
     $end = $_POST['eset'];
     $slots = $_POST['smslse'];
-    
+
     $daysofweek = explode(' ', $_POST['esdays']);
     $rdays = implode(',', $rdays);
 
-    $q = "UPDATE tb_doctor_schedule SET clinic_id = '".$clinic."', date_available = '".$date."' ,
-                                        start_time = '".$start."', end_time = '".$end."', bg_color = '".$color."' ,
-                                        slots = '".$slots."',
-                                        days_available = '".$rdays."'
-                                        WHERE schedule_id = '".$sid."'";
+    $q = "UPDATE tb_doctor_schedule SET clinic_id = '" . $clinic . "', date_available = '" . $date . "' ,
+                                        start_time = '" . $start . "', end_time = '" . $end . "', bg_color = '" . $color . "' ,
+                                        slots = '" . $slots . "',
+                                        days_available = '" . $rdays . "'
+                                        WHERE schedule_id = '" . $sid . "'";
 
-    if (mysqli_query($con,$q)) {
+    if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
         $_SESSION['msg'] = "Schedule updated successfully.";
         $_SESSION['msg-t'] = "success";
@@ -251,17 +251,17 @@ if (isset($_POST['edit_schedule'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?schedule');
+    header('Location: ' . home . '/doctor/?schedule');
     $con->close();
 }
 
 if (isset($_POST['deactivate_sched'])) {
 
     $s_id = $_POST['sid'];
-    
-    $q = "UPDATE tb_doctor_schedule SET s_stat = 0 WHERE schedule_id = '".$s_id."'";
 
-    if (mysqli_query($con,$q)) {
+    $q = "UPDATE tb_doctor_schedule SET s_stat = 0 WHERE schedule_id = '" . $s_id . "'";
+
+    if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
         $_SESSION['msg'] = "Schedule deactivated.";
         $_SESSION['msg-t'] = "success";
@@ -273,7 +273,7 @@ if (isset($_POST['deactivate_sched'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?schedule');
+    header('Location: ' . home . '/doctor/?schedule');
     $con->close();
 }
 
@@ -282,12 +282,12 @@ if (isset($_POST['resched_appointment'])) {
     $sid = $_POST['raid'];
     $sd = $_POST['rad'];
     $st = $_POST['rat'];
-    
-    $newad = $sd .' '. $st;
-    
-    $q = "UPDATE tb_appointment SET appointment_date = '".$newad."' WHERE appointment_id = '".$sid."'";
 
-    if (mysqli_query($con,$q)) {
+    $newad = $sd . ' ' . $st;
+
+    $q = "UPDATE tb_appointment SET appointment_date = '" . $newad . "' WHERE appointment_id = '" . $sid . "'";
+
+    if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
         $_SESSION['msg'] = "Appointment rescheduled successfully.";
         $_SESSION['msg-t'] = "success";
@@ -299,7 +299,7 @@ if (isset($_POST['resched_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?appointments');
+    header('Location: ' . home . '/doctor/?appointments');
     $con->close();
 }
 
@@ -331,7 +331,84 @@ if (isset($_POST['request_info'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: '.home.'/doctor/?patient-transfer');
+    header('Location: ' . home . '/doctor/?patient-transfer');
+    $con->close();
+}
+
+if (isset($_POST['save_profile'])) {
+
+    $user = mysqli_real_escape_string($con, $_POST['u_user']);
+    $fn = mysqli_real_escape_string($con, $_POST['u_fname']);
+    $mn = mysqli_real_escape_string($con, $_POST['u_mname']);
+    $ln = mysqli_real_escape_string($con, $_POST['u_lname']);
+    $sufx = mysqli_real_escape_string($con, $_POST['u_sufx']);
+    $dob = mysqli_real_escape_string($con, $_POST['u_dob']);
+    $add = mysqli_real_escape_string($con, $_POST['u_add']);
+    $phone = mysqli_real_escape_string($con, $_POST['u_phone']);
+    $license = mysqli_real_escape_string($con, $_POST['u_lic']);
+    $spec = mysqli_real_escape_string($con, $_POST['u_spec']);
+    $title = mysqli_real_escape_string($con, $_POST['u_title']);
+
+    $q_user = "UPDATE `tb_users` SET `username`='" . $user . "'
+                                    ,`firstname`='" . $fn . "',`middlename`='" . $mn . "',`lastname`='" . $ln . "',`suffix`='" . $sufx . "'
+                                    ,`DOB`='" . $dob . "',`address`='" . $add . "',`phone_no`='" . $phone . "' WHERE `user_id` = '" . $_SESSION['U_ID'] . "'";
+
+    if (mysqli_query($con, $q_user)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Profile updated.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+
+        $_SESSION['FULLNAME'] = $fn . ' ' . $mn . ' ' . $ln . ' ' . $sufx;
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/doctor/?profile');
+
+    $con->close();
+
+
+    $id = $_SESSION['U_ID'];
+    //$em = $_POST['em'];
+    $fn = $_POST['pfn'];
+    $mn = $_POST['pmn'];
+    $ln = $_POST['pln'];
+    $men = $_POST['pmen'];
+    $dob = $_POST['pdob'];
+    $phone = $_POST['pno'];
+    $ms = $_POST['pms'];
+    $add = $_POST['padd'];
+
+
+    $q = "UPDATE tb_users SET firstname = '" . $fn . "',
+                              middlename ='" . $mn . "',
+                              lastname = '" . $ln . "',
+                              date_first_men_period = '" . $men . "',
+                              DOB = '" . $dob . "',
+                              phone_no = '" . $phone . "',
+                              marital_status = '" . $ms . "',
+                              address = '" . $add . "'  
+                        WHERE user_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Profile updated.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+
+        $_SESSION['FULLNAME'] = $fn . ' ' . $mn . ' ' . $ln;
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/doctor/?profile');
     $con->close();
 }
 

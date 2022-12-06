@@ -7,7 +7,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3"></div>
     <?php
-    $q = "SELECT * FROM tb_clinic";
+    $q = "SELECT *  FROM tb_doctor_clinics tdc INNER JOIN  tb_clinic tc ON tdc.clinic_id = tc.clinic_id WHERE tdc.doctor_id = '".$_SESSION['U_ID']."'";
     $q_run = mysqli_query($con, $q);
     ?>
     <div class="card-body">
