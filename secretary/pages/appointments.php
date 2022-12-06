@@ -69,9 +69,9 @@ $q = "SELECT * FROM tb_appointment ta
 
                             <td class="text-center">
                                 <button type="button" class="btn btn-primary btn-circle btn-sm viewABtn" title="View Details"><i class="fas fa-eye"></i></button>
+                                <span><button type="button" class="btn btn-secondary btn-circle btn-sm printABtn" title="Print"><i class="fas fa-print"></i></button></span>
                                 <span><button type="button" class="btn btn-success btn-circle btn-sm completeABtn" title="Mark As Comlpete" <?php echo (($row['a_stat'] == 1 || $row['a_stat'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-check"></i></button></span>
                                 <span><button type="button" class="btn btn-danger btn-circle btn-sm cancelABtn" title="Cancel" <?php echo (($row['a_stat'] == 1 || $row['a_stat'] == 2) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
-                                <span><button type="button" class="btn btn-secondary btn-circle btn-sm printABtn" title="Print"><i class="fas fa-print"></i></button></span>
                                 <span><button type="button" class="btn btn-warning btn-circle btn-sm resABtn" title="Reschedule" <?php echo (($row['a_stat'] == 1) ? 'disabled' : ''); ?>><i class="fas fa-calendar-days text-gray-900"></i></button></span>
                             </td>
 
