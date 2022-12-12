@@ -1936,3 +1936,78 @@ Stack trace:
 [04-Dec-2022 18:08:47 Asia/Manila] PHP Warning:  implode(): Invalid arguments passed in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 234
 [04-Dec-2022 18:25:32 Asia/Manila] PHP Notice:  Undefined variable: rdays in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 202
 [04-Dec-2022 18:25:32 Asia/Manila] PHP Warning:  implode(): Invalid arguments passed in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 202
+[05-Dec-2022 16:14:59 Asia/Manila] PHP Notice:  Undefined variable: rdays in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 234
+[05-Dec-2022 16:14:59 Asia/Manila] PHP Warning:  implode(): Invalid arguments passed in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 234
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 36
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 43
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 55
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 62
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 63
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 105
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 109
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 113
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 117
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 136
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 142
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 11:59:49 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 36
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 43
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 55
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 62
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 63
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 105
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 109
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 113
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 117
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 136
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 142
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 11:59:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 36
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 43
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 55
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 62
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 63
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 105
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 109
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 113
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 117
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 136
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 142
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 13:10:57 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 36
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 41
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 43
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 55
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 62
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 63
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 105
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 109
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 113
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 117
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 136
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 142
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 13:14:06 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/doctor/pages/profile.php on line 148
+[06-Dec-2022 13:32:56 Asia/Manila] PHP Notice:  Undefined variable: rdays in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 224
+[06-Dec-2022 13:32:56 Asia/Manila] PHP Warning:  implode(): Invalid arguments passed in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 224
+[06-Dec-2022 13:33:45 Asia/Manila] PHP Notice:  Undefined variable: rdays in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 224
+[06-Dec-2022 13:33:45 Asia/Manila] PHP Warning:  implode(): Invalid arguments passed in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 224
+[06-Dec-2022 13:40:41 Asia/Manila] PHP Notice:  Undefined index: am_id in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 170
+[06-Dec-2022 13:40:41 Asia/Manila] PHP Notice:  Undefined index: am_appstat in /home/w22hl01qnd6e/public_html/doctor/actions.php on line 171
+[06-Dec-2022 16:27:13 Asia/Manila] PHP Notice:  Undefined index: U_ID in /home/w22hl01qnd6e/public_html/doctor/index.php on line 22
+[06-Dec-2022 16:27:13 Asia/Manila] PHP Notice:  Undefined index: U_ID in /home/w22hl01qnd6e/public_html/doctor/index.php on line 33
+[06-Dec-2022 16:27:13 Asia/Manila] PHP Notice:  Undefined index: REQ_COUNT in /home/w22hl01qnd6e/public_html/doctor/index.php on line 121
+[06-Dec-2022 16:27:13 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/doctor/index.php on line 144
+[06-Dec-2022 16:27:13 Asia/Manila] PHP Notice:  Undefined index: FULLNAME in /home/w22hl01qnd6e/public_html/doctor/index.php on line 213
+[06-Dec-2022 16:27:13 Asia/Manila] PHP Notice:  Undefined index: U_ID in /home/w22hl01qnd6e/public_html/doctor/pages/appointments.php on line 6
+[06-Dec-2022 16:27:13 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/doctor/pages/appointments.php on line 55

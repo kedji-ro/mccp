@@ -2,6 +2,152 @@
 
 include '../login/db_conn.php';
 
+if (isset($_POST['register_patient'])) {
+
+    $pe = $_POST['em'];
+    $ppass = $_POST['ppass'];
+    $pfn = $_POST['pfn'];
+    $pmn = $_POST['pmn'];
+    $pln = $_POST['pln'];
+    $pmen = $_POST['pmen'];
+    $pms = $_POST['pms'];
+    $pdob = $_POST['pdob'];
+    $pphone = $_POST['pno'];
+    $paddr = $_POST['padd'];
+
+    //$q = "INSERT INTO tb_users (username, password, email, firstname, middlename, lastname, DOB, address, phone_no, date_first_men_period, role, marital_status, is_active)
+     //               VALUES('".$pe."',MD5('".$ppass."'),'".$pe."','".$pfn."','".$pmn."','".$pln."','".$pdob."','".$paddr."','".$pphone."','".$pmen."','3','".$pms."', '1')";
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Registration successful.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/admin/?mothers');
+
+    $con->error;
+}
+
+if (isset($_POST['edit_patient'])) {
+
+    $pe = $_POST['em'];
+    $ppass = $_POST['ppass'];
+    $pfn = $_POST['pfn'];
+    $pmn = $_POST['pmn'];
+    $pln = $_POST['pln'];
+    $pmen = $_POST['pmen'];
+    $pms = $_POST['pms'];
+    $pdob = $_POST['pdob'];
+    $pphone = $_POST['pno'];
+    $paddr = $_POST['padd'];
+
+    $q = "INSERT INTO tb_users (username, password, email, firstname, middlename, lastname, DOB, address, phone_no, date_first_men_period, role, marital_status, is_active)
+                    VALUES('".$pe."',MD5('".$ppass."'),'".$pe."','".$pfn."','".$pmn."','".$pln."','".$pdob."','".$paddr."','".$pphone."','".$pmen."','3','".$pms."', '1')";
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Registration successful.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/admin/?mothers');
+
+    $con->error;
+}
+
+if (isset($_POST['archive_child'])) {
+
+    $c_id = $_POST['arcid'];
+
+    $q = "UPDATE tb_child_details SET ch_stat = '0' WHERE child_id = '" . $c_id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Child info archived.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/admin/?children');
+    $con->close();
+}
+
+if (isset($_POST['archive_mo'])) {
+
+    $c_id = $_POST['aarmid'];
+
+    $q = "UPDATE tb_users SET is_active = '0' WHERE user_id = '" . $c_id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Mother info archived.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/admin/?mothers');
+    $con->close();
+}
+
+if (isset($_POST['edit_child'])) {
+
+    $c_id = $_POST['ch_id'];
+    $cfn = $_POST['chfn'];
+    $cmn = $_POST['chmn'];
+    $cln = $_POST['chln'];
+    $csf = $_POST['chsf'];
+    $cdob = $_POST['chdob'];
+    $chh = $_POST['chh'];
+    $chw = $_POST['chw'];
+
+    $q = "UPDATE tb_child_details SET firstname = '" . $cfn . "', middlename = '" . $cmn . "',
+                              lastname = '" . $cln . "', suffix = '" . $csf . "', 
+                              height = '" . $chh . "', weight = '" . $chw . "', dateofbirth = '" . $cdob . "'
+                        WHERE child_id = '" . $c_id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Child info edited.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/admin/?children');
+    $con->close();
+}
+
 if (isset($_POST['deact_user'])) {
 
     $user_id = (isset($_POST['u_id'])) ? $_POST['u_id'] : $_POST['ur_id'];
@@ -342,6 +488,36 @@ if (isset($_POST['archive_doctor'])) {
     }
 
     header('Location: ' . home . '/admin/?doctors');
+    $con->close();
+}
+
+if (isset($_POST['register_child'])) {
+
+    $p_id = $_SESSION['U_ID'];
+    $cfn = $_POST['rchfn'];
+    $cmn = $_POST['rchmn'];
+    $cln = $_POST['rchln'];
+    $csf = $_POST['rchsf'];
+    $cdob = $_POST['rchdob'];
+    $chh = $_POST['rchh'];
+    $chw = $_POST['rchw'];
+
+    $q = "INSERT INTO tb_child_details (parent_id, firstname, middlename, lastname, suffix, height, weight, dateofbirth)
+                        VALUES ('" . $p_id . "','" . $cfn . "','" . $cmn . "','" . $cln . "','" . $csf . "','" . $chh . "','" . $chw . "','" . $cdob . "')";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Child registered succcesfully.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/admin/?children');
     $con->close();
 }
 

@@ -191,7 +191,7 @@
                     $(".dspec").html('');
                     $(".dserv").html('');
                 } else {
-                    $(".dn").html(msg[0].doc_name);
+                    $(".dn").html(msg[0].docs_name);
                     $(".dspec").html(msg[0].s_desc);
                     $(".dserv").html(msg[0].doc_services);
                 }

@@ -6,8 +6,8 @@ if (isset($_POST['load_doctors'])) {
 
     $cid = $_POST['clid'];
 
-    $q = $con->query("SELECT DISTINCT user_id, CONCAT(firstname,' ',middlename,' ',lastname,' ',suffix) AS doc_name FROM tb_users tu
-                INNER JOIN tb_doctor_clinics tdc ON tdc.doctor_id = tu.user_id
+    $q = $con->query("SELECT DISTINCT user_id, CONCAT(IFNULL(firstname,''),' ',IFNULL(middlename,''),' ',IFNULL(lastname,''),' ',IFNULL(suffix,'')) AS doc_name FROM tb_users tu
+                LEFT JOIN tb_doctor_clinics tdc ON tdc.doctor_id = tu.user_id
                 WHERE tu.role = 2 AND tdc.clinic_id = '" . $cid . "'");
 
     $docs = array();
@@ -38,9 +38,9 @@ if (isset($_POST['load_doc_details'])) {
 
     $did = $_POST['did'];
 
-    $q = $con->query("SELECT DISTINCT user_id, CONCAT(firstname,' ',middlename,' ',lastname,' ',suffix) AS doc_name, s_desc, doc_services FROM tb_users tu
+    $q = $con->query("SELECT DISTINCT user_id, CONCAT(IFNULL(firstname,''),' ',IFNULL(middlename,''),' ',IFNULL(lastname,''),' ',IFNULL(suffix,'')) AS docs_name, s_desc, doc_services FROM tb_users tu
                 INNER JOIN tb_doctor_clinics tdc ON tdc.doctor_id = tu.user_id
-                INNER JOIN tb_specialization ts ON ts.spec_id = tu.spec_id
+                LEFT JOIN tb_specialization ts ON ts.spec_id = tu.spec_id
                 WHERE tu.role = 2 AND tu.user_id = '" . $did . "'");
 
     $docd = array();
@@ -56,7 +56,7 @@ if (isset($_POST['load_doc_details'])) {
 if (isset($_POST['load_dates'])) {
     $did = $_POST['d_id'];
 
-    $q = $con->query("SELECT DISTINCT tds.date_available FROM tb_doctor_schedule tds WHERE tds.doctor_id = '" . $did . "'");
+    $q = $con->query("SELECT DISTINCT tds.date_available FROM tb_doctor_schedule tds WHERE tds.doctor_id = '" . $did . "' AND tds.taken_slots <= tds.slots");
 
     $dates = array();
     while ($r = mysqli_fetch_assoc($q)) {

@@ -50,7 +50,7 @@ foreach ($rs as $r) {
             <li class="nav-item">
                 <a class="nav-link active" href="#apptCalendar" data-toggle="tab" id="hlCal">Calendar</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" href="#apptLists" data-toggle="tab" id="hlAppts">Appointments List
                     <?php if ($_SESSION['APPT_COUNT'] != 0) { ?>
                         <span class="badge badge-primary aReqCount" style="margin-left:10px;"><?php echo $_SESSION['APPT_COUNT']; ?></span>
@@ -85,13 +85,16 @@ foreach ($rs as $r) {
                         <table class="table table-bordered table-condensed table-fixed table-striped" id="apptListDT" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
+                                    <th hidden>No.</th>
                                     <th>Patient Name</th>
+                                    <th>Contact No.</th>
                                     <th>Date</th>
                                     <th>Time</th>
                                     <th>Clinic</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Action</th>
+                                    <th hidden></th>
+                                    <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
                                     <th hidden></th>
@@ -105,12 +108,13 @@ foreach ($rs as $r) {
                             while ($row = $result->fetch_array()) {
                             ?>
                                 <tr>
-                                    <td><?php echo $row['appointment_id']; ?></td>
+                                    <td hidden><?php echo $row['appointment_id']; ?></td>
                                     <td><?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname']; ?></td>
+                                    <td><?php echo 'Phone: '.$row['phone_no'].'<br> Tel: '. (($row['tel_no'] == '')? 'N/A' : $row['tel_no']); ?></td>
                                     <td><?php echo date('Y-m-d', strtotime($row['appointment_date'])); ?></td>
                                     <td><?php echo date('h:i A', strtotime($row['appointment_date'])); ?></td>
                                     <td><?php echo $row['clinic_name']; ?></td>
-
+                                    
                                     <td class="text-center">
                                         <?php
                                         switch ($row['a_stat']) {
@@ -130,18 +134,19 @@ foreach ($rs as $r) {
                                     </td>
 
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-primary btn-circle btn-sm viewABtn" title="View/Add Details"><i class="fas fa-edit"></i></button>
-                                        <span><button type="button" class="btn btn-secondary btn-circle btn-sm printABtn" title="Print"><i class="fas fa-print"></i></button></span>
-                                        <span><button type="button" class="btn btn-success btn-circle btn-sm completeABtn" title="Mark As Comlpete" <?php echo (($row['a_stat'] != 0 ) ? 'disabled' : ''); ?>><i class="fas fa-check"></i></button></span>
-                                        <span><button type="button" class="btn btn-danger btn-circle btn-sm cancelABtn" title="Cancel" <?php echo (($row['a_stat'] != 0 ) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
-                                        <span><button type="button" class="btn btn-warning btn-circle btn-sm resABtn" title="Reschedule" <?php echo (($row['a_stat'] == 1 ) ? 'disabled' : ''); ?>><i class="fas fa-calendar-days text-gray-900"></i></button></span>
+                                        <button type="button" class="btn btn-primary btn-circle btn-sm viewABtn" title="Add Notes/Additional Details"><i class="fas fa-edit"></i></button>
+                                        <span><button type="button" class="btn btn-secondary btn-circle btn-sm printABtn" title="Print"><i class="fas fa-print"></i></button></span><br>
+                                        <span><button type="button" class="btn btn-success btn-circle btn-sm completeABtn" title="Mark As Comlpete" <?php echo (($row['a_stat'] != 0 ) ? 'hidden' : ''); ?>><i class="fas fa-check"></i></button></span>
+                                        <span><button type="button" class="btn btn-danger btn-circle btn-sm cancelABtn" title="Cancel" <?php echo (($row['a_stat'] != 0 ) ? 'hidden' : ''); ?>><i class="fas fa-close"></i></button></span>
+                                        <span><button type="button" class="btn btn-warning btn-circle btn-sm resABtn" title="Reschedule" <?php echo (($row['a_stat'] == 1 ) ? 'hidden' : ''); ?>><i class="fas fa-calendar-days text-gray-900"></i></button></span>
                                     </td>
                                     <td hidden><?php echo $row['email']; ?></td>
                                     <td hidden><?php echo $row['phone_no']; ?></td>
                                     <td hidden><?php echo $row['tel_no']; ?></td>
                                     <td hidden><?php echo $row['clinic_address']; ?></td>
-                                    <td hidden><?php echo date('H:i:s', strtotime($row['appointment_date'])); ?></td>
-
+                                    <td hidden><?php echo $row['contact_no']; ?></td>
+                                    <td hidden><?php echo $row['a_desc']; ?></td>
+                                    <td hidden><?php echo $row['doctor_remarks']; ?></td>
                                 </tr>
 
                             <?php }
@@ -159,17 +164,26 @@ foreach ($rs as $r) {
                                 return $(this).text();
                             }).get();
 
-                            $('#alp_id').val(data[0]);
-                            $('#alp_name').val(data[1]);
-                            $('#alp_pemail').val(data[8]);
-                            $('#alp_con').val(data[9]);
-                            $('#alp_tel').val(data[10]);
-                            $('#alp_date').val(data[2]);
-                            $('#alp_time').val(data[3]);
-                            $('#alp_clinic').val(data[5]);
+                            $('#an_id').val(data[0]);
+                            $('#alp_clinic').val(data[12]);
                             $('#alp_cadd').val(data[11]);
+                            $('#alp_desc').val(data[13]);
+                            $('#alp_drem').html(data[14]);
                         });
 
+                        $('.completeABtn').on('click', function() {
+
+                            $('#compApptModal').modal('show');
+
+                            $tr = $(this).closest('tr');
+
+                            var data = $tr.children("td").map(function() {
+                                return $(this).text();
+                            }).get();
+
+                            $('#cacid').val(data[0]);
+                        });
+                        
                         $('.cancelABtn').on('click', function() {
 
                             $('#cancelApptModal').modal('show');
@@ -218,7 +232,7 @@ foreach ($rs as $r) {
 <script>
     $(document).ready(function() {
         $('#apptListDT').dataTable().fnSort([
-            [5, 'asc']
+            [6, 'asc']
         ]);
 
         var calendarAppts = document.getElementById('appt-calendar');
@@ -227,7 +241,7 @@ foreach ($rs as $r) {
             themeSystem: 'bootstrap',
             initialView: 'dayGridMonth',
             initialDate: '<?php echo $date; ?>',
-            editable: true,
+            editable: false,
             selectable: true,
             height: 700,
             headerToolbar: {

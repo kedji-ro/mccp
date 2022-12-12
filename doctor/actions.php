@@ -25,6 +25,28 @@ if (isset($_POST['transfer_patient'])) {
     $con->close();
 }
 
+if (isset($_POST['upload'])) {
+
+    $c_id = $_SESSION['U_ID'];
+
+    $q = "";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "ID uploaded.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/doctor/?profile');
+    $con->close();
+}
+
 if (isset($_POST['add_clinic'])) {
 
     $c_id = $_POST['c_eid'];
@@ -143,16 +165,16 @@ if (isset($_POST['deactreact_clinic'])) {
     $con->close();
 }
 
-if (isset($_POST['approvedeny_appointment'])) {
+if (isset($_POST['complete_appointment'])) {
 
-    $a_id = $_POST['am_id'];
+    $a_id = $_POST['cacid'];
     $a_stat = $_POST['am_appstat'];
 
-    $q = "UPDATE tb_appointment SET a_stat = '" . $a_stat . "' WHERE appointment_id = '" . $a_id . "'";
+    $q = "UPDATE tb_appointment SET a_stat = '1' WHERE appointment_id = '" . $a_id . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = ($a_stat == '1') ? "Appointment request approved." : "Appointment request denied.";
+        $_SESSION['msg'] = "Appointment marked as complete.";
         $_SESSION['msg-t'] = "success";
         $_SESSION['msg-bg'] = "#e8fae9";
     } else {
@@ -277,6 +299,29 @@ if (isset($_POST['deactivate_sched'])) {
     $con->close();
 }
 
+if (isset($_POST['save_notes'])) {
+
+    $id = $_POST['an_id'];
+    $dr = $_POST['alp_drem'];
+
+    $q = "UPDATE tb_appointment SET doctor_remarks = '".$dr."' WHERE appointment_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Notes Added.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/doctor/?appointments');
+    $con->close();
+}
+
 if (isset($_POST['resched_appointment'])) {
 
     $sid = $_POST['raid'];
@@ -285,7 +330,7 @@ if (isset($_POST['resched_appointment'])) {
 
     $newad = $sd . ' ' . $st;
 
-    $q = "UPDATE tb_appointment SET appointment_date = '" . $newad . "' WHERE appointment_id = '" . $sid . "'";
+    $q = "UPDATE tb_appointment SET appointment_date = '" . $newad . "', a_stat = '0' WHERE appointment_id = '" . $sid . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -351,6 +396,7 @@ if (isset($_POST['save_profile'])) {
 
     $q_user = "UPDATE `tb_users` SET `username`='" . $user . "'
                                     ,`firstname`='" . $fn . "',`middlename`='" . $mn . "',`lastname`='" . $ln . "',`suffix`='" . $sufx . "'
+                                    ,license_no = '".$license."', spec_id = '".$spec."', title = '".$title."'
                                     ,`DOB`='" . $dob . "',`address`='" . $add . "',`phone_no`='" . $phone . "' WHERE `user_id` = '" . $_SESSION['U_ID'] . "'";
 
     if (mysqli_query($con, $q_user)) {
@@ -370,37 +416,68 @@ if (isset($_POST['save_profile'])) {
     header('Location: ' . home . '/doctor/?profile');
 
     $con->close();
+}
 
+if (isset($_POST['deny_req'])) {
 
-    $id = $_SESSION['U_ID'];
-    //$em = $_POST['em'];
-    $fn = $_POST['pfn'];
-    $mn = $_POST['pmn'];
-    $ln = $_POST['pln'];
-    $men = $_POST['pmen'];
-    $dob = $_POST['pdob'];
-    $phone = $_POST['pno'];
-    $ms = $_POST['pms'];
-    $add = $_POST['padd'];
+    $id = $_POST['drid'];
 
-
-    $q = "UPDATE tb_users SET firstname = '" . $fn . "',
-                              middlename ='" . $mn . "',
-                              lastname = '" . $ln . "',
-                              date_first_men_period = '" . $men . "',
-                              DOB = '" . $dob . "',
-                              phone_no = '" . $phone . "',
-                              marital_status = '" . $ms . "',
-                              address = '" . $add . "'  
-                        WHERE user_id = '" . $id . "'";
+    $q = "UPDATE tb_requests SET req_stat = '2' WHERE req_id = '" . $id . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Profile updated.";
+        $_SESSION['msg'] = "Request denied.";
         $_SESSION['msg-t'] = "success";
         $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
 
-        $_SESSION['FULLNAME'] = $fn . ' ' . $mn . ' ' . $ln;
+    header('Location: ' . home . '/doctor/?patient-transfer');
+    $con->close();
+}
+
+if (isset($_POST['approve_req'])) {
+
+    $id = $_POST['aridm'];
+
+    $q = "UPDATE tb_requests SET req_stat = '1' WHERE req_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Request approved.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/doctor/?patient-transfer');
+    $con->close();
+}
+
+if (isset($_POST['upload_img'])) {
+
+    $id = $_SESSION['U_ID'];
+
+    $img_name = $_FILES['lic_img']['name'];
+    $img_tempname = $_FILES['lic_img']['tmp_name'];
+    $img_size = $_FILES['lic_img']['size'];
+    $folder = "../assets/img/uploads/licenses" . $img_name;
+
+    $q = "UPDATE tb_users SET license_img = '".$img_name."' WHERE user_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "License image updated.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
     } else {
         $_SESSION['msg-h'] = "ERROR";
         $_SESSION['msg'] = "Something went wrong." . $con->error;

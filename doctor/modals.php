@@ -352,105 +352,49 @@
 
 <!-- View Appointment From List Modal -->
 <div class="modal fade" id="viewAppointmentListModal" tabindex="-1" role="dialog" aria-labelledby="viewAppointmentListModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Appointment Information</h5>
+                <h5 class="modal-title">Add Notes and Additional Details</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <form action="actions.php" method="POST">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row mt-3 text-gray-900">
-                                    <div class="col-sm-12">
-                                        <h5>Patient Information</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <input type="hidden" id="alp_id" name="alp_id" class="form-control">
-                                    <div class="col-sm-12">
-                                        <label for="alp_name">Name</span></label>
-                                        <input type="text" id="alp_name" name="alp_name" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-12">
-                                        <label for="alp_pemail">Email</label>
-                                        <input type="text" id="alp_pemail" name="alp_pemail" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-6">
-                                        <label for="alp_con">Contact No.</label>
-                                        <input type="text" id="alp_con" name="alp_con" class="form-control" readonly>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="alp_tel">Tel No.</label>
-                                        <input type="text" id="alp_tel" name="alp_tel" class="form-control" readonly>
-                                    </div>
-                                </div> <br>
-                                <div class="row mt-3 text-gray-900">
-                                    <div class="col-sm-12">
-                                        <h5>Appointment Information</h5>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-7">
-                                        <label for="alp_date">Date</label>
-                                        <input type="text" id="alp_date" name="alp_date" class="form-control" readonly>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <label for="alp_time">Time</label>
-                                        <input type="text" id="alp_time" name="alp_time" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-12">
-                                        <label for="ap_clinic">Clinic</label>
-                                        <input type="text" id="alp_clinic" name="alp_clinic" class="form-control" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-12">
-                                        <label for="alp_cadd">Clinic Address</label>
-                                        <textarea id="alp_cadd" name="alp_cadd" class="form-control" readonly></textarea>
-                                    </div>
-                                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <input type="hidden" id="alp_id" name="alp_id" class="form-control">
+                                <label for="ap_clinic">Clinic Contact No.</label>
+                                <input type="text" id="alp_clinic" name="alp_clinic" class="form-control" readonly>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row mt-3 text-gray-900">
-                                    <div class="col-sm-12">
-                                        <h5>Additional Information</h5>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <input type="hidden" id="alp_id" name="alp_id" class="form-control">
-                                    <div class="col-sm-12">
-                                        <label for="alp_desc">Appointment Description</span></label>
-                                        <textarea id="alp_desc" name="alp_desc" class="form-control" readonly></textarea>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-sm-12">
-                                        <label for="alp_drem">Remarks (500 characters)</label>
-                                        <textarea id="alp_drem" name="alp_drem" rows="10" class="form-control"></textarea>
-                                    </div>
-                                </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label for="alp_cadd">Clinic Address</label>
+                                <textarea id="alp_cadd" name="alp_cadd" class="form-control" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <input type="hidden" id="an_id" name="an_id" class="form-control">
+                            <div class="col-sm-12">
+                                <label for="alp_desc">Appointment Description</span></label>
+                                <textarea id="alp_desc" name="alp_desc" class="form-control" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label for="alp_drem">Doctor's Notes (500 characters)</label>
+                                <textarea id="alp_drem" name="alp_drem" rows="5" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit" name="save_notes" id="save_notes">Save Notes</button>
                 </div>
             </form>
         </div>
@@ -502,7 +446,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <input type="hidden" id="acid" name="acid" class="form-control">
+                            <input type="hidden" id="cacid" name="cacid" class="form-control">
                             <div class="col-sm-12">
                                 <p>Mark appointment as complete?</p>
                             </div>
@@ -720,7 +664,7 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                        <div class="col-sm-12">
+                            <div class="col-sm-12">
                                 <label for="">Repeat</label><br>
                                 <div id="" class="d-sm-flex align-items-center justify-content-between">
                                     <a class="btn btn-light btn-circle" onclick="markActive('erSu','0','esdays');" id="erSu">Su</a>
@@ -775,6 +719,66 @@
     </div>
 </div>
 
+<!-- Approve req -->
+<div class="modal fade" id="approveReq" tabindex="-1" role="dialog" aria-labelledby="approveReq" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Approve</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="aridm" name="aridm" class="form-control">
+                            <div class="col-sm-12">
+                                <p>Approve request?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="approve_req" name="approve_req" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Deny req -->
+<div class="modal fade" id="denyReq" tabindex="-1" role="dialog" aria-labelledby="denyReq" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deny</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="drid" name="drid" class="form-control">
+                            <div class="col-sm-12">
+                                <p>Deny request?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="deny_req" name="deny_req" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(document).ready(function() {
@@ -785,7 +789,7 @@
             $('#addEditClinicModal').find('textarea').val('');
         });
     });
-    
+
     function markActive(id, no, input) {
         var el = document.getElementById(id);
         var d = document.getElementById(input);
@@ -794,20 +798,20 @@
             console.log('F');
             $('#' + id + '').removeClass('btn btn-primary btn-circle active');
             $('#' + id + '').addClass('btn btn-primary btn-circle');
-            
+
             var rVal = d.value;
-            
-            $('#'+input+'').val(rVal.replace(no,'')); 
-            
+
+            $('#' + input + '').val(rVal.replace(no, ''));
+
         } else {
             console.log('G');
             $('#' + id + '').removeClass('btn btn-primary btn-circle');
             $('#' + id + '').addClass('btn btn-primary btn-circle active');
 
             if (d.value == '') {
-                $('#'+input+'').val(no);
+                $('#' + input + '').val(no);
             } else {
-                $('#'+input+'').val(d.value + ' ' + no);
+                $('#' + input + '').val(d.value + ' ' + no);
             }
         }
     }

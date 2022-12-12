@@ -24,7 +24,7 @@
                         <?php
 
                         $q = "SELECT * FROM tb_requests tr INNER JOIN tb_users tu ON tu.user_id = tr.user_id
-                                INNER JOIN (SELECT user_id, CONCAT(IFNULL(firstname,''),' ',IFNULL(middlename,''),' ',IFNULL(lastname,''),' ',IFNULL(suffix,'')) AS doct_name FROM tb_users WHERE role = 2) td
+                                LEFT JOIN (SELECT user_id, CONCAT(IFNULL(firstname,''),' ',IFNULL(middlename,''),' ',IFNULL(lastname,''),' ',IFNULL(suffix,'')) AS doct_name FROM tb_users WHERE role = 2) td
                                 ON td.user_id = tr.docto_id
                                 WHERE docfrom_id = '" . $_SESSION['U_ID'] . "'";
                         $res = $con->query($q);
@@ -51,8 +51,8 @@
                                         } ?>
                                     </td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-success btn-circle btn-sm btnApproveReq" title="Approve"><i class="fa fa-check"></i></button>
-                                        <span><button type="button" class="btn btn-danger btn-circle btn-sm btnDenyReq" title="Deny"><i class="fa fa-close"></i></button></span>
+                                        <button type="button" class="btn btn-success btn-circle btn-sm btnApproveReq" title="Approve" <?php echo ($rows['req_stat'] != 0)?'disabled' : ''; ?>><i class="fa fa-check"></i></button>
+                                        <span><button type="button" class="btn btn-danger btn-circle btn-sm btnDenyReq" title="Deny" <?php echo ($rows['req_stat'] != 0)?'disabled' : ''; ?>><i class="fa fa-close"></i></button></span>
                                 </tr>
                         <?php
                             }
@@ -68,5 +68,31 @@
         $('#reqsTable').dataTable().fnSort([
             [4, 'asc']
         ]);
+    });
+    
+    $('.btnApproveReq').on('click', function() {
+
+        $('#approveReq').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function() {
+            return $(this).text();
+        }).get();
+
+        $('#aridm').val(data[0]);
+    });
+
+    $('.btnDenyReq').on('click', function() {
+
+        $('#denyReq').modal('show');
+
+        $tr = $(this).closest('tr');
+
+        var data = $tr.children("td").map(function() {
+            return $(this).text();
+        }).get();
+
+        $('#drid').val(data[0]);
     });
 </script>

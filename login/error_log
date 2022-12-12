@@ -84,3 +84,52 @@
 [04-Dec-2022 15:46:47 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
 [04-Dec-2022 17:12:06 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
 [04-Dec-2022 17:12:06 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[04-Dec-2022 21:22:15 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[04-Dec-2022 21:22:15 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[05-Dec-2022 04:24:47 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 04:24:47 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[05-Dec-2022 06:23:00 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 06:23:00 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[05-Dec-2022 06:23:44 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 06:23:44 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[05-Dec-2022 09:17:19 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 09:17:19 Asia/Manila] PHP Notice:  Undefined index: d_id in /home/w22hl01qnd6e/public_html/login/action.php on line 172
+[05-Dec-2022 10:33:05 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 10:33:06 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[05-Dec-2022 10:33:10 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 10:44:23 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 12:52:19 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 12:52:37 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 13:59:37 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 15:53:59 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 15:54:22 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 15:56:36 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 15:58:46 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 15:58:46 Asia/Manila] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/w22hl01qnd6e/public_html/login/index.php on line 132
+[05-Dec-2022 15:58:59 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 16:01:23 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 16:14:49 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 19:31:19 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[05-Dec-2022 19:37:18 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 08:48:14 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 08:57:25 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 10:31:30 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:02:31 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:04:29 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:04:45 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:07:25 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:07:45 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:08:29 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:09:03 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:09:49 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:19:45 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:20:48 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 12:42:19 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:03:38 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:09:36 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:10:56 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:12:17 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:13:11 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:18:21 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:34:22 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25
+[06-Dec-2022 13:36:56 Asia/Manila] PHP Notice:  Constant home already defined in /home/w22hl01qnd6e/public_html/login/db_conn.php on line 25

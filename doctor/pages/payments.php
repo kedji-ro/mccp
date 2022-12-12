@@ -44,8 +44,8 @@ $query_run = mysqli_query($con, $q);
                                 <td><?php echo $rows['hmo_discount']; ?></td>
                                 <td><?php echo $rows['payment_method']; ?></td>
                 
-                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm" title="View Details"><i class="fas fa-search"></i></button>
-                                    <span><button type="button" class="btn btn-secondary btn-sm" title="Print"><i class="fas fa-print"></i></button></span>
+                                <td class="text-center"><button type="button" class="btn btn-primary btn-circle btn-sm" title="View Details"><i class="fas fa-search"></i></button>
+                                    <span><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Print"><i class="fas fa-print"></i></button></span>
                             </tr>
                     <?php
                         }

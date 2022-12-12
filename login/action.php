@@ -44,7 +44,7 @@ if (isset($_POST['register_doctor'])) {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
 
-        header('Location: '.home.'/register/?doctor');
+        header('Location: '.home.'/register/?patient');
         exit(0);
     }
 
@@ -167,7 +167,7 @@ if (isset($_POST['register_patient'])) {
         $_SESSION['msg-h'] = "NOTICE";
         $_SESSION['msg-t'] = "danger";
 
-        header('Location: '.home.'/register/?patient');
+        header('Location: '.home.'/register/?doctor');
         exit(0);
     }
 

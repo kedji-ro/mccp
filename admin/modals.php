@@ -20,6 +20,240 @@
     </div>
 <?php } ?>
 
+<!-- Reg Mother -->
+<div class="modal fade" id="regMotherModal" tabindex="-1" role="dialog" aria-labelledby="regMotherModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register Mother</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                 <div class="modal-body">
+                    <h5>User Information</h5>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <label>Email</label>
+                            <input type="email" name="em" id="em" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Password</label>
+                            <input type="password" name="ppass" id="ppass" class="form-control" required>
+                        </div>
+                    </div>
+                    <br>
+
+                    <h5>Personal Information</h5>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-4">
+                            <label>First Name</label>
+                            <input type="text" name="pfn" id="pfn" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Middle Name</label>
+                            <input type="text" name="pmn" id="pmn" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Last Name</label>
+                            <input type="text" name="pln" id="pln" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <label for="sufx">First Day of Last Men Period</label>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <input type="date" name="pmen" id="pmen" class="form-control" placeholder="Date of Birth" required value="<?php echo $row['date_first_men_period']; ?>" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Marital Status</label>
+                            <input type="text" name="pms" id="pms" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class=" col-md-6">
+                            <label>Date of Birth</label>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <input type="date" name="pdob" id="pdob" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Phone No.</label>
+                            <input type="number" name="pno" id="pno" class="form-control" pattern="[0-9]{11}">
+                        </div>
+                        
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-12">
+                            <label for="u_add">Address</label>
+                            <textarea type="text" name="padd" id="padd" class="form-control"></textarea>
+                        </div>
+                    </div><br>
+            </div>
+            <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit" id="register_patient" name="register_patient">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Mother -->
+<div class="modal fade" id="editMotherModal" tabindex="-1" role="dialog" aria-labelledby="editMotherModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Details</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                 <div class="modal-body">
+                    <h5>User Information</h5>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-6">
+                            <label>Email</label>
+                            <input type="email" name="eem" id="eem" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Password</label>
+                            <input type="password" name="eppass" id="eppass" class="form-control" required>
+                        </div>
+                    </div>
+                    <br>
+
+                    <h5>Personal Information</h5>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-4">
+                            <label>First Name</label>
+                            <input type="text" name="epfn" id="epfn" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Middle Name</label>
+                            <input type="text" name="epmn" id="epmn" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Last Name</label>
+                            <input type="text" name="epln" id="epln" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <label for="sufx">First Day of Last Men Period</label>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <input type="date" name="epmen" id="epmen" class="form-control" placeholder="Date of Birth" required value="<?php echo $row['date_first_men_period']; ?>" />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Marital Status</label>
+                            <input type="text" name="epms" id="epms" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class=" col-md-6">
+                            <label>Date of Birth</label>
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <input type="date" name="epdob" id="epdob" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Phone No.</label>
+                            <input type="number" name="epno" id="epno" class="form-control" pattern="[0-9]{11}">
+                        </div>
+                        
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="form-group col-md-12">
+                            <label for="u_add">Address</label>
+                            <textarea type="text" name="epadd" id="epadd" class="form-control"></textarea>
+                        </div>
+                    </div><br>
+            </div>
+            <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit" id="edit_patient" name="edit_patient">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Archive mother Modal-->
+<div class="modal fade" id="archivem" tabindex="-1" role="dialog" aria-labelledby="archivem" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Archive</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="aarmid" name="aarmid" class="form-control">
+                            <div class="col-sm-12">
+                                <p>Archive patient?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="archive_mo" name="archive_mo" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Archive Child Modal-->
+<div class="modal fade" id="archiveChildModal" tabindex="-1" role="dialog" aria-labelledby="archiveChildModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Archive</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="arcid" name="arcid" class="form-control">
+                            <div class="col-sm-12">
+                                <p>Archive child?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="archive_child" name="archive_child" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Deact User Modal-->
 <div class="modal fade" id="deactUserModal" role="dialog" aria-labelledby="deactUserModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -500,6 +734,128 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <button type="submit" id="archive_doctor" name="archive_doctor" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Register Child Modal -->
+<div class="modal fade" id="registerChildModal" tabindex="-1" role="dialog" aria-labelledby="registerChildModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Register Child</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>First Name</label>
+                                <input type="text" id="rchfn" name="rchfn" class="form-control" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Middle Name</label>
+                                <input type="text" id="rchmn" name="rchmn" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>Last Name</label>
+                                <input type="text" id="rchln" name="rchln" class="form-control" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Suffix</label>
+                                <input type="text" id="rchsf" name="rchsf" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Date of Birth</label>
+                                <input type="date" id="rchdob" name="rchdob" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>Height</label>
+                                <input type="text" id="rchh" name="rchh" class="form-control" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Weight</label>
+                                <input type="text" id="rchw" name="rchw" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit" id="register_child" name="register_child">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Child Modal -->
+<div class="modal fade" id="editChildModal" tabindex="-1" role="dialog" aria-labelledby="editChildModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Child</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <input type="hidden" id="ch_id" name="ch_id" class="form-control">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label>First Name</label>
+                                <input type="text" id="chfn" name="chfn" class="form-control" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Middle Name</label>
+                                <input type="text" id="chmn" name="chmn" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>Last Name</label>
+                                <input type="text" id="chln" name="chln" class="form-control" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Suffix</label>
+                                <input type="text" id="chsf" name="chsf" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Date of Birth</label>
+                                <input type="date" id="chdob" name="chdob" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>Height</label>
+                                <input type="text" id="chh" name="chh" class="form-control" required>
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Weight</label>
+                                <input type="text" id="chw" name="chw" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="submit" id="edit_child" name="edit_child">Confirm</button>
                 </div>
             </form>
         </div>

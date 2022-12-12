@@ -27,8 +27,8 @@
                         </div>
                     </div>
                     <div class="row align-items-center">
-                        <div class="form-group col-md-5 text-right" style="margin: 0;">
-                            <img class="" src="../assets/img/uploads/licenses/default.JPG" alt="" style="width: 100%; height:100%; position: fit;">
+                        <div class="form-group col-md-5 text-right licDiv" style="margin: 0;">
+                            <img class="licImg" src="../assets/img/uploads/licenses/<?php echo ($row['license_img'] == '') ? 'default.JPG' : $row['license_img']; ?>" alt="License Image" style="width: 100%; height:100%; position: fit;">
                         </div>
                         <div class="form-group col-md-3 text-left" style="margin: 0;">
                             <div class="row ">
@@ -75,23 +75,14 @@
                                 <div class="form-group col-md-12">
 
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" accept="image/*">
+                                        <input type="file" class="custom-file-input" name="lic_img" id="lic_img" accept="image/*">
                                         <label class="custom-file-label" for="customFile">Change profile picture</label>
                                     </div>
 
 
                                     <div class="text-center" style="margin: 5% 0% 0% 0%;">
-                                        <button type="button" class="btn btn-primary container-fluid">Upload</button>
+                                        <button type="button" onclick="uploadLicense()" class="btn btn-primary container-fluid" name="upload_img" id="upload_img">Upload</button>
                                     </div>
-
-
-                                    <script>
-                                        // Add the following code if you want the name of the file appear on select
-                                        $(".custom-file-input").on("change", function() {
-                                            var fileName = $(this).val().split("\\").pop();
-                                            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                                        });
-                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -158,45 +149,20 @@
 </div>
 
 <script>
-    function updateProfile() {
-        var user = document.getElementById('u_user').value;
-        var fname = document.getElementById('u_fname').value;
-        var mname = document.getElementById('u_mname').value;
-        var lname = document.getElementById('u_lname').value;
-        var sfx = document.getElementById('u_sufx').value;
-        var dob = document.getElementById('u_dob').value;
-        var add = document.getElementById('u_add').value;
-        var phone = document.getElementById('u_phone').value;
-        var lic = document.getElementById('u_lic').value;
-        var spec = document.getElementById('u_spec').value;
-        var title = document.getElementById('u_title').value;
+    function uploadLicense() {
+        var img = document.getElementById('lic_img').value;
 
         $.ajax({
             type: 'POST',
-            url: '../actions/update-profile.php',
+            url: 'actions.php',
             data: {
-                "u_user": user,
-                "u_fname": fname,
-                "u_lname": lname,
-                "u_sufx": sfx,
-                "u_dob": dob,
-                "u_add": add,
-                "u_phone": phone,
-                "u_lic": lic,
-                "u_spec": spec,
-                "u_title": title,
-                "u_mname": mname
+                "upload_img": "true",
+                "lic_img": img
             },
             success: function(msg) {
-                document.getElementById('alert-text').innerText = "Profile updated.";
-                $("#user_prof").load(location.href + " #user_prof");
-                $('#alertModal').modal('show');
-                setTimeout(function() {
-                    $('#alertModal').modal('hide');
-                }, 4000);
-
+                $(".licDiv").load(location.href + " .licImg");
+                alert(img);
             }
         });
-        document.getElementById('alert-text').innerText = "";
     }
 </script>
