@@ -48,12 +48,12 @@ foreach ($rs as $r) {
     <div class="card-header py-3">
         <ul class="nav nav-pills">
             <li class="nav-item">
-                <a class="nav-link active" href="#apptCalendar" data-toggle="tab" id="hlCal">Calendar</a>
+                <a class="nav-link <?php echo ($_GET['appointments'] == '') ? 'active' : '';?>" href="#apptCalendar" data-toggle="tab" id="hlCal">Calendar</a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#apptLists" data-toggle="tab" id="hlAppts">Appointments List
+            <li class="nav-item">
+                <a class="nav-link <?php echo ($_GET['appointments'] == '1') ? 'active' : '';?>" href="#apptLists" data-toggle="tab" id="hlAppts">Appointments List
                     <?php if ($_SESSION['APPT_COUNT'] != 0) { ?>
-                        <span class="badge badge-primary aReqCount" style="margin-left:10px;"><?php echo $_SESSION['APPT_COUNT']; ?></span>
+                        <span class="<?php echo ($_GET['appointments'] == '1') ? 'badge badge-light' : 'badge badge-primary';?> aReqCount" style="margin-left:10px;"><?php echo $_SESSION['APPT_COUNT']; ?></span>
                     <?php } ?>
                 </a>
             </li>
@@ -66,7 +66,7 @@ foreach ($rs as $r) {
             <div class="content tab-content">
 
                 <!-- Calendar -->
-                <div class="tab-pane active" id="apptCalendar">
+                <div class="tab-pane <?php echo ($_GET['appointments'] == '') ? 'active' : '';?>" id="apptCalendar">
                     <div class="content animated--fade-in">
                         <div class="mb-4">
                             <h5>
@@ -80,7 +80,7 @@ foreach ($rs as $r) {
                 </div>
 
                 <!-- Appointments List -->
-                <div class="tab-pane" id="apptLists">
+                <div class="tab-pane <?php echo ($_GET['appointments'] == '1') ? 'active' : '';?>" id="apptLists">
                     <div class="table-responsive animated--fade-in container-fluid">
                         <table class="table table-bordered table-condensed table-fixed table-striped" id="apptListDT" width="100%" cellspacing="0">
                             <thead>
@@ -264,4 +264,7 @@ foreach ($rs as $r) {
     $("#hlCal").click(function() {
         $('.aReqCount').removeClass('badge badge-light aReqCount').addClass('badge badge-primary aReqCount');
     });
+
+  window.history.replaceState({}, document.title, "?appointments" + "");
+
 </script>

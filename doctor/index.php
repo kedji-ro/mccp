@@ -4,13 +4,13 @@ include '../login/db_conn.php';
 if (isset($_SESSION['U_ID'])) {
     if (isset($_SESSION['U_ROLE'])) {
         if ($_SESSION['U_ROLE'] != '2') {
-            header('Location: '.home.'/admin/?dashboard');
+            header('Location: ' . home . '/admin/?dashboard');
         }
     } else {
-        header('Location: '.home.'/?');
+        header('Location: ' . home . '/?');
     }
 } else {
-    header('Location: '.home.'/?');
+    header('Location: ' . home . '/?');
 }
 
 if (empty($_GET)) {
@@ -55,7 +55,10 @@ if ($res) {
         <title>Dashboard | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
     <?php if (isset($_GET['patient-transfer']) != null) { ?>
-        <title>Patient Info Requests | MOTHER CHILD CARE PORTAL</title>
+        <title>Requests | MOTHER CHILD CARE PORTAL</title>
+    <?php } ?>
+    <?php if (isset($_GET['transferred']) != null) { ?>
+        <title>Transferred | MOTHER CHILD CARE PORTAL</title>
     <?php } ?>
     <?php if (isset($_GET['clinics']) != null) { ?>
         <title>Clinics | MOTHER CHILD CARE PORTAL</title>
@@ -112,16 +115,30 @@ if ($res) {
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <li class="nav-item <?php if (isset($_GET['patient-transfer']) != null) {
+            <li class="nav-item <?php if (isset($_GET['patient-transfer']) || isset($_GET['transferred'])) {
                                     echo 'active';
                                 } ?>">
-                <a class="nav-link" href="?patient-transfer">
-                    <i class="fas fa-fw fa-paper-plane"></i>
-                    <span>Patient Info Requests</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Patient Information</span>
                     <?php if ($_SESSION['REQ_COUNT'] != 0) { ?>
-                        <span class="badge badge-light" id="aReqCount" style="margin-left: 15px; position:absolute;"><?php echo $_SESSION['REQ_COUNT']; ?></span>
+                        <span class="badge badge-pill badge-light" id="aReqCount" style="margin-left: 5px; position:absolute; font-size:5pt;"><?php echo $_SESSION['REQ_COUNT']; ?></span>
                     <?php } ?>
                 </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item <?php if (isset($_GET['patient-transfer'])) {
+                                                    echo 'active';
+                                                } ?>" href="?patient-transfer">Requests
+                            <?php if ($_SESSION['REQ_COUNT'] != 0) { ?>
+                                <span class="badge badge-pill badge-danger" id="aReqCount" style="margin-left: 10px; position:absolute;"><?php echo $_SESSION['REQ_COUNT']; ?></span>
+                            <?php } ?>
+                        </a>
+                        <a class="collapse-item <?php if (isset($_GET['transferred'])) {
+                                                    echo 'active';
+                                                } ?>" href="?transferred">Transferred</a>
+                    </div>
+                </div>
             </li>
 
             <hr class="sidebar-divider">
@@ -142,7 +159,7 @@ if ($res) {
                 <a class="nav-link" href="?appointments">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Appointments</span><?php if ($_SESSION['APPT_COUNT'] != 0) { ?>
-                        <span class="badge badge-light" id="aReqCount" style="margin-left:55px; position:absolute;"><?php echo $_SESSION['APPT_COUNT']; ?></span>
+                        <span class="badge badge-pill badge-light" id="aReqCount" style="margin-left:55px; position:absolute;"><?php echo $_SESSION['APPT_COUNT']; ?></span>
                     <?php } ?>
                 </a>
             </li>
@@ -240,6 +257,9 @@ if ($res) {
                     }
                     if (isset($_GET['patient-transfer']) != null) {
                         include('pages/patient-transfer.php');
+                    }
+                    if (isset($_GET['transferred']) != null) {
+                        include('pages/transferred.php');
                     }
                     if (isset($_GET['schedule']) != null) {
                         include('pages/schedule.php');

@@ -184,7 +184,7 @@ if (isset($_POST['complete_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: ' . home . '/doctor/?appointments');
+    header('Location: ' . home . '/doctor/?appointments=1');
     $con->close();
 }
 
@@ -206,7 +206,7 @@ if (isset($_POST['cancel_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: ' . home . '/doctor/?appointments');
+    header('Location: ' . home . '/doctor/?appointments=1');
     $con->close();
 }
 
@@ -304,7 +304,7 @@ if (isset($_POST['save_notes'])) {
     $id = $_POST['an_id'];
     $dr = $_POST['alp_drem'];
 
-    $q = "UPDATE tb_appointment SET doctor_remarks = '".$dr."' WHERE appointment_id = '" . $id . "'";
+    $q = "UPDATE tb_appointment SET doctor_remarks = '" . $dr . "' WHERE appointment_id = '" . $id . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -344,7 +344,7 @@ if (isset($_POST['resched_appointment'])) {
         $_SESSION['msg-bg'] = "#fae8ea";
     }
 
-    header('Location: ' . home . '/doctor/?appointments');
+    header('Location: ' . home . '/doctor/?appointments=1');
     $con->close();
 }
 
@@ -396,7 +396,7 @@ if (isset($_POST['save_profile'])) {
 
     $q_user = "UPDATE `tb_users` SET `username`='" . $user . "'
                                     ,`firstname`='" . $fn . "',`middlename`='" . $mn . "',`lastname`='" . $ln . "',`suffix`='" . $sufx . "'
-                                    ,license_no = '".$license."', spec_id = '".$spec."', title = '".$title."'
+                                    ,license_no = '" . $license . "', spec_id = '" . $spec . "', title = '" . $title . "'
                                     ,`DOB`='" . $dob . "',`address`='" . $add . "',`phone_no`='" . $phone . "' WHERE `user_id` = '" . $_SESSION['U_ID'] . "'";
 
     if (mysqli_query($con, $q_user)) {
@@ -462,25 +462,34 @@ if (isset($_POST['approve_req'])) {
     $con->close();
 }
 
-if (isset($_POST['upload_img'])) {
+if (isset($_FILES['lic_img']['name'])) {
 
     $id = $_SESSION['U_ID'];
 
     $img_name = $_FILES['lic_img']['name'];
     $img_tempname = $_FILES['lic_img']['tmp_name'];
     $img_size = $_FILES['lic_img']['size'];
-    $folder = "../assets/img/uploads/licenses" . $img_name;
+    $folder = "../assets/img/uploads/licenses/" . $img_name;
 
-    $q = "UPDATE tb_users SET license_img = '".$img_name."' WHERE user_id = '" . $id . "'";
+    $q = "UPDATE tb_users SET license_img = '" . $img_name . "' WHERE user_id = '" . $id . "'";
 
-    if (mysqli_query($con, $q)) {
-        $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "License image updated.";
-        $_SESSION['msg-t'] = "success";
-        $_SESSION['msg-bg'] = "#e8fae9";
+    if ($img_size != 0) {
+        if (mysqli_query($con, $q)) {
+            if (move_uploaded_file($img_tempname, $folder)) {
+                $_SESSION['msg-h'] = "SUCCESS";
+                $_SESSION['msg'] = "License image updated.";
+                $_SESSION['msg-t'] = "success";
+                $_SESSION['msg-bg'] = "#e8fae9";
+            }
+        } else {
+            $_SESSION['msg-h'] = "ERROR";
+            $_SESSION['msg'] = "Something went wrong." . $con->error;
+            $_SESSION['msg-type'] = "danger";
+            $_SESSION['msg-bg'] = "#fae8ea";
+        }
     } else {
         $_SESSION['msg-h'] = "ERROR";
-        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg'] = "No file is selected.";
         $_SESSION['msg-type'] = "danger";
         $_SESSION['msg-bg'] = "#fae8ea";
     }
