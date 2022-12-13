@@ -8,7 +8,7 @@
     <html>
 
     <head>
-        <title>Print Data</title>
+        <title>Appointment Data</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
@@ -161,7 +161,7 @@
                             <tr>
                                 <td>Remarks</td>
                                 <td class="sep">:</td>
-                                <td class="inf"></td>
+                                <td class="inf"><?php echo $r['doctor_remarks']; ?></td>
                             </tr>
                         </table>
                         <hr>

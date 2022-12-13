@@ -171,12 +171,16 @@ if (isset($_POST['complete_appointment'])) {
     $a_stat = $_POST['am_appstat'];
 
     $q = "UPDATE tb_appointment SET a_stat = '1' WHERE appointment_id = '" . $a_id . "'";
+    $qn = "INSERT INTO tb_notifs(user_id, n_desc, is_read, date_logged)
+            SELECT ta.patient_id, CONCAT('Appointment No. ', ta.appointment_id ,' has been completed.'),'0', '" . $datetime . "' FROM tb_appointment ta WHERE appointment_id = '" . $a_id . "'";
 
     if (mysqli_query($con, $q)) {
-        $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Appointment marked as complete.";
-        $_SESSION['msg-t'] = "success";
-        $_SESSION['msg-bg'] = "#e8fae9";
+        if (mysqli_query($con, $qn)) {
+            $_SESSION['msg-h'] = "SUCCESS";
+            $_SESSION['msg'] = "Appointment marked as complete.";
+            $_SESSION['msg-t'] = "success";
+            $_SESSION['msg-bg'] = "#e8fae9";
+        }
     } else {
         $_SESSION['msg-h'] = "ERROR";
         $_SESSION['msg'] = "Something went wrong." . $con->error;
@@ -193,6 +197,8 @@ if (isset($_POST['cancel_appointment'])) {
     $a_id = $_POST['cam_id'];
 
     $q = "UPDATE tb_appointment SET a_stat = '2' WHERE appointment_id = '" . $a_id . "'";
+    $qn = "INSERT INTO tb_notifs(user_id, n_desc, is_read, date_logged)
+            SELECT ta.patient_id, CONCAT('Appointment No. ', ta.appointment_id ,' has been cancelled.'),'0', '" . $datetime . "' FROM tb_appointment ta WHERE appointment_id = '" . $a_id . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -220,11 +226,17 @@ if (isset($_POST['add_schedule'])) {
     $end = $_POST['sm_et'];
     $slots = $_POST['smsls'];
 
-    $daysofweek = explode(' ', $_POST['sdays']);
-    $rdays = implode(',', $rdays);
+    $days = $_POST['sdays'];
 
-    $q = "INSERT INTO tb_doctor_schedule (doctor_id, clinic_id, date_available, start_time, end_time, bg_color, s_stat, slots,days_available)
-                        VALUES ('" . $d_id . "','" . $clinic . "','" . $date . "','" . $start . "','" . $end . "','" . $color . "','1','" . $slots . "',$rdays)";
+    $arr = [];
+    for ($i = 0; $i < strlen($days); $i++) {
+        $arr[$i] = $days[$i];
+    }
+
+    $rdays = implode(',',  $arr);
+
+    $q = "INSERT INTO tb_doctor_schedule (doctor_id, clinic_id, date_available, start_time, end_time, bg_color, s_stat, slots,days_available, taken_slots)
+                        VALUES ('" . $d_id . "','" . $clinic . "','" . $date . "','" . $start . "','" . $end . "','" . $color . "','1','" . $slots . "','" . $rdays . "','" . $slots . "')";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
@@ -252,18 +264,24 @@ if (isset($_POST['edit_schedule'])) {
     $end = $_POST['eset'];
     $slots = $_POST['smslse'];
 
-    $daysofweek = explode(' ', $_POST['esdays']);
-    $rdays = implode(',', $rdays);
+    $days = $_POST['esdays'];
+
+    $arr = [];
+    for ($i = 0; $i < strlen($days); $i++) {
+        $arr[$i] = $days[$i];
+    }
+
+    $rdays = implode(',',  $arr);
 
     $q = "UPDATE tb_doctor_schedule SET clinic_id = '" . $clinic . "', date_available = '" . $date . "' ,
                                         start_time = '" . $start . "', end_time = '" . $end . "', bg_color = '" . $color . "' ,
-                                        slots = '" . $slots . "',
+                                        slots = '" . $slots . "', taken_slots = '" . $slots . "',
                                         days_available = '" . $rdays . "'
                                         WHERE schedule_id = '" . $sid . "'";
 
     if (mysqli_query($con, $q)) {
         $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Schedule updated successfully.";
+        $_SESSION['msg'] = "Schedule updated successfully." . $daysofweek . ' ' . $rdays;
         $_SESSION['msg-t'] = "success";
         $_SESSION['msg-bg'] = "#e8fae9";
     } else {
@@ -331,12 +349,16 @@ if (isset($_POST['resched_appointment'])) {
     $newad = $sd . ' ' . $st;
 
     $q = "UPDATE tb_appointment SET appointment_date = '" . $newad . "', a_stat = '0' WHERE appointment_id = '" . $sid . "'";
+    $qn = "INSERT INTO tb_notifs(user_id, n_desc, is_read, date_logged)
+            SELECT ta.patient_id, CONCAT('Appointment No. ', ta.appointment_id ,' has been rescheduled on ','" . $newad . ".'),'0', '" . $datetime . "' FROM tb_appointment ta WHERE appointment_id = '" . $sid . "'";
 
     if (mysqli_query($con, $q)) {
-        $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Appointment rescheduled successfully.";
-        $_SESSION['msg-t'] = "success";
-        $_SESSION['msg-bg'] = "#e8fae9";
+        if (mysqli_query($con, $qn)) {
+            $_SESSION['msg-h'] = "SUCCESS";
+            $_SESSION['msg'] = "Appointment rescheduled successfully.";
+            $_SESSION['msg-t'] = "success";
+            $_SESSION['msg-bg'] = "#e8fae9";
+        }
     } else {
         $_SESSION['msg-h'] = "ERROR";
         $_SESSION['msg'] = "Something went wrong." . $con->error;
@@ -423,12 +445,16 @@ if (isset($_POST['deny_req'])) {
     $id = $_POST['drid'];
 
     $q = "UPDATE tb_requests SET req_stat = '2' WHERE req_id = '" . $id . "'";
+    $qn = "INSERT INTO tb_notifs(user_id, n_desc, is_read, date_logged)
+            SELECT tr.user_id, CONCAT('Your Info Transfer Request No. ', tr.id ,' has been denied.') ,'0', '" . $datetime . "' FROM tb_requests tr WHERE req_id = '" . $id . "'";
 
     if (mysqli_query($con, $q)) {
-        $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Request denied.";
-        $_SESSION['msg-t'] = "success";
-        $_SESSION['msg-bg'] = "#e8fae9";
+        if (mysqli_query($con, $qn)) {
+            $_SESSION['msg-h'] = "SUCCESS";
+            $_SESSION['msg'] = "Request denied.";
+            $_SESSION['msg-t'] = "success";
+            $_SESSION['msg-bg'] = "#e8fae9";
+        }
     } else {
         $_SESSION['msg-h'] = "ERROR";
         $_SESSION['msg'] = "Something went wrong." . $con->error;
@@ -445,12 +471,16 @@ if (isset($_POST['approve_req'])) {
     $id = $_POST['aridm'];
 
     $q = "UPDATE tb_requests SET req_stat = '1' WHERE req_id = '" . $id . "'";
+    $qn = "INSERT INTO tb_notifs(user_id, n_desc, is_read, date_logged)
+            SELECT tr.user_id, CONCAT('Your Info Transfer Request No. ', tr.id ,' has been approved.') ,'0', '" . $datetime . "' FROM tb_requests tr WHERE req_id = '" . $id . "'";
 
     if (mysqli_query($con, $q)) {
-        $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Request approved.";
-        $_SESSION['msg-t'] = "success";
-        $_SESSION['msg-bg'] = "#e8fae9";
+        if (mysqli_query($con, $qn)) {
+            $_SESSION['msg-h'] = "SUCCESS";
+            $_SESSION['msg'] = "Request approved.";
+            $_SESSION['msg-t'] = "success";
+            $_SESSION['msg-bg'] = "#e8fae9";
+        }
     } else {
         $_SESSION['msg-h'] = "ERROR";
         $_SESSION['msg'] = "Something went wrong." . $con->error;
@@ -459,6 +489,79 @@ if (isset($_POST['approve_req'])) {
     }
 
     header('Location: ' . home . '/doctor/?patient-transfer');
+    $con->close();
+}
+
+if (isset($_POST['archive_serv'])) {
+
+    $id = $_POST['id'];
+
+    $q = "UPDATE tb_doctor_services SET sd_stat = '0' WHERE sd_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        echo json_encode('Updated');
+    } 
+
+    $con->close();
+}
+
+if (isset($_POST['add_service'])) {
+
+    $sid = $_POST['nss'];
+    $serv = $_POST['ns'];
+
+    $q = '';
+    $q2 = '';
+
+    if ($sid == '') {
+        $q = "INSERT INTO tb_services(srv_desc,srv_stat) VALUES('" . $serv . "','1')";
+        $q2 = "INSERT INTO tb_doctor_services(doc_id, srv_id, sd_stat) VALUES ('" . $_SESSION['U_ID'] . "',LAST_INSERT_ID(),'1')";
+    } else {
+        $check = $con->query("SELECT 1 FROM tb_doctor_services WHERE srv_id ='" . $sid . "'");
+        $cnt = mysqli_num_rows($check);
+
+        if ($cnt > 0) {
+            $_SESSION['msg-h'] = "ERROR";
+            $_SESSION['msg'] = "You already have this service.";
+            $_SESSION['msg-type'] = "danger";
+            $_SESSION['msg-bg'] = "#fae8ea";
+
+            header('Location: ' . home . '/doctor/?profile');
+            exit;
+        }
+
+        $q2 = "INSERT INTO tb_doctor_services(doc_id, srv_id, sd_stat) VALUES ('" . $_SESSION['U_ID'] . "','" . $sid . "','1')";
+    }
+
+    if ($sid == '') {
+        if (mysqli_query($con, $q)) {
+            if (mysqli_query($con, $q2)) {
+                $_SESSION['msg-h'] = "SUCCESS";
+                $_SESSION['msg'] = "Service added.";
+                $_SESSION['msg-t'] = "success";
+                $_SESSION['msg-bg'] = "#e8fae9";
+            }
+        } else {
+            $_SESSION['msg-h'] = "ERROR";
+            $_SESSION['msg'] = "Something went wrong." . $con->error;
+            $_SESSION['msg-type'] = "danger";
+            $_SESSION['msg-bg'] = "#fae8ea";
+        }
+    } else {
+        if (mysqli_query($con, $q2)) {
+            $_SESSION['msg-h'] = "SUCCESS";
+            $_SESSION['msg'] = "Service added.";
+            $_SESSION['msg-t'] = "success";
+            $_SESSION['msg-bg'] = "#e8fae9";
+        } else {
+            $_SESSION['msg-h'] = "ERROR";
+            $_SESSION['msg'] = "Something went wrong." . $con->error;
+            $_SESSION['msg-type'] = "danger";
+            $_SESSION['msg-bg'] = "#fae8ea";
+        }
+    }
+
+    header('Location: ' . home . '/doctor/?profile');
     $con->close();
 }
 
@@ -497,5 +600,3 @@ if (isset($_FILES['lic_img']['name'])) {
     header('Location: ' . home . '/doctor/?profile');
     $con->close();
 }
-
-?>

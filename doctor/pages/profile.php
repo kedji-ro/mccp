@@ -5,6 +5,7 @@
                 <h1 class="h3 mb-0 text-gray-800">Edit Profile</h1>
             </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <button class="btn btn-warning" data-toggle="modal" data-target="#addServicesModal"><i class="fa fa-plus"></i> Add Services</button> &nbsp;
                 <button class="btn btn-primary"><i class="fa fa-list"></i> Secretary Accounts</button> &nbsp;
                 <button class="btn btn-success"><i class="fa fa-user-plus"></i> Register a Secretary</button>
             </div>

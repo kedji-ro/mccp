@@ -3,17 +3,15 @@
 $q = $con->query("SELECT    schedule_id as s_id,
                             doctor_id as sd_id, 
                             days_available as s_days, 
-                            TIME_FORMAT(open_time, '%h:%i %p') as s_st, 
                             date_available as s_d, 
                             slots,
-                            tb_doctor_schedule.s_stat,
-                            TIME_FORMAT(end_time, '%h:%i %p') as s_et,
-                            tb_clinic.clinic_name as s_cname,
-                            tb_clinic.clinic_address as s_caddrs,
-                            tb_doctor_schedule.bg_color,
-                            tb_doctor_schedule.start_time, tb_doctor_schedule.end_time, tb_doctor_schedule.clinic_id as c_id
-                            FROM tb_doctor_schedule     
-                            LEFT JOIN tb_clinic ON tb_clinic.clinic_id = tb_doctor_schedule.clinic_id WHERE doctor_id = " . $_SESSION['U_ID']);
+                            tds.s_stat,
+                            tc.clinic_name as s_cname,
+                            tc.clinic_address as s_caddrs,
+                            tds.bg_color,
+                            tds.start_time, tds.end_time, tds.clinic_id as c_id
+                            FROM tb_doctor_schedule tds  
+                            LEFT JOIN tb_clinic tc ON tc.clinic_id = tds.clinic_id WHERE doctor_id = " . $_SESSION['U_ID']);
 
 $schedules = [];
 $sched = [];
@@ -24,7 +22,6 @@ foreach ($q as $row) {
 
         $sched['title'] = (count($daysofweek) > 1) ? $row['s_cname'].' (R)' : $row['s_cname'];
         $sched['start'] = $row['s_d'];
-        //$sched['end'] = '2022-11-27';
         $sched['backgroundColor'] = $row['bg_color'];
         $sched['borderColor'] = $row['bg_color'];
         $sched['daysOfWeek'] = (count($daysofweek) > 1) ? $daysofweek : null;
@@ -70,24 +67,6 @@ foreach ($q as $row) {
 
             <div class="tab-pane" id="schedLists">
                 <div class="row mb-4">
-                    <!-- <div class="form-check" style="padding: 0% 2% 0% 2%;">
-                        <input class="form-check-input" type="radio" name="rbShowPending" id="rbShowPending" value="1" checked>
-                        <label class="form-check-label" for="rbShowPending">
-                            Show Active Only
-                        </label>
-                    </div>
-                    <div class="form-check" style="padding-right: 2%;">
-                        <input class="form-check-input" type="radio" name="rbShowDenied" id="rbShowDenied" value="2">
-                        <label class="form-check-label" for="rbShowDenied">
-                            Show Denied Only
-                        </label>
-                    </div> -->
-                    <div class="form-check" style="padding: 0% 2% 0% 2%;">
-                        <input class="form-check-input" type="checkbox" value="" id="chkShowAll">
-                        <label class="form-check-label" for="chkShowAll">
-                            Show All
-                        </label>
-                    </div>
                 </div>
                 <div class="table-responsive animated--fade-in">
                     <table class="table table-bordered table-condensed table-fixed table-striped" id="list" width="100%" cellspacing="0">
@@ -103,6 +82,7 @@ foreach ($q as $row) {
                                 <th>Color</th>
                                 <th class="text-center" style="width: 8%;">Status</th>
                                 <th class="text-center" style="width: 8%;">Actions</th>
+                                <th hidden></th>
                                 <th hidden></th>
                                 <th hidden></th>
                                 <th hidden></th>
@@ -126,9 +106,9 @@ foreach ($q as $row) {
                                     <td hidden><?php echo $rows['s_id']; ?></td>
                                     <td><?php echo $rows['s_cname']; ?></td>
                                     <td><?php echo $rows['s_d']; ?></td>
-                                    <td><?php echo $rdays; ?></td>
-                                    <td><?php echo $rows['s_st']; ?></td>
-                                    <td><?php echo $rows['s_et']; ?></td>
+                                    <td><?php echo ($rows['s_days'] == '') ? date("l",strtotime($rows['s_d'])) : $rdays; ?></td>
+                                    <td><?php echo date("h:i A",strtotime($rows['start_time'])); ?></td>
+                                    <td><?php echo date("h:i A",strtotime($rows['end_time'])); ?></td>
                                     <td><?php echo $rows['slots']; ?></td>
                                     <td><div class="container-fluid" style="background-color: <?php echo $rows['bg_color']; ?>;">&nbsp;</div></td>
                                     <?php if ($rows['s_stat'] == '1') { ?>
@@ -142,12 +122,14 @@ foreach ($q as $row) {
                                     <?php } ?>
 
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-circle editSchedBtn" title="View/Edit Details" <?php echo (($rows['s_stat'] == '0') ? 'disabled' : ''); ?>><i class="fas fa-edit"></i> </button>
-                                        <span> <button type="button" class="btn btn-sm btn-danger btn-circle deactSchedBtn" title="Deactivate" <?php echo (($rows['s_stat'] == '0') ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
+                                        <span> <button type="button" class="btn btn-sm btn-secondary btn-circle deactSchedBtn" title="Archive" <?php echo (($rows['s_stat'] == '0') ? 'disabled' : ''); ?>><i class="fas fa-archive"></i></button></span>
                                     </td>
                                     <td hidden><?php echo $rows['bg_color']; ?></td>
                                     <td hidden><?php echo $rows['start_time']; ?></td>
                                     <td hidden><?php echo $rows['end_time']; ?></td>
                                     <td hidden><?php echo $rows['c_id']; ?></td>
+                                    <td hidden><?php echo $rows['days_available']; ?></td>
+
                                 </tr>
                         <?php
                             }
@@ -191,6 +173,8 @@ foreach ($q as $row) {
         $('#esst').val(data[11]);
         $('#eset').val(data[12]);
         $('#smslse').val(data[6]);
+
+
     });
 
 

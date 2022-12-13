@@ -8,7 +8,7 @@
     <html>
 
     <head>
-        <title>Print Data</title>
+        <title>Patient Appointments History</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
@@ -68,29 +68,30 @@
     ?>
 
     <body>
-        <div class="page-content">
-            <div class="row">
+        <?php if ($res) {
+            foreach ($res as $r) { ?>
+                <div class="page-content" style="page-break-after: always;">
+                    <div class="row">
 
-                <!-- Page Header -->
-                <div class="col-md-12" style="padding: 50px 0px 0px 0px;">
-                    <div style="text-align: center;">
-                        <p style="line-height: 1.5;"> <span style="font-size: 12pt;"> Mother Child Care Portal </span><br>
-                            <span style="font-weight: bold; font-size: 14pt;">Patient Appointment Data</span><br>
-                            <span style="font-size: 10pt;"> Date: <span><?php echo date("M d, Y", strtotime($date)); ?></span>
-                        </p>
-                    </div>
-                </div>
+                        <!-- Page Header -->
+                        <div class="col-md-12" style="padding: 50px 0px 0px 0px;">
+                            <div style="text-align: center;">
+                                <p style="line-height: 1.5;"> <span style="font-size: 12pt;"> Mother Child Care Portal </span><br>
+                                    <span style="font-weight: bold; font-size: 14pt;">Patient Appointment Data</span><br>
+                                    <span style="font-size: 10pt;"> Date: <span><?php echo date("M d, Y", strtotime($date)); ?></span>
+                                </p>
+                            </div>
+                        </div>
 
-                <!-- Page Body -->
-                <div class="col-md-12" style="padding: 30px 30px 30px 30px; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; line-height: 1.3;">
-                    <?php if ($res) {
-                        //$r = mysqli_fetch_assoc($res); 
-                        foreach ($res as $r) { ?>
+
+
+                        <!-- Page Body -->
+                        <div class="col-md-12" style="padding: 30px 30px 30px 30px; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; line-height: 1.3;">
                             <table>
                                 <tr>
                                     <td>Appointment No.</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo $r['a_id']; ?></td>
+                                    <td class="inf"><?php echo $r['appointment_id']; ?></td>
                                 </tr>
                                 <tr>
                                     <td><br></td>
@@ -98,7 +99,7 @@
                                 <tr>
                                     <td>Patient Name</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo $r['p_fn'] . ' ' . $r['p_mn'] . ' ' . $r['p_ln'] . ' ' . $r['p_s']; ?></td>
+                                    <td class="inf"><?php echo $r['firstname'] . ' ' . $r['middlename'] . ' ' . $r['lastname']; ?></td>
                                 </tr>
                                 <tr>
                                     <td><br></td>
@@ -106,17 +107,17 @@
                                 <tr>
                                     <td>Date</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo $r['a_d']; ?></td>
+                                    <td class="inf"><?php echo $r['appointment_date']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Time</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo $r['a_t']; ?></td>
+                                    <td class="inf"><?php echo $r['appointment_date']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Day</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo $r['a_day']; ?></td>
+                                    <td class="inf"><?php echo $r['appointment_date']; ?></td>
                                 </tr>
                                 <tr>
                                     <td><br></td>
@@ -124,17 +125,17 @@
                                 <tr>
                                     <td>Contact No.</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo $r['p_cn']; ?></td>
+                                    <td class="inf"><?php echo $r['phone_no']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Tel No.</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo ($r['p_tel'] == '') ? 'N/A' : $r['p_tel']; ?></td>
+                                    <td class="inf"><?php echo ($r['tel_no'] == '') ? 'N/A' : $r['tel_no']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Email</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo $r['p_email']; ?></td>
+                                    <td class="inf"><?php echo $r['email']; ?></td>
                                 </tr>
                                 <tr>
                                     <td><br></td>
@@ -142,7 +143,7 @@
                                 <tr>
                                     <td>Remarks</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"></td>
+                                    <td class="inf"><?php echo $r['doctor_remarks']; ?></td>
                                 </tr>
                             </table>
                             <hr>
@@ -151,17 +152,17 @@
                                 <tr>
                                     <td>Name</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo ($r['c_name'] == '') ? 'N/A' : $r['c_name']; ?></td>
+                                    <td class="inf"><?php echo ($r['clinic_name'] == '') ? 'N/A' : $r['clinic_name']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo ($r['c_addr'] == '') ? 'N/A' : $r['c_addr']; ?></td>
+                                    <td class="inf"><?php echo ($r['clinic_address'] == '') ? 'N/A' : $r['clinic_address']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Contact No.</td>
                                     <td class="sep">:</td>
-                                    <td class="inf"><?php echo ($r['c_cont'] == '') ? 'N/A' : $r['c_cont']; ?></td>
+                                    <td class="inf"><?php echo ($r['contact_no'] == '') ? 'N/A' : $r['contact_no']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Tel No.</td>
@@ -185,11 +186,13 @@
                                     <td class="inf"><?php echo ($r['close_time'] == '') ? 'N/A' : $r['close_time']; ?></td>
                                 </tr>
                             </table>
-                    <?php }
-                    } ?>
+
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-        </div>
+        <?php }
+        } ?>
 
         <script type="text/javascript" src="../assets/js/jquery.js"></script>
         <script>

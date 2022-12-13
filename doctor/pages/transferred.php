@@ -5,7 +5,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3"></div>
     <?php
-    $q = "SELECT DISTINCT * FROM tb_requests tr 
+    $q = "SELECT DISTINCT *, tr.user_id as u_id FROM tb_requests tr 
             INNER JOIN tb_users tu ON tr.user_id = tu.user_id 
             INNER JOIN (SELECT tu.user_id, 
             CONCAT(IFNULL(tu.firstname,''),' ', IFNULL(tu.middlename,''),' ', IFNULL(tu.lastname,''),' ', IFNULL(tu.suffix,'')) AS docFrom FROM tb_users tu WHERE tu.role = 2) AS tdf ON tdf.user_id = tr.docfrom_id
@@ -29,7 +29,7 @@
                     foreach ($q_run as $rows) {
                 ?>
                         <tr>
-                            <td hidden><?php echo $rows['user_id']; ?></td>
+                            <td hidden><?php echo $rows['u_id']; ?></td>
                             <td><?php echo $rows['lastname'] . ', ' . $rows['firstname'] . ' ' . $rows['middlename']; ?></td>
                             <td><?php echo $rows['docFrom']; ?></td>
                             <td class="text-center">

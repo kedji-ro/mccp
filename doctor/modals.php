@@ -779,6 +779,111 @@
     </div>
 </div>
 
+<!-- Add services -->
+<div class="modal fade" id="addServicesModal" tabindex="-1" role="dialog" aria-labelledby="addServicesModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Service</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST" id="addServiceForm">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="text" name="ns" id="ns" class="form-control">
+                            <select name="nss" id="nss" class="form-control">
+                                <option value="" selected>Select from existing services...</option>
+                                <?php
+                                $q = $con->query("SELECT * FROM tb_services WHERE srv_stat = 1");
+                                if ($q) {
+                                    foreach ($q as $r) { ?>
+                                        <option value="<?php echo $r['serv_id']; ?>"><?php echo $r['srv_desc']; ?></option>
+                                <?php }
+                                }
+                                ?>
+                            </select>
+
+                            <button class="btn btn-success btn-sm mt-3 btnServ" type="button" title="Add New Service"><i class="fa fa-plus"></i>&nbsp; New</button>
+                        </div>
+                        <div class="row mt-3" id="servTableRow">
+                            <table class="table table-bordered table-condensed table-fixed table-striped table-sm" width="100%" cellspacing="0" id="servTable">
+                                <thead>
+                                    <tr>
+                                        <th hidden></th>
+                                        <th>Description</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $q = $con->query("SELECT * FROM tb_doctor_services tds INNER JOIN tb_services ts ON tds.srv_id = ts.serv_id WHERE tds.sd_stat = 1 AND tds.doc_id = '" . $_SESSION['U_ID'] . "'");
+                                    if ($q) {
+                                        foreach ($q as $r) {
+                                    ?>
+                                            <tr>
+                                                <td hidden><?php echo $r['srv_id']; ?></td>
+                                                <td><?php echo $r['srv_desc']; ?></td>
+                                                <td class="text-center"><button onclick="archiveServ(<?php echo $r['srv_id']; ?>)" class="btn btn-secondary btn-circle btn-sm" type="button" title="Archive"><i class="fa fa-archive"></i></button></td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="add_service" name="add_service" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+            <script>
+                $(document).ready(function() {
+                    $('#ns').attr('type', 'hidden');
+                });
+
+                var def = true;
+
+                $('.btnServ').on('click', function() {
+                    if (def == false) {
+                        $('#ns').attr('type', 'hidden');
+                        $('#nss').attr('hidden', false);
+                        $('.btnServ').removeClass('btn btn-primary btn-sm btnServ').addClass('btn btn-success btn-sm btnServ');
+                        $('.btnServ').html('<i class="fa fa-plus"></i> New');
+
+                        def = true;
+                    } else {
+                        $('#ns').attr('type', 'text');
+                        $('#nss').attr('hidden', true);
+                        $('.btnServ').removeClass('btn btn-success btn-sm btnServ').addClass('btn btn-primary btn-sm btnServ');
+                        $('.btnServ').html('<i class="fa fa-plus"></i> Existing');
+                        def = false;
+                    }
+                });
+
+                function archiveServ(id) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'actions.php',
+                        data: {
+                            "archive_serv": "true",
+                            "id": id
+                        },
+                        dataType: 'json',
+                        success: function(msg) {
+                            console.log(id + ' - ' + msg);
+                            $("#servTableRow").load(location.href + " #servTable");
+                        }
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(document).ready(function() {
@@ -795,7 +900,6 @@
         var d = document.getElementById(input);
 
         if (el.classList.contains('active')) {
-            console.log('F');
             $('#' + id + '').removeClass('btn btn-primary btn-circle active');
             $('#' + id + '').addClass('btn btn-primary btn-circle');
 
@@ -804,14 +908,13 @@
             $('#' + input + '').val(rVal.replace(no, ''));
 
         } else {
-            console.log('G');
             $('#' + id + '').removeClass('btn btn-primary btn-circle');
             $('#' + id + '').addClass('btn btn-primary btn-circle active');
 
             if (d.value == '') {
                 $('#' + input + '').val(no);
             } else {
-                $('#' + input + '').val(d.value + ' ' + no);
+                $('#' + input + '').val(d.value + no);
             }
         }
     }
