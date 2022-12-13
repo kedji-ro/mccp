@@ -158,6 +158,15 @@
 
         var text = did.options[did.selectedIndex].text;
         $('#aa_date').val(text);
+
+        if (did.value == '') {
+            $("#a_time").html('');
+
+            $('#a_time').append($('<option>', {
+                value: '',
+                text: 'Select Time'
+            }));
+        }
     });
 
     function loadDocs(id) {
@@ -202,6 +211,10 @@
                     $(".cn").html('');
                     $(".cloc").html('');
                     $(".ccont").html('');
+                    $(".dn").html('');
+                    $(".dspec").html('');
+                    $(".dserv").html('');
+                    $(".sslots").html('');
                 } else {
                     $(".cn").html(msg[0].clinic_name);
                     $(".cloc").html(msg[0].clinic_address);
@@ -225,6 +238,7 @@
                     $(".dn").html('');
                     $(".dspec").html('');
                     $(".dserv").html('');
+                    $(".sslots").html('');
                 } else {
                     $(".dn").html(msg[0].docs_name);
                     $(".dspec").html(msg[0].s_desc);
@@ -272,8 +286,12 @@
             },
             dataType: 'json',
             success: function(msg) {
-                $(".sslots").html(msg[0].taken_slots);
-                $(".r_slots").val(msg[0].taken_slots);
+                if (id.value != '') {
+                    $(".sslots").html(msg[0].taken_slots);
+                    $(".r_slots").val(msg[0].taken_slots);
+                } else {
+                    $(".sslots").html('');
+                }
             }
         });
     }
@@ -288,7 +306,6 @@
             },
             dataType: 'json',
             success: function(msg) {
-                console.log(msg);
 
                 $("#a_time").html('');
 
@@ -297,12 +314,14 @@
                     text: 'Select Time'
                 }));
 
-                $.each(msg, function(i, item) {
-                    $('#a_time').append($('<option>', {
-                        value: item,
-                        text: item
-                    }));
-                });
+                if (id.value != '') {
+                    $.each(msg, function(i, item) {
+                        $('#a_time').append($('<option>', {
+                            value: item,
+                            text: item
+                        }));
+                    });
+                }
             }
         });
     }
