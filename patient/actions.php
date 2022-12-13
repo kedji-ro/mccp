@@ -91,27 +91,43 @@ if (isset($_POST['create_appointment'])) {
     $pid = $_SESSION['U_ID'];
     $cid = $_POST['a_clinic'];
     $did = $_POST['a_doc'];
-    $date = $_POST['a_date'];
+    $date = $_POST['aa_date'];
     $time = $_POST['a_time'];
     $desc =  $_POST['a_desc'];
 
-    $dt = $date . ' ' . $time;
+    $s_id = $_POST['a_date'];
+    $r_slots = $_POST['r_slots'];
+
+    $ntime = substr($time, 0, 8);
+
+    $dt = $date . ' ' . $ntime;
 
     $q = "INSERT INTO tb_appointment(patient_id, clinic_id, doctor_id, a_desc, appointment_date)
                               VALUES('".$pid."','".$cid."','".$did."','".$desc."','".$dt."')";
 
-    if (mysqli_query($con, $q)) {
-        $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Successfully booked an appointment.";
-        $_SESSION['msg-t'] = "success";
-        $_SESSION['msg-bg'] = "#e8fae9";
+    $qus = "UPDATE tb_doctor_schedule SET taken_slots = (taken_slots - 1) WHERE schedule_id = '".$s_id."'";
+
+    if ($r_slots != 0) {
+        if (mysqli_query($con, $q)) {
+            if (mysqli_query($con, $qus)) {
+                $_SESSION['msg-h'] = "SUCCESS";
+                $_SESSION['msg'] = "Successfully booked an appointment.";
+                $_SESSION['msg-t'] = "success";
+                $_SESSION['msg-bg'] = "#e8fae9";
+            }
+        } else {
+            $_SESSION['msg-h'] = "ERROR";
+            $_SESSION['msg'] = "Something went wrong." . $con->error;
+            $_SESSION['msg-type'] = "danger";
+            $_SESSION['msg-bg'] = "#fae8ea";
+        }
     } else {
         $_SESSION['msg-h'] = "ERROR";
-        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg'] = "No more slots available on the selected schedule." . $con->error;
         $_SESSION['msg-type'] = "danger";
         $_SESSION['msg-bg'] = "#fae8ea";
     }
-
+    
     header('Location: ' . home . '/patient/?set-appointment');
     $con->close();
 }

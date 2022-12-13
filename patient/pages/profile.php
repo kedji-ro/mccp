@@ -1,5 +1,5 @@
 <div class="row animated--fade-in">
-    <div class="col-sm-7 container-fluid">
+    <div class="col-sm-8 container-fluid">
         <div class="text-center mb-4">
             <h1 class="h3 mb-0 text-gray-800">Edit Profile</h1>
         </div>
@@ -19,14 +19,14 @@
                         </div>
                     </div>
                     <div class="row align-items-center">
-                        <div class="form-group col-md-9">
+                        <div class="form-group col-md-8">
                             <?php
                             $atPos = strpos($row['email'], '@') - 1;
                             $email = substr_replace($row['email'], "******", 1, $atPos);
                             ?>
                             <input type="text" name="em" id="em" class="form-control" placeholder="" required value="<?php echo $email; ?>" readonly />
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <button type="button" name="u_cPass" id="u_cPass" class="form-control btn btn-primary" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
                         </div>
                     </div>

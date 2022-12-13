@@ -74,8 +74,8 @@
                                     <span><button type="button" class="btn btn-sm btn-success btn-circle payApptBtn" title="<?php echo ($rows['1'] == 1) ? 'Payment Sent' : 'Send Payment'; ?>" <?php echo ($rows['1'] == 1) ? 'disabled' : ''; ?>><i class="fa-solid fa-money-bill-wave"></i></button></span>
                                 <?php } ?>
 
-                                <span><button type="button" class="btn btn-sm btn-danger btn-circle cancelApptBtn" title="Cancel" <?php echo (($rows['a_stat'] == '0' || $rows['a_stat'] == '2' || $rows['a_stat'] == '4' || $rows['a_stat'] == '3') ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
-                                <span><button type="button" class="btn btn-sm btn-warning btn-circle reschedApptBtn text-gray-900" title="Reschedule" <?php echo (($rows['a_stat'] == '4' || $rows['a_stat'] == '3') ? 'disabled' : ''); ?>><i class="fas fa-calendar-day"></i></button></span>
+                                <span><button type="button" class="btn btn-sm btn-danger btn-circle cancelApptBtn" title="Cancel" <?php echo (($rows['a_stat'] == '0' || $rows['a_stat'] == '2' || $rows['a_stat'] == '4' || $rows['a_stat'] == '3' || $rows['1'] == 1) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
+                                <span><button type="button" class="btn btn-sm btn-warning btn-circle reschedApptBtn text-gray-900" title="Reschedule" <?php echo (($rows['a_stat'] == '4' || $rows['a_stat'] == '3' || $rows['1'] == 1) ? 'disabled' : ''); ?>><i class="fas fa-calendar-day"></i></button></span>
                             </td>
 
                             <td hidden><?php echo $rows['contact_no']; ?></td>

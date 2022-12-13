@@ -3,7 +3,7 @@
 </div> -->
 <h3 class="h3 mb-3 align-items-center text-center">Set an Appointment</h3>
 <div class="row animated--fade-in">
-    <div class="col-sm-7 container-fluid">
+    <div class="col-sm-9 container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
             </div>
@@ -52,6 +52,7 @@
                                         <select class="form-control" name="a_date" id="a_date" required>
                                             <option value="" selected>Select Date</option>
                                         </select>
+                                        <input type="hidden" name="aa_date" id="aa_date">
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +62,9 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text"><i class="fa-solid fa-clock"></i></div>
                                         </div>
-                                        <input type="time" class="form-control" id="a_time" name="a_time">
+                                        <select class="form-control" id="a_time" name="a_time" required>
+                                            <option value="" selected>Select Time</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -81,23 +84,47 @@
                         <h4>Appointment Details</h4><br>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p class="c_details" style="font-size: 13pt; padding-left:5px;">
-                                    <span class="p-head">Name:</span><br>
-                                    <span class="cn"></span><br><br>
-                                    <span class="p-head">Location:</span><br>
-                                    <span class="cloc"></span><br><br>
-                                    <span class="p-head">Contact No:</span><br>
-                                    <span class="ccont"></span>
-                                </p>
+                                <table class="c_details" style="font-size: 13pt; padding-left:5px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-right: 25px;"><span class="p-head">Name:</span></td>
+                                            <td><span class="cn"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-right: 25px;"><span class="p-head">Location:</span></td>
+                                            <td><span class="cloc"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-right: 25px; vertical-align: top;"><span class="p-head">Contact No:</span></td>
+                                            <td><span class="ccont"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><br></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-right: 25px; vertical-align: top;"><span class="p-head">Slots Available:</span></td>
+                                            <td hidden><input type="hidden" class="r_slots" name="r_slots"></td>
+                                            <td style="font-size: 24pt; vertical-align: top;"><span class="sslots"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <hr>
-                                <p class="d_details" style="font-size: 13pt; padding-left:5px;">
-                                    <span class="p-head">Doctor:</span><br>
-                                    <span class="dn"></span><br><br>
-                                    <span class="p-head">Specialization:</span><br>
-                                    <span class="dspec"></span><br><br>
-                                    <span class="p-head">Services:</span><br>
-                                    <span class="dserv"></span>
-                                </p>
+                                <table class="d_details" style="font-size: 13pt; padding-left:5px;">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-right: 25px;"><span class="p-head">Doctor:</span></td>
+                                            <td><span class="dn"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-right: 25px;"><span class="p-head">Specialization:</span></td>
+                                            <td><span class="dspec"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-right: 25px; vertical-align: top;"><span class="p-head">Services:</span></td>
+                                            <td><span class="dserv"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -122,6 +149,15 @@
         var did = document.getElementById('a_doc');
         loadDates(did);
         loadDocInfo(did);
+    });
+
+    $('#a_date').on('change', function() {
+        var did = document.getElementById('a_date');
+        loadSlots(did);
+        loadTime(did);
+
+        var text = did.options[did.selectedIndex].text;
+        $('#aa_date').val(text);
     });
 
     function loadDocs(id) {
@@ -169,7 +205,7 @@
                 } else {
                     $(".cn").html(msg[0].clinic_name);
                     $(".cloc").html(msg[0].clinic_address);
-                    $(".ccont").html('Phone -  ' + msg[0].contact_no + '<br> Tel -  ' + ((msg[0].tel_no == '')? 'N/A' : msg[0].tel_no));
+                    $(".ccont").html('Phone -  ' + msg[0].contact_no + '<br> Tel -  ' + ((msg[0].tel_no == '') ? 'N/A' : msg[0].tel_no));
                 }
             }
         });
@@ -185,7 +221,6 @@
             },
             dataType: 'json',
             success: function(msg) {
-                console.log(msg);
                 if (id.value == '') {
                     $(".dn").html('');
                     $(".dspec").html('');
@@ -219,8 +254,53 @@
 
                 $.each(msg, function(i, item) {
                     $('#a_date').append($('<option>', {
-                        value: item.date_available,
+                        value: item.schedule_id,
                         text: item.date_available
+                    }));
+                });
+            }
+        });
+    }
+
+    function loadSlots(id) {
+        $.ajax({
+            type: 'POST',
+            url: 'appt-loads.php',
+            data: {
+                "load_slots": "true",
+                "s_id": id.value
+            },
+            dataType: 'json',
+            success: function(msg) {
+                $(".sslots").html(msg[0].taken_slots);
+                $(".r_slots").val(msg[0].taken_slots);
+            }
+        });
+    }
+
+    function loadTime(id) {
+        $.ajax({
+            type: 'POST',
+            url: 'appt-loads.php',
+            data: {
+                "load_time": "true",
+                "s_id": id.value
+            },
+            dataType: 'json',
+            success: function(msg) {
+                console.log(msg);
+
+                $("#a_time").html('');
+
+                $('#a_time').append($('<option>', {
+                    value: '',
+                    text: 'Select Time'
+                }));
+
+                $.each(msg, function(i, item) {
+                    $('#a_time').append($('<option>', {
+                        value: item,
+                        text: item
                     }));
                 });
             }

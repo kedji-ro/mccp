@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive animated--fade-in">
-            <table class="table table-bordered table-condensed table-fixed table-striped" id="appointmentsTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-condensed table-fixed table-striped" id="paymentsTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th hidden></th>
@@ -50,7 +50,7 @@
                             </td>
 
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-secondary btn-circle viewApptBtn" title="Print"><i class="fas fa-print"></i> </button>
+                                <button type="button" class="btn btn-sm btn-secondary btn-circle printBtn" title="Print"><i class="fas fa-print"></i> </button>
                             </td>
                         </tr>
                 <?php }
@@ -62,50 +62,17 @@
 
 <script>
     $(document).ready(function() {
-        $('#appointmentsTable').dataTable();
+        $('#paymentsTable').dataTable();
     });
 
-    $('.viewApptBtn').on('click', function() {
 
-        $('#viewApptModal').modal('show');
+    $('.printBtn').on('click', function() {
 
         $tr = $(this).closest('tr');
-
         var data = $tr.children("td").map(function() {
             return $(this).text();
         }).get();
 
-        $('#acn').val(data[3]);
-        $('#acl').val(data[9]);
-        $('#acc').val(data[8]);
-        $('#ad').val(data[10]);
-    });
-
-    $('.reschedApptBtn').on('click', function() {
-
-        $('#reschedApptModal').modal('show');
-
-        $tr = $(this).closest('tr');
-
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
-
-        $('#raid').val(data[0]);
-        $('#rad').val(data[1]);
-        $('#rat').val(data[11]);
-    });
-
-    $('.cancelApptBtn').on('click', function() {
-
-        $('#cancelApptModal').modal('show');
-
-        $tr = $(this).closest('tr');
-
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
-
-        $('#caid').val(data[0]);
+        window.location.href = "<?php echo home; ?>/patient/print/payment-data.php?id=" + data[0];
     });
 </script>

@@ -21,7 +21,7 @@
 
                                         <option value="" selected>Select Doctor</option>
                                         <?php
-                                        $q = "SELECT * FROM tb_users tu 
+                                        $q = "SELECT DISTINCT tu.user_id, tu.firstname, tu.middlename, tu.lastname, tu.suffix FROM tb_users tu 
                                                 INNER JOIN tb_appointment ta ON ta.doctor_id = tu.user_id
                                                 WHERE tu.role = '2' AND ta.patient_id = '" . $_SESSION['U_ID'] . "'";
                                         $q_run = mysqli_query($con, $q);
