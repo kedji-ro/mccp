@@ -819,7 +819,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $q = $con->query("SELECT * FROM tb_doctor_services tds INNER JOIN tb_services ts ON tds.srv_id = ts.serv_id WHERE tds.sd_stat = 1 AND tds.doc_id = '" . $_SESSION['U_ID'] . "'");
+                                    $q = $con->query("SELECT * FROM tb_doctor_services tds INNER JOIN tb_services ts ON tds.sev_is = ts.serv_id WHERE tds.sd_stat = 1 AND tds.doc_id = '" . $_SESSION['U_ID'] . "'");
                                     if ($q) {
                                         foreach ($q as $r) {
                                     ?>

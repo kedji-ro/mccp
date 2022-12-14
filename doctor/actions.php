@@ -515,9 +515,9 @@ if (isset($_POST['add_service'])) {
 
     if ($sid == '') {
         $q = "INSERT INTO tb_services(srv_desc,srv_stat) VALUES('" . $serv . "','1')";
-        $q2 = "INSERT INTO tb_doctor_services(doc_id, srv_id, sd_stat) VALUES ('" . $_SESSION['U_ID'] . "',LAST_INSERT_ID(),'1')";
+        $q2 = "INSERT INTO tb_doctor_services(doc_id, sev_is, sd_stat) VALUES ('" . $_SESSION['U_ID'] . "',LAST_INSERT_ID(),'1')";
     } else {
-        $check = $con->query("SELECT 1 FROM tb_doctor_services WHERE srv_id ='" . $sid . "'");
+        $check = $con->query("SELECT 1 FROM tb_doctor_services WHERE sev_is ='" . $sid . "'");
         $cnt = mysqli_num_rows($check);
 
         if ($cnt > 0) {
@@ -530,7 +530,7 @@ if (isset($_POST['add_service'])) {
             exit;
         }
 
-        $q2 = "INSERT INTO tb_doctor_services(doc_id, srv_id, sd_stat) VALUES ('" . $_SESSION['U_ID'] . "','" . $sid . "','1')";
+        $q2 = "INSERT INTO tb_doctor_services(doc_id, sev_is, sd_stat) VALUES ('" . $_SESSION['U_ID'] . "','" . $sid . "','1')";
     }
 
     if ($sid == '') {

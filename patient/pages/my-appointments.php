@@ -22,6 +22,7 @@
                         <th hidden></th>
                         <th hidden></th>
                         <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
 
@@ -72,6 +73,7 @@
                             <td hidden><?php echo $rows['clinic_address']; ?></td>
                             <td hidden><?php echo $rows['a_desc']; ?></td>
                             <td hidden><?php echo date('H:i:s', strtotime($rows['appointment_date'])); ?></td>
+                            <td hidden><?php echo $rows['doctor_id']; ?></td>
                         </tr>
                 <?php }
                 } ?>
@@ -111,9 +113,8 @@
             return $(this).text();
         }).get();
 
-        $('#raid').val(data[0]);
-        $('#rad').val(data[1]);
-        $('#rat').val(data[11]);
+        $('#raid').val(data[12]);
+        $('#rraid').val(data[0]);
     });
 
     $('.cancelApptBtn').on('click', function() {

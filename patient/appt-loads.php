@@ -73,7 +73,7 @@ if (isset($_POST['load_services'])) {
 if (isset($_POST['load_dates'])) {
     $did = $_POST['d_id'];
 
-    $q = $con->query("SELECT DISTINCT tds.date_available, tds.schedule_id FROM tb_doctor_schedule tds WHERE tds.doctor_id = '" . $did . "'");
+    $q = $con->query("SELECT DISTINCT tds.date_available, tds.schedule_id FROM tb_doctor_schedule tds WHERE tds.s_stat = 1 AND tds.doctor_id = '" . $did . "'");
 
     $dates = array();
     while ($r = mysqli_fetch_assoc($q)) {
@@ -87,7 +87,7 @@ if (isset($_POST['load_dates'])) {
 if (isset($_POST['load_slots'])) {
     $did = $_POST['s_id'];
 
-    $q = $con->query("SELECT DISTINCT tds.taken_slots FROM tb_doctor_schedule tds WHERE tds.schedule_id = '" . $did . "'");
+    $q = $con->query("SELECT DISTINCT (tds.slots - tds.taken_slots) as taken_slots FROM tb_doctor_schedule tds WHERE tds.schedule_id = '" . $did . "'");
 
     $slots = array();
     while ($r = mysqli_fetch_assoc($q)) {

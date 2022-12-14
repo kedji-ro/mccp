@@ -219,7 +219,7 @@
     </div>
 </div>
 
-<!-- Reschedule Appointment -->
+<!-- Payment -->
 <div class="modal fade" id="payApptModal" tabindex="-1" role="dialog" aria-labelledby="payApptModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -300,17 +300,50 @@
             <form action="actions.php" method="POST">
                 <div class="modal-body">
                     <div class="container">
-                        <div class="row mt-3">
-                            <div class="col-sm-7">
-                                <input type="hidden" id="raid" name="raid" class="form-control">
-                                <label for="rad">Date</label>
-                                <input type="date" id="rad" name="rad" class="form-control">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa-solid fa-calendar-days"></i></div>
+                                            </div>
+                                            <select class="form-control" id="rad" name="rad" required>
+                                                <option value="" selected>Select Date</option>
+                                            </select>
+                                            <input type="hidden" name="rad_date" id="rad_date">
+                                            <input type="hidden" id="raid" name="raid" class="form-control">
+                                            <input type="hidden" id="rraid" name="rraid" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa-solid fa-clock"></i></div>
+                                            </div>
+                                            <select class="form-control" id="rat" name="rat" required>
+                                                <option value="" selected>Select Time</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-5">
-                                <label for="rat">Time</label>
-                                <input type="time" id="rat" name="rat" class="form-control">
+                            <div class="col-sm-3 text-center">
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <h6>SLOTS<br>REMAINING</h6>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-sm-12">
+                                        <h2 class="rslots"></h2>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div><br>
                 <div class="modal-footer">
@@ -321,6 +354,109 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#reschedApptModal').on('shown.bs.modal', function() {
+        var did = document.getElementById('raid');
+        loadD(did);
+    });
+
+    $('#rad').on('change', function() {
+        var did = document.getElementById('rad');
+        loadS(did);
+        loadT(did);
+
+        var text = did.options[did.selectedIndex].text;
+        $('#rad_date').val(text);
+
+        if (did.value == '') {
+            $("#rat").html('');
+
+            $('#rat').append($('<option>', {
+                value: '',
+                text: 'Select Time'
+            }));
+        }
+    });
+
+    function loadD(id) {
+        $.ajax({
+            type: 'POST',
+            url: 'appt-loads.php',
+            data: {
+                "load_dates": "true",
+                "d_id": id.value
+            },
+            dataType: 'json',
+            success: function(msg) {
+                $("#rad").html('');
+
+                $('#rad').append($('<option>', {
+                    value: '',
+                    text: 'Select Date'
+                }));
+
+                $.each(msg, function(i, item) {
+                    $('#rad').append($('<option>', {
+                        value: item.schedule_id,
+                        text: item.date_available
+                    }));
+                });
+            }
+        });
+    }
+
+    function loadT(id) {
+        console.log('g');
+        $.ajax({
+            type: 'POST',
+            url: 'appt-loads.php',
+            data: {
+                "load_time": "true",
+                "s_id": id.value
+            },
+            dataType: 'json',
+            success: function(msg) {
+                console.log('g');
+                $("#rat").html('');
+
+                $('#rat').append($('<option>', {
+                    value: '',
+                    text: 'Select Time'
+                }));
+
+                if (id.value != '') {
+                    $.each(msg, function(i, item) {
+                        $('#rat').append($('<option>', {
+                            value: item,
+                            text: item
+                        }));
+                    });
+                }
+            }
+        });
+    }
+
+    function loadS(id) {
+        $.ajax({
+            type: 'POST',
+            url: 'appt-loads.php',
+            data: {
+                "load_slots": "true",
+                "s_id": id.value
+            },
+            dataType: 'json',
+            success: function(msg) {
+                if (id.value != '') {
+                    $(".rslots").html(msg[0].taken_slots);
+                    $(".r_slots").val(msg[0].taken_slots);
+                } else {
+                    $(".rslots").html('');
+                }
+            }
+        });
+    }
+</script>
 
 <!-- Cancel Appointment -->
 <div class="modal fade" id="cancelApptModal" tabindex="-1" role="dialog" aria-labelledby="cancelApptModal" aria-hidden="true">

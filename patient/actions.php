@@ -105,7 +105,7 @@ if (isset($_POST['create_appointment'])) {
     $q = "INSERT INTO tb_appointment(patient_id, clinic_id, doctor_id, a_desc, appointment_date)
                               VALUES('".$pid."','".$cid."','".$did."','".$desc."','".$dt."')";
 
-    $qus = "UPDATE tb_doctor_schedule SET taken_slots = (taken_slots - 1) WHERE schedule_id = '".$s_id."'";
+    $qus = "UPDATE tb_doctor_schedule SET taken_slots = (taken_slots + 1) WHERE schedule_id = '".$s_id."'";
 
     if ($r_slots != 0) {
         if (mysqli_query($con, $q)) {
@@ -156,8 +156,22 @@ if (isset($_POST['cancel_appointment'])) {
 
 if (isset($_POST['resched_appointment'])) {
 
-    $id = $_POST['raid'];
-    $dt = $_POST['rad'] . ' ' . $_POST['rat'];
+    $id = $_POST['rraid'];
+    $sid = $_POST['rad'];
+    $dt = $_POST['rad_date'] . ' ' . substr($_POST['rat'], 0, 8);
+
+    $chk = $con->query("SELECT 1 FROM tb_doctor_schedule WHERE schedule_id = '".$sid."' AND taken_slots = 0");
+    $count = mysqli_num_rows($chk);
+
+    if ($count > 0) {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "No more slots available for this date.";
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+
+        header('Location: ' . home . '/patient/?my-appointments');
+        exit;
+    }
 
     $q = "UPDATE tb_appointment SET appointment_date = '" . $dt . "', a_stat = '0' WHERE appointment_id = '" . $id . "'";
 
