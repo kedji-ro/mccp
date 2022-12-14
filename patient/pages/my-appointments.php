@@ -44,27 +44,17 @@
 
                             <td class="text-center">
                                 <?php
-                                switch ($rows['a_stat']) {
-                                    case 0:
-                                ?>
-                                        <h5><span class="badge badge-pill badge-warning">Pending</span></h5>
+                                    switch ($rows['a_stat']) {
+                                        case 0: ?>
+                                            <h5><span class="badge badge-pill badge-primary">Approved</span></h5>
                                     <?php break;
-                                    case 1:
-                                    ?>
-                                        <h5><span class="badge badge-pill badge-primary">Approved</span></h5>
+                                        case 1: ?>
+                                            <h5><span class="badge badge-pill badge-success">Completed</span></h5>
                                     <?php break;
-                                    case 2:
-                                    ?>
-                                        <h5><span class="badge badge-pill badge-danger">Denied</span></h5>
+                                        case 2: ?>
+                                            <h5><span class="badge badge-pill badge-danger">Cancelled</span></h5>
                                     <?php break;
-                                    case 3:
-                                    ?>
-                                        <h5><span class="badge badge-pill badge-danger">Cancelled</span></h5>
-                                    <?php break;
-                                    case 4: ?>
-                                        <h5><span class="badge badge-pill badge-success">Completed</span></h5>
-                                <?php break;
-                                } ?>
+                                    } ?>
                             </td>
 
                             <td class="text-center">
@@ -74,8 +64,8 @@
                                     <span><button type="button" class="btn btn-sm btn-success btn-circle payApptBtn" title="<?php echo ($rows['1'] == 1) ? 'Payment Sent' : 'Send Payment'; ?>" <?php echo ($rows['1'] == 1) ? 'disabled' : ''; ?>><i class="fa-solid fa-money-bill-wave"></i></button></span>
                                 <?php } ?>
 
-                                <span><button type="button" class="btn btn-sm btn-danger btn-circle cancelApptBtn" title="Cancel" <?php echo (($rows['a_stat'] == '0' || $rows['a_stat'] == '2' || $rows['a_stat'] == '4' || $rows['a_stat'] == '3' || $rows['1'] == 1) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
-                                <span><button type="button" class="btn btn-sm btn-warning btn-circle reschedApptBtn text-gray-900" title="Reschedule" <?php echo (($rows['a_stat'] == '4' || $rows['a_stat'] == '3' || $rows['1'] == 1) ? 'disabled' : ''); ?>><i class="fas fa-calendar-day"></i></button></span>
+                                <span><button type="button" class="btn btn-sm btn-danger btn-circle cancelApptBtn" title="Cancel" <?php echo (($rows['a_stat'] == '1' || $rows['1'] == 1) ? 'disabled' : ''); ?>><i class="fas fa-close"></i></button></span>
+                                <span><button type="button" class="btn btn-sm btn-warning btn-circle reschedApptBtn text-gray-900" title="Reschedule" <?php echo (($rows['a_stat'] == '1' || $rows['1'] == 1) ? 'disabled' : ''); ?>><i class="fas fa-calendar-day"></i></button></span>
                             </td>
 
                             <td hidden><?php echo $rows['contact_no']; ?></td>

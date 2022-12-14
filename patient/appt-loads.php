@@ -52,6 +52,23 @@ if (isset($_POST['load_doc_details'])) {
     $con->close();
 }
 
+if (isset($_POST['load_services'])) {
+
+    $did = $_POST['did'];
+
+    $q = $con->query("SELECT srv_desc FROM tb_doctor_services tds INNER JOIN tb_services ts ON tds.sev_is = ts.serv_id WHERE tds.sd_stat = 1 AND tds.doc_id = '" . $did . "'");
+
+    $serv = [];
+    $srv = [];
+    while ($r = mysqli_fetch_assoc($q)) {
+        $srv['i'] = $r['srv_desc'];
+        $serv[] = $srv;
+    }
+
+    echo json_encode($serv);
+    $con->close();
+}
+
 
 if (isset($_POST['load_dates'])) {
     $did = $_POST['d_id'];
@@ -93,13 +110,18 @@ if (isset($_POST['load_time'])) {
     $etinit = intval(str_replace(':', '', $r['end_time']));
 
     $nstart = $stinit;
+    $sin = false;
 
-    for ($i = $nstart + 10000; $i < $etinit; $i += 10000) {
+    for ($i = $stinit + 10000 ; $i < $etinit; $i += 10000) {
         $nstart += 10000;
         $nnstart = $nstart + 10000;
 
         if ($nnstart > $etinit) {
             $nnstart = $etinit;
+        }
+        
+        if (($nstart - 10000) == $stinit && $sin == false) {
+            $nstart = $stinit;
         }
 
         if (strlen(strval($nstart)) < 6) {
@@ -118,6 +140,11 @@ if (isset($_POST['load_time'])) {
                 $nn = '0' . strval($nnstart);
             }
             $time[] = implode(':', str_split($nstart, 2)) . ' - ' . implode(':', str_split(($nn == '') ? $nnstart : $nn, 2));
+        }
+        
+        if ($nstart == $stinit) { 
+            $nstart += 10000;
+            $sin = true;
         }
     }
 

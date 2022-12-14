@@ -120,6 +120,9 @@
                                             <td><span class="dspec"></span></td>
                                         </tr>
                                         <tr>
+                                            <td><br></td>
+                                        </tr>
+                                        <tr>
                                             <td style="padding-right: 25px; vertical-align: top;"><span class="p-head">Services:</span></td>
                                             <td><span class="dserv"></span></td>
                                         </tr>
@@ -149,6 +152,7 @@
         var did = document.getElementById('a_doc');
         loadDates(did);
         loadDocInfo(did);
+        loadServices(did);
     });
 
     $('#a_date').on('change', function() {
@@ -242,7 +246,7 @@
                 } else {
                     $(".dn").html(msg[0].docs_name);
                     $(".dspec").html(msg[0].s_desc);
-                    $(".dserv").html(msg[0].doc_services);
+                    // $(".dserv").html(msg[0].doc_services);
                 }
             }
         });
@@ -322,6 +326,29 @@
                         }));
                     });
                 }
+            }
+        });
+    }
+
+    function loadServices(id) {
+        $.ajax({
+            type: 'POST',
+            url: 'appt-loads.php',
+            data: {
+                "load_services": "true",
+                "did": id.value
+            },
+            dataType: 'json',
+            success: function(msg) {
+                var str = JSON.stringify(msg);
+                str = str.replace(/{|}|]|"|:|i|/g, '');
+                str = str.replace('[','');
+                str = str.replace(/,/g,', <br>');
+
+                    console.log(str);
+                $(".dserv").html('');
+                $(".dserv").html(str);
+
             }
         });
     }
