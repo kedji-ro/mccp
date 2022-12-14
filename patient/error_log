@@ -1,0 +1,81 @@
+[04-Dec-2022 13:17:38 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:40 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:40 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/pages/appointments.php on line 84
+[04-Dec-2022 13:17:42 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:42 Asia/Manila] PHP Warning:  Invalid argument supplied for foreach() in /home/w22hl01qnd6e/public_html/patient/pages/schedule.php on line 20
+[04-Dec-2022 13:17:47 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/index.php on line 99
+[04-Dec-2022 13:17:47 Asia/Manila] PHP Notice:  Undefined index: APPT_COUNT in /home/w22hl01qnd6e/public_html/patient/pages/appointments.php on line 84
+[13-Dec-2022 14:16:53 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/appt-loads.php on line 92
+[13-Dec-2022 14:16:53 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/appt-loads.php on line 93
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:41:19 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:16 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:39 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:46:47 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:50:07 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:54 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:58:56 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 09:59:38 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Undefined variable: row in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47
+[14-Dec-2022 10:00:04 Asia/Manila] PHP Notice:  Trying to access array offset on value of type null in /home/w22hl01qnd6e/public_html/patient/pages/my-appointments.php on line 47

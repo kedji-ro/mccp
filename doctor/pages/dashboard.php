@@ -27,7 +27,7 @@
 
     <?php
     $query = "SELECT appointment_id FROM tb_appointment 
-                WHERE doctor_id = '" . $_SESSION['ADMIN_ID'] . "' 
+                WHERE doctor_id = '" . $_SESSION['U_ID'] . "' 
                 AND a_stat = 1 AND  DATE(appointment_date) > DATE(NOW()) ";
     $query_run = mysqli_query($con, $query);
     $row = mysqli_num_rows($query_run);
@@ -55,11 +55,28 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Total Pending Appointment Requests</div>
+                            Total Approved Appointments</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $_SESSION['APPT_COUNT']; ?></div>
                     </div>
                     <div class="col-auto">
                         <i class="fa fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Info Transfer Requests</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $_SESSION['REQ_COUNT']; ?></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fa fa-info-circle fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>

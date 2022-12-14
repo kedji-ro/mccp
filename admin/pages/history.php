@@ -1,98 +1,209 @@
 <?php
 
-$q = "SELECT    tb_appointment.appointment_id as a_id,
-                tb_appointment.patient_id as p_id,
-                DATE(tb_appointment.appointment_date) as a_d,
-                TIME_FORMAT(TIME(tb_appointment.appointment_date), '%h:%i %p') as a_t,
-                DAYNAME(tb_appointment.appointment_date) as a_day,
-                tb_appointment.a_stat,
-                tb_clinic.clinic_name as c_name,
-                tb_clinic.clinic_address as c_addr,
-                tb_users.firstname as p_fn,
-                tb_users.middlename as p_mn,
-                tb_users.lastname as p_ln,
-                tb_users.suffix as p_s,
-                tb_users.phone_no as p_cn,
-                tb_users.tel_no as p_tel,
-                tb_users.email as p_email
-                FROM tb_appointment 
-                INNER JOIN tb_users on tb_users.user_id = tb_appointment.patient_id
-                LEFT JOIN tb_clinic on tb_clinic.clinic_id = tb_appointment.clinic_id";
-?>
+$q = "SELECT * FROM tb_appointment ta
+                LEFT JOIN tb_users tu on tu.user_id = ta.patient_id
+                LEFT JOIN tb_clinic tc on tc.clinic_id = ta.clinic_id
+                   ";
 
+
+$rs = $con->query($q);
+?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Appointments History</h1>
+    <h1 class="h3 mb-0 text-gray-800">My Appointments</h1>
 </div>
 
 <div class="card shadow mb-4 animated--fade-in">
     <div class="card-header py-3">
+
     </div>
     <div class="card-body">
         <div class="card-body text-black">
-            <div class="table-responsive">
-                <table class="table table-bordered table-condensed table-fixed table-striped" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Patient Name</th>
-                            <th>Doctor Appointed</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Clinic</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <?php
-                    $query_run = mysqli_query($con, $q);
 
-                    if ($query_run) {
-                        foreach ($query_run as $rows) {
-                    ?>
+            <div class="content">
+                <div class="table-responsive animated--fade-in container-fluid">
+                    <table class="table table-bordered table-condensed table-fixed table-striped" id="apptListDT" width="100%" cellspacing="0">
+                        <thead>
                             <tr>
-                                <td><?php echo $rows['a_id']; ?></td>
-                                <td><?php echo $rows['p_ln'] . ', ' . $rows['p_fn'] . ' ' . $rows['p_mn'] . ' ' . $rows['p_s']; ?></td>
-                                <td><?php  ?></td>
-                                <td><?php echo $rows['a_d']; ?></td>
-                                <td><?php echo $rows['a_t']; ?></td>
-                                <td><?php echo $rows['c_name']; ?></td>
-                                <?php if ($rows['a_stat'] == 1 && $rows['a_d'] >= $date) { ?>
-    <td class="text-center">
-      <h5><span class="badge badge-pill badge-primary">Approved</span></h5>
-    </td>
-  <?php } elseif ($rows['a_stat'] == 2) { ?>
-    <td class="text-center">
-      <h5><span class="badge badge-pill badge-danger">Cancelled</span></h5>
-    </td>
-    <?php } elseif ($rows['a_stat'] == 0) {
-    if ($rows['a_d'] >= $date) { ?>
-      <td class="text-center">
-        <h5><span class="badge badge-pill badge-warning text-gray-900">Pending</span></h5>
-      </td>
-    <?php } else { ?>
-      <td class="text-center">
-        <h5><span class="badge badge-pill badge-secondary">Expired</span></h5>
-      </td>
-    <?php }
-  } else { ?>
-    <td class="text-center">
-      <h5><span class="badge badge-pill badge-success">Completed</span></h5>
-    </td>
-  <?php } ?>
-                                <td class="text-center"><button type="button" class="btn btn-primary btn-sm btn-circle" title="View Details"><i class="fas fa-search"></i></button>
-                                    <span><button type="button" class="btn btn-secondary viewbtn btn-sm btn-circle" title="Print"><i class="fas fa-print"></i></button></span>
-                                </td>
+                                <th>No.</th>
+                                <th>Patient Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Clinic</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Action</th>
+                                <th hidden></th>
+                                <th hidden></th>
+                                <th hidden></th>
+                                <th hidden></th>
+                                <th hidden></th>
                             </tr>
-                    <?php
-                        }
-                    }
-                    ?>
-                </table>
+                        </thead>
+
+                        <?php
+                        $result = $con->query($q);
+                        while ($row = $result->fetch_array()) {
+                        ?>
+                            <tr>
+                                <td>
+                                    <?php echo $row['appointment_id']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname']; ?>
+                                </td>
+                                <td>
+                                    <?php echo date('Y-m-d', strtotime($row['appointment_date'])); ?>
+                                </td>
+                                <td>
+                                    <?php echo date('h:i A', strtotime($row['appointment_date'])); ?>
+                                </td>
+                                <td>
+                                    <?php echo $row['clinic_name']; ?>
+                                </td>
+
+                                <td class="text-center">
+                                    <?php
+                                    switch ($row['a_stat']) {
+                                        case 0:
+                                    ?>
+                                            <h5><span class="badge badge-pill badge-primary">Approved</span></h5>
+                                        <?php break;
+                                        case 1:
+                                        ?>
+                                            <h5><span class="badge badge-pill badge-success">Completed</span></h5>
+                                        <?php break;
+                                        case 2:
+                                        ?>
+                                            <h5><span class="badge badge-pill badge-danger">Cancelled</span></h5>
+                                    <?php break;
+                                    } ?>
+                                </td>
+
+                                <td class="text-center">
+                                    
+                                    <span><button type="button" class="btn btn-secondary btn-circle btn-sm printABtn" title="Print"><i class="fas fa-print"></i></button></span>
+                                 
+                                </td>
+                                <td hidden>
+                                    <?php echo $row['email']; ?>
+                                </td>
+                                <td hidden>
+                                    <?php echo $row['phone_no']; ?>
+                                </td>
+                                <td hidden>
+                                    <?php echo $row['tel_no']; ?>
+                                </td>
+                                <td hidden>
+                                    <?php echo $row['clinic_address']; ?>
+                                </td>
+                                <td hidden>
+                                    <?php echo date('H:i:s', strtotime($row['appointment_date'])); ?>
+                                </td>
+
+                            </tr>
+
+                        <?php }
+                        ?>
+                    </table>
+                </div>
+                <script>
+                    $('.viewABtn').on('click', function() {
+
+                        $('#viewAppointmentListModal').modal('show');
+
+                        $tr = $(this).closest('tr');
+
+                        var data = $tr.children("td").map(function() {
+                            return $(this).text();
+                        }).get();
+
+                        $('#alp_id').val(data[0]);
+                        $('#alp_name').val(data[1]);
+                        $('#alp_pemail').val(data[8]);
+                        $('#alp_con').val(data[9]);
+                        $('#alp_tel').val(data[10]);
+                        $('#alp_date').val(data[2]);
+                        $('#alp_time').val(data[3]);
+                        $('#alp_clinic').val(data[5]);
+                        $('#alp_cadd').val(data[11]);
+                    });
+
+                    $('.cancelABtn').on('click', function() {
+
+                        $('#cancelApptModal').modal('show');
+
+                        $tr = $(this).closest('tr');
+
+                        var data = $tr.children("td").map(function() {
+                            return $(this).text();
+                        }).get();
+
+                        $('#cam_id').val(data[0]);
+                    });
+
+                    $('.resABtn').on('click', function() {
+
+                        $('#reschedModal').modal('show');
+
+                        $tr = $(this).closest('tr');
+
+                        var data = $tr.children("td").map(function() {
+                            return $(this).text();
+                        }).get();
+
+                        $('#raid').val(data[0]);
+                        $('#rad').val(data[2]);
+                        $('#rat').val(data[12]);
+                    });
+
+                    $('.printABtn').on('click', function() {
+
+                        $tr = $(this).closest('tr');
+                        var data = $tr.children("td").map(function() {
+                            return $(this).text();
+                        }).get();
+
+                        window.location.href = "<?php echo home; ?>/admin/print/appointments-data.php?id=" + data[0];
+                    });
+                </script>
             </div>
         </div>
     </div>
 </div>
 
-<script>
 
+<script>
+    $(document).ready(function() {
+        $('#apptListDT').dataTable().fnSort([
+            [5, 'asc']
+        ]);
+
+        var calendarAppts = document.getElementById('appt-calendar');
+
+        var calendarA = new FullCalendar.Calendar(calendarAppts, {
+            themeSystem: 'bootstrap',
+            initialView: 'dayGridMonth',
+            initialDate: '<?php echo $date; ?>',
+            editable: true,
+            selectable: true,
+            height: 700,
+            headerToolbar: {
+                left: 'title',
+                right: 'today prev,next'
+            },
+            events: appts,
+            eventClick(info) {
+                console.log(info);
+            }
+        });
+
+        calendarA.render();
+    });
+
+    $("#hlAppts").click(function() {
+        $('.aReqCount').removeClass('badge badge-primary aReqCount').addClass('badge badge-light aReqCount');
+    });
+
+    $("#hlCal").click(function() {
+        $('.aReqCount').removeClass('badge badge-light aReqCount').addClass('badge badge-primary aReqCount');
+    });
 </script>

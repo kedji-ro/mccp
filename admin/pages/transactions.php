@@ -45,7 +45,7 @@ $query = "SELECT *
                                 <td><?php echo $rows['hmo_discount']; ?></td>
                                 <td><?php echo $rows['payment_method']; ?></td>
 
-                                <td class="text-center"><button type="button" class="btn btn-primary btn-circle btn-sm" title="View Details"><i class="fas fa-search"></i></button>
+                                <td class="text-center">
                                     <span><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Print"><i class="fas fa-print"></i></button></span>
                             </tr>
                     <?php
