@@ -20,6 +20,153 @@
     </div>
 <?php } ?>
 
+<!-- Sec List -->
+<div class="modal fade" id="secListModal" tabindex="-1" role="dialog" aria-labelledby="secListModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registered Secretaries</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST" id="addServiceForm">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 container-fluid" id="secRow">
+                                <table class="table table-bordered table-condensed table-fixed table-striped table-sm" width="100%" cellspacing="0" id="secTable">
+                                    <thead>
+                                        <tr>
+                                            <th hidden></th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Phone No.</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <?php
+                                        $q = $con->query("SELECT * FROM tb_users WHERE role = 4 AND sec_docid = '" . $_SESSION['U_ID'] . "'");
+                                        if ($q) {
+                                            foreach ($q as $r) {
+                                        ?>
+                                                <tr>
+                                                    <td hidden><?php echo $r['user_id']; ?></td>
+                                                    <td><?php echo $r['firstname'] . ' ' . $r['middlename'] . ' ' . $r['lastname'] . ' ' . $r['suffix']; ?></td>
+                                                    <td><?php echo $r['email']; ?></td>
+                                                    <td><?php echo ($r['phone_no'] == '') ? 'N/A' : $r['phone_no']; ?></td>
+                                                    <td class="text-center">
+                                                        <h5><span class="badge badge-pill badge-<?php echo ($r['is_active'] == '1') ? 'success' : 'secondary'; ?>"><?php echo ($r['is_active'] == '1') ? 'Active' : 'Inactive'; ?></span></h5>
+                                                    </td>
+                                                    <td class="text-center"><button onclick="archiveSec(<?php echo $r['user_id']; ?>)" class="btn btn-secondary btn-circle btn-sm" type="button" title="Archive" <?php echo ($r['is_active'] == '0') ? 'disabled' : ''; ?>><i class="fa fa-archive"></i></button></td>
+                                                </tr>
+                                        <?php }
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+            <script>
+                function archiveSec(id) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'actions.php',
+                        data: {
+                            "archive_sec": "true",
+                            "sec_id": id
+                        },
+                        dataType: 'json',
+                        success: function(msg) {
+                            $("#secTable").load(location.href + " #secTable");
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    $('#secTable').dataTable();
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<!-- Create Sec -->
+<div class="modal fade" id="createSecModal" tabindex="-1" role="dialog" aria-labelledby="createSecModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Secretary Account</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Email</label>
+                                <input type="email" name="nae" id="nae" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Password</label>
+                                <input type="password" name="nap" id="nap" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>First Name</label>
+                                <input type="text" name="nafn" id="nafn" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Middle Name</label>
+                                <input type="text" name="namn" id="namn" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>Last Name</label>
+                                <input type="text" name="naln" id="naln" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Suffix</label>
+                                <input type="text" name="nasf" id="nasf" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Phone No.</label>
+                                <input type="number" id="napn" name="napn" class="form-control" required value="">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Address</span></label>
+                                <textarea rows="3" id="naaddr" name="naaddr" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="add_sec" name="add_sec" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Change Password Modal-->
 <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal" aria-hidden="true">
     <div class="modal-dialog" role="document">

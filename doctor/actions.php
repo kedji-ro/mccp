@@ -2,6 +2,52 @@
 
 include '../login/db_conn.php';
 
+if (isset($_POST['archive_sec'])) {
+
+    $id = $_POST['sec_id'];
+
+    $q = "UPDATE tb_users SET is_active = '0' WHERE user_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        echo json_encode('Updated');
+    } 
+
+    $con->close();
+}
+
+if (isset($_POST['add_sec'])) {
+
+    $e = $_POST['nae'];
+    $p = $_POST['nap'];
+    $fn = $_POST['nafn'];
+    $mn = $_POST['namn'];
+    $ln = $_POST['naln'];
+    $sf = $_POST['nasf'];
+    $pn = $_POST['napn'];
+    $addr = $_POST['naaddr'];
+
+    $q = "INSERT INTO tb_users (username, password, email, firstname, middlename, lastname, suffix, address, phone_no, is_active, role, sec_docid)
+                    VALUES('".$e."',MD5('".$p."'),'".$e."','".$fn."','".$mn."','".$ln."','".$sf."','".$addr."', '".$pn."', '1', '4', '".$_SESSION['U_ID']."')";
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "New secretary account created.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/doctor/?profile');
+
+    $con->error;
+}
+
 if (isset($_POST['transfer_patient'])) {
 
     $apt_id = $_POST['tp_aid'];

@@ -6,8 +6,8 @@
             </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <button class="btn btn-warning" data-toggle="modal" data-target="#addServicesModal"><i class="fa fa-plus"></i> Add Services</button> &nbsp;
-                <button class="btn btn-primary"><i class="fa fa-list"></i> Secretary Accounts</button> &nbsp;
-                <button class="btn btn-success"><i class="fa fa-user-plus"></i> Register a Secretary</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#secListModal"><i class="fa fa-list"></i> Secretary Accounts</button> &nbsp;
+                <button class="btn btn-success" data-toggle="modal" data-target="#createSecModal"><i class="fa fa-user-plus"></i> Register a Secretary</button>
             </div>
         </div>
         <div class="card shadow mb-4">
