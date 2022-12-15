@@ -60,15 +60,16 @@ $query_run = mysqli_query($con, $q);
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        $('.printBtn').on('click', function() {
+<script>
+    $('.printBtn').on('click', function() {
 
-            $tr = $(this).closest('tr');
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function() {
+            return $(this).text();
+        }).get();
 
-            window.location.href = "<?php echo home; ?>/doctor/print/payment-data.php?id=" + data[0];
-        });
-    </script>
+        window.location.href = "<?php echo home; ?>/doctor/print/payment-data.php?id=" + data[0];
+    });
+</script>

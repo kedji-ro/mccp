@@ -3,14 +3,21 @@ include '../login/db_conn.php';
 
 if (isset($_SESSION['U_ID'])) {
     if (isset($_SESSION['U_ROLE'])) {
-        if ($_SESSION['U_ROLE'] != '2') {
-            header('Location: ' . home . '/admin/?dashboard');
+
+        switch ($_SESSION['U_ROLE']) {
+            case '1':
+                header('Location: ' . home . '/admin/?dashboard');
+                break;
+            case '3':
+                header('Location: ' . home . '/patient/?set-appointment');
+                break;
+            case '4':
+                header('Location: ' . home . '/secretary/?appointments');
+                break;
         }
-    } else {
-        header('Location: ' . home . '/?');
     }
 } else {
-    header('Location: ' . home . '/?');
+    header('Location: '.home.'/?');
 }
 
 if (empty($_GET)) {

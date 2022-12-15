@@ -1,10 +1,12 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Doctors Management</h1>
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <div class="d-sm-flex align-items-center justify-content-between">
         <button type="button" class="btn btn-success addDocBtn">
             <i class="fas fa-plus"></i> Add Doctor</button> &nbsp;
         <button type="button" class="btn btn-primary addSpecBtn">
-            <i class="fas fa-plus"></i> Add Specialization</button>
+            <i class="fas fa-plus"></i> Add Specialization</button> &nbsp;
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addServicesModal">
+            <i class="fas fa-plus"></i> Add Services</button>
     </div>
 </div>
 
@@ -55,7 +57,7 @@ $query_run = mysqli_query($con, $query);
                                 <td class="text-center">
                                     <h5><span class="badge badge-pill badge-success">Active</span></h5>
                                 </td>
-                            <?php } elseif($rows['is_active'] == '2') { ?>
+                            <?php } elseif ($rows['is_active'] == '2') { ?>
                                 <td class="text-center">
                                     <h5><span class="badge badge-pill badge-secondary">Archived</span></h5>
                                 </td>

@@ -136,7 +136,7 @@
                         <input type="date" name="u_dob" id="u_dob" class="form-control" placeholder="Date of Birth" required value="<?php echo $row['DOB']; ?>" />
                     </div>
                     <div class="form-group col-md-2">
-                        <input type="text" name="age" id="age" class="form-control" placeholder="Age" readonly value="<?php echo '23'; ?>" />
+                        <input type="text" name="age" id="age" class="form-control" placeholder="Age" readonly value="" />
                     </div>
                     <div class="form-group col-md-5">
                         <input type="text" name="u_phone" id="u_phone" class="form-control" placeholder="Phone No." value="<?php echo $row['phone_no']; ?>" />
@@ -158,6 +158,22 @@
 </div>
 
 <script>
+    $(document).ready(function() {
+        var today = new Date();
+        var dob = new Date($("#u_dob").val());
+        var age = new Date(today - dob).getFullYear() - 1970;
+
+        $("#age").val(age);
+    });
+
+    $("#u_dob").change(function() {
+        var today = new Date();
+        var dob = new Date($("#u_dob").val());
+        var age = new Date(today - dob).getFullYear() - 1970;
+
+        $("#age").val(age);
+    });
+
     function uploadLicense() {
         var f = $('#lic_img')[0].files;
         var fd = new FormData();

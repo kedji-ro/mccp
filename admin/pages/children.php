@@ -1,12 +1,15 @@
 <?php
 
-$q = $con->query("SELECT * FROM tb_child_details");
+$q = $con->query("SELECT *  ,CONCAT(IFNULL(tcd.firstname,''),' ',IFNULL(tcd.middlename,''),' ',IFNULL(tcd.lastname,'')) as child
+                            ,CONCAT(IFNULL(tu.firstname,''),' ',IFNULL(tu.middlename,''),' ',IFNULL(tu.lastname,'')) as guardian 
+                            FROM tb_child_details tcd 
+                            INNER JOIN tb_users tu ON tcd.parent_id = tu.user_id");
 
 ?>
 
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Registered Children</h1>
+    <h1 class="h3 mb-0 text-gray-800">Patients Management (Children)</h1>
     <button type="button" class="btn btn-success regChildBtn">
         <i class="fas fa-plus"></i> Register Child</button>
 </div>
@@ -20,7 +23,8 @@ $q = $con->query("SELECT * FROM tb_child_details");
                 <thead>
                     <tr>
                         <th hidden></th>
-                        <th>Name</th>
+                        <th>Child's Name</th>
+                        <th>Mother/Guardian</th>
                         <th>Date of Birth</th>
                         <th>Height</th>
                         <th>Weight</th>
@@ -40,24 +44,18 @@ $q = $con->query("SELECT * FROM tb_child_details");
                 ?>
                         <tr>
                             <td hidden><?php echo $rows['child_id']; ?></td>
-                            <td><?php echo $rows['firstname'] . ' ' . $rows['middlename'] . ' ' . $rows['lastname'] . ' ' . $rows['suffix']; ?></td>
+                            <td><?php echo $rows['child'];?></td>
+                            <td><?php echo $rows['guardian']; ?></td>
                             <td><?php echo $rows['dateofbirth']; ?></td>
                             <td><?php echo $rows['height']; ?></td>
                             <td><?php echo $rows['weight']; ?></td>
-                            <?php if ($rows['ch_stat'] == '1') { ?>
-                                <td class="text-center">
-                                    <h5><span class="badge badge-pill badge-success">Active</span></h5>
-                                </td>
-                            <?php } else { ?>
-                                <td class="text-center">
-                                    <h5><span class="badge badge-pill badge-secondary">Inactive</span></h5>
-                                </td>
-                            <?php } ?>
+                            <td><h5><span class="badge badge-pill badge-<?php echo ($rows['ch_stat'] == '1') ? 'success' : 'secondary' ;?>"><?php echo ($rows['ch_stat'] == '1') ? 'Active' : 'Inactive' ;?></span></h5></td>
 
                             <td class="text-center">
                                 <button type="button" class="btn btn-sm btn-primary btn-circle editChildBtn" title="View/Edit Details"><i class="fas fa-edit"></i> </button>
                                 <span> <button type="button" class="btn btn-sm btn-secondary btn-circle archiveChildBtn" title="Archive" <?php echo (($rows['ch_stat'] == '0') ? 'disabled' : ''); ?>><i class="fas fa-archive"></i></button></span>
                             </td>
+
                             <td hidden><?php echo $rows['firstname']; ?></td>
                             <td hidden><?php echo $rows['middlename']; ?></td>
                             <td hidden><?php echo $rows['lastname']; ?></td>
@@ -114,7 +112,7 @@ $('.regChildBtn').on('click', function() {
 
     $(document).ready(function() {
         $('#childTable').dataTable().fnSort([
-            [5, 'asc']
+            [6, 'asc']
         ]);
     });
 </script>

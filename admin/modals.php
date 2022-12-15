@@ -20,6 +20,223 @@
     </div>
 <?php } ?>
 
+<!-- User Settings -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">User Settings</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="euid" name="euid" class="form-control">
+                            <div class="col-sm-12">
+                                <label>Email</label>
+                                <input type="email" name="eue" id="eue" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Old Password</label>
+                                <input type="password" name="euop" id="euop" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>New Password</label>
+                                <input type="password" name="eunp" id="eunp" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Confirm Password</label>
+                                <input type="password" name="eucp" id="eucp" class="form-control">
+                            </div>
+                        </div><br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="edit_user" name="edit_user" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Create Admin -->
+<div class="modal fade" id="createAdminModal" tabindex="-1" role="dialog" aria-labelledby="createAdminModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Admin Account</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Email</label>
+                                <input type="email" name="nae" id="nae" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Password</label>
+                                <input type="password" name="nap" id="nap" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>First Name</label>
+                                <input type="text" name="nafn" id="nafn" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Middle Name</label>
+                                <input type="text" name="namn" id="namn" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label>Last Name</label>
+                                <input type="text" name="naln" id="naln" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Suffix</label>
+                                <input type="text" name="nasf" id="nasf" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Phone No.</label>
+                                <input type="number" id="napn" name="napn" class="form-control" required value="">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-sm-12">
+                                <label>Address</span></label>
+                                <textarea rows="3" id="naaddr" name="naaddr" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="add_admin" name="add_admin" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Archive user -->
+<div class="modal fade" id="archiveUserModal" tabindex="-1" role="dialog" aria-labelledby="archivem" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Archive</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="hidden" id="auid" name="auid" class="form-control">
+                            <div class="col-sm-12">
+                                <p>Archive user?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="archive_user" name="archive_user" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add services -->
+<div class="modal fade" id="addServicesModal" tabindex="-1" role="dialog" aria-labelledby="addServicesModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Service</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form action="actions.php" method="POST" id="addServiceForm">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <input type="text" name="ns" id="ns" class="form-control" placeholder="New service description...">
+                        </div>
+                        <div class="row mt-3">
+                            <h5>Active Services</h5>
+                        </div>
+                        <div class="row" id="srvRow">
+                            <table class="table table-bordered table-condensed table-fixed table-striped table-sm" width="100%" cellspacing="0" id="srvTable">
+                                <thead>
+                                    <tr>
+                                        <th hidden></th>
+                                        <th>Description</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $q = $con->query("SELECT * FROM tb_services WHERE srv_stat = 1");
+                                    if ($q) {
+                                        foreach ($q as $r) {
+                                    ?>
+                                            <tr>
+                                                <td hidden><?php echo $r['srv_id']; ?></td>
+                                                <td><?php echo $r['srv_desc']; ?></td>
+                                                <td class="text-center"><button onclick="archiveServ(<?php echo $r['serv_id']; ?>)" class="btn btn-secondary btn-circle btn-sm" type="button" title="Archive"><i class="fa fa-archive"></i></button></td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="add_service" name="add_service" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+            <script>
+                function archiveServ(id) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'actions.php',
+                        data: {
+                            "archive_serv": "true",
+                            "asrid": id
+                        },
+                        dataType: 'json',
+                        success: function(msg) {
+                            $("#srvRow").load(location.href + " #srvTable");
+                        }
+                    });
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
 <!-- Reg Mother -->
 <div class="modal fade" id="regMotherModal" tabindex="-1" role="dialog" aria-labelledby="regMotherModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -31,7 +248,7 @@
                 </button>
             </div>
             <form action="actions.php" method="POST">
-                 <div class="modal-body">
+                <div class="modal-body">
                     <h5>User Information</h5>
                     <div class="row align-items-center">
                         <div class="form-group col-md-6">
@@ -89,7 +306,7 @@
                             <label>Phone No.</label>
                             <input type="number" name="pno" id="pno" class="form-control" pattern="[0-9]{11}">
                         </div>
-                        
+
                     </div>
                     <div class="row align-items-center">
                         <div class="form-group col-md-12">
@@ -97,8 +314,8 @@
                             <textarea type="text" name="padd" id="padd" class="form-control"></textarea>
                         </div>
                     </div><br>
-            </div>
-            <div class="modal-footer">
+                </div>
+                <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <button class="btn btn-primary" type="submit" id="register_patient" name="register_patient">Register</button>
                 </div>
@@ -112,22 +329,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Details</h5>
+                <h5 class="modal-title">Edit Mother Details</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <form action="actions.php" method="POST">
-                 <div class="modal-body">
+                <div class="modal-body">
                     <h5>User Information</h5>
                     <div class="row align-items-center">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                             <label>Email</label>
-                            <input type="email" name="eem" id="eem" class="form-control" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Password</label>
-                            <input type="password" name="eppass" id="eppass" class="form-control" required>
+                            <input type="email" name="eme" id="eme" class="form-control" readonly>
+                            <input type="hidden" name="emid" id="emid" class="form-control">
                         </div>
                     </div>
                     <br>
@@ -136,15 +350,15 @@
                     <div class="row align-items-center">
                         <div class="form-group col-md-4">
                             <label>First Name</label>
-                            <input type="text" name="epfn" id="epfn" class="form-control" required>
+                            <input type="text" name="emfn" id="emfn" class="form-control" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Middle Name</label>
-                            <input type="text" name="epmn" id="epmn" class="form-control">
+                            <input type="text" name="emmn" id="emmn" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Last Name</label>
-                            <input type="text" name="epln" id="epln" class="form-control" required>
+                            <input type="text" name="emln" id="emln" class="form-control" required>
                         </div>
                     </div>
                     <div class="row align-items-center">
@@ -154,12 +368,12 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input type="date" name="epmen" id="epmen" class="form-control" placeholder="Date of Birth" required value="<?php echo $row['date_first_men_period']; ?>" />
+                                <input type="date" name="emmen" id="emmen" class="form-control" placeholder="Date of Birth" required value="<?php echo $row['date_first_men_period']; ?>" />
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Marital Status</label>
-                            <input type="text" name="epms" id="epms" class="form-control">
+                            <input type="text" name="emms" id="emms" class="form-control">
                         </div>
                     </div>
                     <div class="row align-items-center">
@@ -169,25 +383,25 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
                                 </div>
-                                <input type="date" name="epdob" id="epdob" class="form-control">
+                                <input type="date" name="emdob" id="emdob" class="form-control">
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Phone No.</label>
-                            <input type="number" name="epno" id="epno" class="form-control" pattern="[0-9]{11}">
+                            <input type="number" name="empn" id="empn" class="form-control" pattern="[0-9]{11}">
                         </div>
-                        
+
                     </div>
                     <div class="row align-items-center">
                         <div class="form-group col-md-12">
                             <label for="u_add">Address</label>
-                            <textarea type="text" name="epadd" id="epadd" class="form-control"></textarea>
+                            <textarea type="text" name="emaddr" id="emaddr" class="form-control"></textarea>
                         </div>
                     </div><br>
-            </div>
-            <div class="modal-footer">
+                </div>
+                <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" type="submit" id="edit_patient" name="edit_patient">Register</button>
+                    <button class="btn btn-primary" type="submit" id="edit_patient" name="edit_patient">Confirm</button>
                 </div>
             </form>
         </div>
@@ -210,7 +424,7 @@
                         <div class="row">
                             <input type="hidden" id="aarmid" name="aarmid" class="form-control">
                             <div class="col-sm-12">
-                                <p>Archive patient?</p>
+                                <p>Archive mother?</p>
                             </div>
                         </div>
                     </div>
@@ -429,87 +643,87 @@
             <form action="../actions/update-profile.php" method="POST">
                 <div class="modal-body">
                     <h5>User Information</h4>
-                    <div class="row align-items-center">
-                        <div class="form-group col-md-12">
-                            <label for="email">Email</label>
-                            <input type="text" name="u_email" id="u_email" class="form-control" placeholder="" required value="" readonly />
-                        </div>
-                    </div>
-                    <br>
-
-                    <h5>Personal Information</h4>
-                    <div class="row align-items-center">
-                        <div class="form-group col-md-6">
-                            <label for="fname">First Name</label>
-                            <input type="text" name="u_fname" id="u_fname" class="form-control" placeholder="" required value="" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="mname">Middle Name</label>
-                            <input type="text" name="u_mname" id="u_mname" class="form-control" placeholder="" value="" />
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="form-group col-md-6">
-                            <label for="lname">Last Name</label>
-                            <input type="text" name="u_lname" id="u_lname" class="form-control" placeholder="" required value="" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="sufx">Suffix</label>
-                            <input type="text" name="u_sufx" id="u_sufx" class="form-control" placeholder="" value="" />
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <label for="dob">Date of Birth</label>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="dob">Phone No.</label>
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="form-group input-group col-md-6">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                        <div class="row align-items-center">
+                            <div class="form-group col-md-12">
+                                <label for="email">Email</label>
+                                <input type="text" name="u_email" id="u_email" class="form-control" placeholder="" required value="" readonly />
                             </div>
-                            <input type="date" name="u_dob" id="u_dob" class="form-control" required value="" />
                         </div>
-                        <div class="form-group col-md-6">
-                            <input type="number" name="u_phone" id="u_phone" class="form-control" value="" />
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="form-group col-md-12">
-                            <label for="u_add">Address</label>
-                            <textarea type="text" name="u_add" id="u_add" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="form-group col-md-6">
-                            <label for="spec">License No.</label>
-                            <input type="text" name="u_lic" id="u_lic" class="form-control" required value="" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="spec">Specialization</label>
-                            <select type="text" class="form-control form-control-user" id="u_spec" name="u_spec">
-                                <option value="" selected></option>
-                                <?php
-                                $q = $con->query("SELECT * FROM tb_specialization WHERE spec_stat = 1");
-                                if ($q) {
-                                    foreach ($q as $r) {
-                                ?>
-                                        <option value="<?php echo $r['spec_id']; ?>"><?php echo $r['s_desc']; ?></option>
-                                <?php }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="form-group col-md-12">
-                            <label for="degree">Title</label>
-                            <input type="text" name="u_title" id="u_title" class="form-control" required value="" />
-                        </div>
-                    </div>
+                        <br>
+
+                        <h5>Personal Information</h4>
+                            <div class="row align-items-center">
+                                <div class="form-group col-md-6">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" name="u_fname" id="u_fname" class="form-control" placeholder="" required value="" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" name="u_mname" id="u_mname" class="form-control" placeholder="" value="" />
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="form-group col-md-6">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" name="u_lname" id="u_lname" class="form-control" placeholder="" required value="" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="sufx">Suffix</label>
+                                    <input type="text" name="u_sufx" id="u_sufx" class="form-control" placeholder="" value="" />
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <label for="dob">Date of Birth</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="dob">Phone No.</label>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="form-group input-group col-md-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                    <input type="date" name="u_dob" id="u_dob" class="form-control" required value="" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="number" name="u_phone" id="u_phone" class="form-control" value="" />
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="form-group col-md-12">
+                                    <label for="u_add">Address</label>
+                                    <textarea type="text" name="u_add" id="u_add" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="form-group col-md-6">
+                                    <label for="spec">License No.</label>
+                                    <input type="text" name="u_lic" id="u_lic" class="form-control" required value="" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="spec">Specialization</label>
+                                    <select type="text" class="form-control form-control-user" id="u_spec" name="u_spec">
+                                        <option value="" selected></option>
+                                        <?php
+                                        $q = $con->query("SELECT * FROM tb_specialization WHERE spec_stat = 1");
+                                        if ($q) {
+                                            foreach ($q as $r) {
+                                        ?>
+                                                <option value="<?php echo $r['spec_id']; ?>"><?php echo $r['s_desc']; ?></option>
+                                        <?php }
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="form-group col-md-12">
+                                    <label for="degree">Title</label>
+                                    <input type="text" name="u_title" id="u_title" class="form-control" required value="" />
+                                </div>
+                            </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -682,7 +896,7 @@
 
 <!-- Add Specialization Modal -->
 <div class="modal fade" id="addSpecModal" tabindex="-1" role="dialog" aria-labelledby="addSpecModal" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add Specialization</h5>
@@ -694,10 +908,35 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-12">
-                                <label>New Specialization</label>
-                                <input type="text" id="nspec" name="nspec" class="form-control">
-                            </div>
+                            <input type="text" id="nspec" name="nspec" class="form-control" placeholder="New specialization description...">
+                        </div>
+                        <div class="row mt-3">
+                            <h5>Active Specializations</h5>
+                        </div>
+                        <div class="row" id="specRow">
+                            <table class="table table-bordered table-condensed table-fixed table-striped table-sm" width="100%" cellspacing="0" id="specTable">
+                                <thead>
+                                    <tr>
+                                        <th hidden></th>
+                                        <th>Description</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $q = $con->query("SELECT * FROM tb_specialization WHERE spec_stat = 1");
+                                    if ($q) {
+                                        foreach ($q as $r) {
+                                    ?>
+                                            <tr>
+                                                <td hidden><?php echo $r['spec_stat']; ?></td>
+                                                <td><?php echo $r['s_desc']; ?></td>
+                                                <td class="text-center"><button onclick="archiveSpec(<?php echo $r['spec_id']; ?>)" class="btn btn-secondary btn-circle btn-sm" type="button" title="Archive"><i class="fa fa-archive"></i></button></td>
+                                            </tr>
+                                    <?php }
+                                    } ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div><br>
@@ -706,6 +945,22 @@
                     <button type="submit" id="add_specialization" name="add_specialization" class="btn btn-primary">Confirm</button>
                 </div>
             </form>
+            <script>
+                function archiveSpec(id) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'actions.php',
+                        data: {
+                            "archive_spec": "true",
+                            "asid": id
+                        },
+                        dataType: 'json',
+                        success: function(msg) {
+                            $("#specRow").load(location.href + " #specTable");
+                        }
+                    });
+                }
+            </script>
         </div>
     </div>
 </div>

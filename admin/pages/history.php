@@ -9,16 +9,14 @@ $q = "SELECT * FROM tb_appointment ta
 $rs = $con->query($q);
 ?>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">My Appointments</h1>
+    <h1 class="h3 mb-0 text-gray-800">Appointments History</h1>
 </div>
 
 <div class="card shadow mb-4 animated--fade-in">
     <div class="card-header py-3">
-
     </div>
     <div class="card-body">
         <div class="card-body text-black">
-
             <div class="content">
                 <div class="table-responsive animated--fade-in container-fluid">
                     <table class="table table-bordered table-condensed table-fixed table-striped" id="apptListDT" width="100%" cellspacing="0">
@@ -175,35 +173,6 @@ $rs = $con->query($q);
     $(document).ready(function() {
         $('#apptListDT').dataTable().fnSort([
             [5, 'asc']
-        ]);
-
-        var calendarAppts = document.getElementById('appt-calendar');
-
-        var calendarA = new FullCalendar.Calendar(calendarAppts, {
-            themeSystem: 'bootstrap',
-            initialView: 'dayGridMonth',
-            initialDate: '<?php echo $date; ?>',
-            editable: true,
-            selectable: true,
-            height: 700,
-            headerToolbar: {
-                left: 'title',
-                right: 'today prev,next'
-            },
-            events: appts,
-            eventClick(info) {
-                console.log(info);
-            }
-        });
-
-        calendarA.render();
-    });
-
-    $("#hlAppts").click(function() {
-        $('.aReqCount').removeClass('badge badge-primary aReqCount').addClass('badge badge-light aReqCount');
-    });
-
-    $("#hlCal").click(function() {
-        $('.aReqCount').removeClass('badge badge-light aReqCount').addClass('badge badge-primary aReqCount');
+        ]);     
     });
 </script>

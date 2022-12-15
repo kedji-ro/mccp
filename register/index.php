@@ -1,4 +1,27 @@
-<?php include '../login/db_conn.php'; ?>
+<?php
+include '../login/db_conn.php';
+
+if (isset($_SESSION['U_ID'])) {
+  if (isset($_SESSION['U_ROLE'])) {
+
+    switch ($_SESSION['U_ROLE']) {
+      case '1':
+        header('Location: ' . home . '/admin/?dashboard');
+        break;
+      case '2':
+        header('Location: ' . home . '/doctor/?dashboard');
+        break;
+      case '3':
+        header('Location: ' . home . '/patient/?set-appointment');
+        break;
+      case '4':
+        header('Location: ' . home . '/secretary/?appointments');
+        break;
+    }
+  }
+} 
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">

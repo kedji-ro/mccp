@@ -1,25 +1,24 @@
 <?php
 include '../login/db_conn.php';
 
-// if (isset($_SESSION['D_ID'])) {
-//     if (isset($_SESSION['U_ROLE'])) {
-//         if ($_SESSION['U_ROLE'] != '2') {
-//             header('Location: http://localhost:8080/mccp/admin/?dashboard');
-//         }
-//     } else {
-//         header('Location: http://localhost:8080/mccp/?');
-//     }
-// } else {
-//     header('Location: http://localhost:8080/mccp/?');
-// }
+if (isset($_SESSION['U_ID'])) {
+    if (isset($_SESSION['U_ROLE'])) {
 
-// if (empty($_GET)) {
-//     header('Location: ?dashboard');
-// }
-
-// $q = "SELECT COUNT(appointment_id) AS appt_count 
-// FROM tb_appointment
-// WHERE doctor_id = " . $_SESSION['D_ID'] . "  AND DATE(appointment_date) > (NOW()) AND a_stat = 0";
+        switch ($_SESSION['U_ROLE']) {
+            case '1':
+                header('Location: ' . home . '/admin/?dashboard');
+                break;
+            case '2':
+                header('Location: ' . home . '/doctor/?dashboard');
+                break;
+            case '3':
+                header('Location: ' . home . '/patient/?set-appointment');
+                break;
+        }
+    }
+} else {
+    header('Location: '.home.'/?');
+}
 
 $q = "SELECT COUNT(appointment_id) AS appt_count  FROM tb_appointment ta WHERE ta.a_stat = 0 AND ta.doctor_id = '" . $_SESSION['D_ID'] . "'";
 
@@ -173,7 +172,7 @@ if ($result) {
                     if (isset($_GET['reg-patient']) != null) {
                         include('pages/reg-patient.php');
                     }
-                    
+
                     ?>
                 </div>
                 <!-- End of Page Content -->

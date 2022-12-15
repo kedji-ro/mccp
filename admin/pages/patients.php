@@ -16,14 +16,19 @@ $query_run = mysqli_query($con, $query);
             <table class="table table-bordered table-condensed table-fixed table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>CODE</th>
-                        <th>PATIENT'S NAME</th>
-                        <th>ADDRESS</th>
-                        <th>DATE OF BIRTH</th>
-                        <th>MARITAL STATUS</th>
-                        <th>F-DAY OF L-MENS PERIOD </th>
-                        <th class="text-center" style="width:8%;">STATUS</th>
-                        <th class="text-center" style="width:8%;">ACTION</th>
+                        <th hidden>CODE</th>
+                        <th>Patient's Name</th>
+                        <th>Address</th>
+                        <th>Date of Birth</th>
+                        <th>Marital Status</th>
+                        <th>F-day of L-mens Period</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Actions</th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
+                        <th hidden></th>
                     </tr>
                 </thead>
                 
@@ -33,7 +38,7 @@ $query_run = mysqli_query($con, $query);
                     foreach ($query_run as $rows) {
                 ?>
                             <tr>
-                                <td><?php echo $rows['user_id']; ?></td>
+                                <td hidden><?php echo $rows['user_id']; ?></td>
                                 <td><?php echo $rows['firstname'] . ' ' .  $rows['middlename'] . ' ' .  $rows['lastname'] . ' ' .  $rows['suffix']; ?></td>
                                 <td><?php echo $rows['address']; ?></td>
                                 <td><?php echo $rows['DOB']; ?></td>
@@ -65,6 +70,12 @@ $query_run = mysqli_query($con, $query);
                                             </button></span>
                                     <?php } ?>
                                 </td>
+
+                                <td hidden><?php echo $rows['email']; ?></td>
+                                <td hidden><?php echo $rows['phone_no']; ?></td>
+                                <td hidden><?php echo $rows['firstname']; ?></td>
+                                <td hidden><?php echo $rows['middlename']; ?></td>
+                                <td hidden><?php echo $rows['lastname']; ?></td>
                             </tr>
                               <?php
                     }
@@ -80,7 +91,7 @@ $query_run = mysqli_query($con, $query);
 <script>
     $('.edit').on('click', function() {
 
-        $('#editChildModal').modal('show');
+        $('#editMotherModal').modal('show');
 
         $tr = $(this).closest('tr');
 
@@ -88,14 +99,17 @@ $query_run = mysqli_query($con, $query);
             return $(this).text();
         }).get();
 
-        $('#ch_id').val(data[0]);
-        $('#chfn').val(data[7]);
-        $('#chmn').val(data[8]);
-        $('#chln').val(data[9]);
-        $('#chsf').val(data[10]);
-        $('#chdob').val(data[2]);
-        $('#chh').val(data[3]);
-        $('#chw').val(data[4]);
+        $('#emid').val(data[0]);
+        $('#eme').val(data[8]);
+        $('#emfn').val(data[10]);
+        $('#emmn').val(data[11]);
+        $('#emln').val(data[12]);
+        $('#emmen').val(data[5]);
+        $('#emmd').val(data[2]);
+        $('#emdob').val(data[3]);
+        $('#empn').val(data[9]);
+        $('#emms').val(data[4]);
+        $('#emaddr').val(data[2]);
     });
 
     $('.archm').on('click', function() {

@@ -3,11 +3,18 @@ include '../login/db_conn.php';
 
 if (isset($_SESSION['U_ID'])) {
     if (isset($_SESSION['U_ROLE'])) {
-        if ($_SESSION['U_ROLE'] != '1') {
-            header('Location: '.home.'/doctor/?dashboard');
+
+        switch ($_SESSION['U_ROLE']) {
+            case '2':
+                header('Location: ' . home . '/doctor/?dashboard');
+                break;
+            case '3':
+                header('Location: ' . home . '/patient/?set-appointment');
+                break;
+            case '4':
+                header('Location: ' . home . '/secretary/?appointments');
+                break;
         }
-    } else {
-        header('Location: '.home.'/?');
     }
 } else {
     header('Location: '.home.'/?');
@@ -120,7 +127,7 @@ if (empty($_GET)) {
                     <span>Doctors</span></a>
             </li>
 
-            <li class="nav-item <?php if (isset($_GET['mothers']) || isset($_GET['patients'])) {
+            <li class="nav-item <?php if (isset($_GET['mothers']) || isset($_GET['children'])) {
                                     echo 'active';
                                 } ?>">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -129,10 +136,10 @@ if (empty($_GET)) {
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item <?php if (isset($_GET['dashboard'])) {
+                        <a class="collapse-item <?php if (isset($_GET['mothers'])) {
                                                     echo 'active';
                                                 } ?>" href="?mothers">Mothers</a>
-                        <a class="collapse-item <?php if (isset($_GET['dashboard'])) {
+                        <a class="collapse-item <?php if (isset($_GET['children'])) {
                                                     echo 'active';
                                                 } ?>" href="?children">Children</a>
                     </div>

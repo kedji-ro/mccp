@@ -19,6 +19,7 @@ $query = "SELECT *
                 <table class="table table-bordered table-condensed table-fixed table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th hidden></th>
                             <th>Appt<br>No.</th>
                             <th>Patient</th>
                             <th>Clinic</th>
@@ -37,6 +38,7 @@ $query = "SELECT *
                         foreach ($query_run as $rows) {
                     ?>
                             <tr>
+                                <td hidden><?php echo $rows['record_id']; ?></td>
                                 <td><?php echo $rows['appt_id']; ?></td>
                                 <td><?php echo $rows['lastname'] . ', ' . $rows['firstname'] . ' ' . $rows['middlename'] . ' ' . $rows['suffix']; ?></td>
                                 <td><?php echo $rows['clinic_name']; ?></td>
@@ -46,7 +48,7 @@ $query = "SELECT *
                                 <td><?php echo $rows['payment_method']; ?></td>
 
                                 <td class="text-center">
-                                    <span><button type="button" class="btn btn-secondary btn-circle btn-sm" title="Print"><i class="fas fa-print"></i></button></span>
+                                    <span><button type="button" class="btn btn-secondary btn-circle btn-sm printBtn" title="Print"><i class="fas fa-print"></i></button></span>
                             </tr>
                     <?php
                         }
@@ -57,3 +59,15 @@ $query = "SELECT *
         </div>
     </div>
 </div>
+
+<script>
+    $('.printBtn').on('click', function() {
+
+        $tr = $(this).closest('tr');
+        var data = $tr.children("td").map(function() {
+            return $(this).text();
+        }).get();
+
+        window.location.href = "<?php echo home; ?>/admin/print/payment-data.php?id=" + data[0];
+    });
+</script>

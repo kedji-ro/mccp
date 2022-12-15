@@ -2,6 +2,167 @@
 
 include '../login/db_conn.php';
 
+if (isset($_POST['edit_user'])) {
+
+    $id = $_POST['euid'];
+    $e = $_POST['eue'];
+    $op = $_POST['euop'];
+    $p = $_POST['eunp'];
+    $cp = $_POST['eucp'];
+
+    $chk = $con->query("SELECT 1 FROM tb_users WHERE password = MD5('".$op."') AND user_id = '".$id."'");
+    $cnt = mysqli_num_rows($chk);
+
+    if ($cnt == 0 && ($op != '' && $p != '')) {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Incorrect old password." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+
+        header('Location: '.home.'/admin/?users');
+        exit;
+    }
+
+    if ($cp != $p && ($op != '' && $p != '')) {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Passwords don't match." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+
+        header('Location: '.home.'/admin/?users');
+        exit;
+    }
+
+    $q = "";
+
+    if ($op === '' && $p === '') {
+        $q = "UPDATE tb_users SET email = '".$e."' WHERE user_id = '".$id."'";
+    } else {
+        $q = "UPDATE tb_users SET email = '".$e."', password = MD5('".$p."') WHERE user_id = '".$id."'";
+    }
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "User settings updated.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/admin/?users');
+
+    $con->error;
+}
+
+if (isset($_POST['add_service'])) {
+
+    $serv = $_POST['ns'];
+
+    $q = "INSERT INTO tb_services(srv_desc,srv_stat) VALUES('" . $serv . "','1')";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "Service added.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/admin/?doctors');
+    $con->close();
+}
+
+if (isset($_POST['archive_serv'])) {
+
+    $id = $_POST['asrid'];
+
+    $q = "UPDATE tb_services SET srv_stat = '0' WHERE serv_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        echo json_encode('Updated');
+    } 
+
+    $con->close();
+}
+
+if (isset($_POST['archive_spec'])) {
+
+    $id = $_POST['asid'];
+
+    $q = "UPDATE tb_specialization SET spec_stat = '0' WHERE spec_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        echo json_encode('Updated');
+    } 
+
+    $con->close();
+}
+
+if (isset($_POST['add_admin'])) {
+
+    $e = $_POST['nae'];
+    $p = $_POST['nap'];
+    $fn = $_POST['nafn'];
+    $mn = $_POST['namn'];
+    $ln = $_POST['naln'];
+    $sf = $_POST['nasf'];
+    $pn = $_POST['napn'];
+    $addr = $_POST['naaddr'];
+
+    $q = "INSERT INTO tb_users (username, password, email, firstname, middlename, lastname, suffix, address, phone_no, is_active, role)
+                    VALUES('".$e."',MD5('".$p."'),'".$e."','".$fn."','".$mn."','".$ln."','".$sf."','".$addr."', '".$pn."', '1', '1')";
+
+    $res = $con->query($q);
+
+    if ($res) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "New admin account created.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: '.home.'/admin/?users');
+
+    $con->error;
+}
+
+if (isset($_POST['archive_user'])) {
+
+    $id = $_POST['auid'];
+
+    $q = "UPDATE tb_users SET is_active = '2' WHERE user_id = '" . $id . "'";
+
+    if (mysqli_query($con, $q)) {
+        $_SESSION['msg-h'] = "SUCCESS";
+        $_SESSION['msg'] = "User archived.";
+        $_SESSION['msg-t'] = "success";
+        $_SESSION['msg-bg'] = "#e8fae9";
+    } else {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong." . $con->error;
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+    }
+
+    header('Location: ' . home . '/admin/?users');
+    $con->close();
+}
+
 if (isset($_POST['register_patient'])) {
 
     $pe = $_POST['em'];
@@ -15,8 +176,8 @@ if (isset($_POST['register_patient'])) {
     $pphone = $_POST['pno'];
     $paddr = $_POST['padd'];
 
-    //$q = "INSERT INTO tb_users (username, password, email, firstname, middlename, lastname, DOB, address, phone_no, date_first_men_period, role, marital_status, is_active)
-     //               VALUES('".$pe."',MD5('".$ppass."'),'".$pe."','".$pfn."','".$pmn."','".$pln."','".$pdob."','".$paddr."','".$pphone."','".$pmen."','3','".$pms."', '1')";
+    $q = "INSERT INTO tb_users (username, password, email, firstname, middlename, lastname, DOB, address, phone_no, date_first_men_period, role, marital_status, is_active)
+                    VALUES('".$pe."',MD5('".$ppass."'),'".$pe."','".$pfn."','".$pmn."','".$pln."','".$pdob."','".$paddr."','".$pphone."','".$pmen."','3','".$pms."', '1')";
 
     $res = $con->query($q);
 
@@ -39,25 +200,25 @@ if (isset($_POST['register_patient'])) {
 
 if (isset($_POST['edit_patient'])) {
 
-    $pe = $_POST['em'];
-    $ppass = $_POST['ppass'];
-    $pfn = $_POST['pfn'];
-    $pmn = $_POST['pmn'];
-    $pln = $_POST['pln'];
-    $pmen = $_POST['pmen'];
-    $pms = $_POST['pms'];
-    $pdob = $_POST['pdob'];
-    $pphone = $_POST['pno'];
-    $paddr = $_POST['padd'];
+    $id = $_POST['emid'];
+    $fn = $_POST['emfn'];
+    $mn = $_POST['emmn'];
+    $ln = $_POST['emln'];
+    $mens = $_POST['emmen'];
+    $ms = $_POST['emms'];
+    $dob = $_POST['emdob'];
+    $pn = $_POST['empn'];
+    $addr = $_POST['emaddr'];
 
-    $q = "INSERT INTO tb_users (username, password, email, firstname, middlename, lastname, DOB, address, phone_no, date_first_men_period, role, marital_status, is_active)
-                    VALUES('".$pe."',MD5('".$ppass."'),'".$pe."','".$pfn."','".$pmn."','".$pln."','".$pdob."','".$paddr."','".$pphone."','".$pmen."','3','".$pms."', '1')";
+    $q = "UPDATE tb_users SET firstname = '".$fn."', middlename = '".$mn."', lastname = '".$ln."', 
+                              date_first_men_period = '".$mens."', marital_status = '".$ms."',
+                              DOB = '".$dob."', phone_no = '".$pn."', address = '".$addr."' WHERE user_id = '".$id."'";
 
     $res = $con->query($q);
 
     if ($res) {
         $_SESSION['msg-h'] = "SUCCESS";
-        $_SESSION['msg'] = "Registration successful.";
+        $_SESSION['msg'] = "Mother info edited.";
         $_SESSION['msg-t'] = "success";
         $_SESSION['msg-bg'] = "#e8fae9";
     } else {
@@ -157,6 +318,16 @@ if (isset($_POST['deact_user'])) {
 
     $num = mysqli_num_rows($result);
 
+    if ($user_id == $_SESSION['U_ID']) {
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "User is currently logged in.";
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
+
+        header('Location: ' . home . '/admin/?users');
+        exit;
+    }
+
     if ($num > 0) {
         $row = mysqli_fetch_assoc($result);
 
@@ -177,14 +348,17 @@ if (isset($_POST['deact_user'])) {
             $_SESSION['msg-t'] = "success";
             $_SESSION['msg-bg'] = "#e8fae9";
         }
-
-        header('Location: ' . home . '/admin/?users');
     } else {
-        echo $con->error;
-        echo 'error';
+        $_SESSION['msg-h'] = "ERROR";
+        $_SESSION['msg'] = "Something went wrong.";
+        $_SESSION['msg-type'] = "danger";
+        $_SESSION['msg-bg'] = "#fae8ea";
     }
-}
 
+    header('Location: ' . home . '/admin/?users');
+
+    $con->close();
+}
 
 if (isset($_POST['add_clinic'])) {
 

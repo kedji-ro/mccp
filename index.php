@@ -3,15 +3,25 @@ include 'login/db_conn.php';
 
 if (isset($_SESSION['U_ID'])) {
   if (isset($_SESSION['U_ROLE'])) {
-    if ($_SESSION['U_ROLE'] == '1') {
-      header('Location: ' . home . '/admin/?dashboard');
-    } elseif ($_SESSION['U_ROLE'] == '2') {
-      header('Location: ' . home . '/doctor/?dashboard');
-    } else {
-      header('Location: ' . home . '/?');
+
+    switch ($_SESSION['U_ROLE']) {
+      case '1':
+        header('Location: ' . home . '/admin/?dashboard');
+        break;
+      case '2':
+        header('Location: ' . home . '/doctor/?dashboard');
+        break;
+      case '3':
+        header('Location: ' . home . '/patient/?set-appointment');
+        break;
+      case '4':
+        header('Location: ' . home . '/secretary/?appointments');
+        break;
+
+      default:
+        session_destroy();
+        break;
     }
-  } else {
-    session_destroy();
   }
 } else {
   session_destroy();
